@@ -28,8 +28,7 @@ public class SocketWorker implements SocketWorkerInterface {
     }
 
     @Override
-    public String sendRequest(byte[] serializedRequest) {
-
+    public TypeOfAnswer sendRequest(byte[] serializedRequest) {
         try {
             ByteBuffer buf = ByteBuffer.wrap(serializedRequest);
             do {
@@ -38,11 +37,11 @@ public class SocketWorker implements SocketWorkerInterface {
             return responseHandler.receive(receiveAnswer());
         } catch (IOException exception) {
             RequestHandler.getInstance().setSocketStatus(false);
-            return TextFormatting.getRedText("\tCommand didn't send, try again!\n");
+            return TypeOfAnswer.COMMANDNOTGO;
         }
     }
 
-    private String receiveAnswer() {
+    private TypeOfAnswer receiveAnswer() {
 
         long timeStart = System.currentTimeMillis();
         ByteBuffer buffer = ByteBuffer.allocate(4096);
@@ -57,8 +56,7 @@ public class SocketWorker implements SocketWorkerInterface {
                 }
             } else {
                 RequestHandler.getInstance().setSocketStatus(false);
-                return TextFormatting.getRedText("\n\tServer isn't available at the moment! " +
-                        "Please, select another remote host!\n\n");
+                return TypeOfAnswer.SERVERNOTAVAILABLE;
             }
         }
     }

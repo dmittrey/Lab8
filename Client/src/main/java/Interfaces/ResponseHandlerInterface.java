@@ -1,6 +1,6 @@
 package Interfaces;
 
-import utility.Command;
+import utility.TypeOfAnswer;
 
 import java.nio.ByteBuffer;
 
@@ -8,11 +8,13 @@ public interface ResponseHandlerInterface {
 
     /**
      * Return String representation of Server answer in buffer
+     * @return
      */
-    String receive(ByteBuffer buffer);
+    TypeOfAnswer receive(ByteBuffer buffer);
 
     /**
      * Return reformatted errorInformation
+     * @return
      */
-    String receive(String errorInformation);
+    TypeOfAnswer receive(TypeOfAnswer errorInformation);
 }

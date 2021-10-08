@@ -1,11 +1,12 @@
 package Interfaces;
 
-import utility.Command;
+import utility.TypeOfAnswer;
 
 public interface SocketWorkerInterface {
 
     /**
      * Send Request to the server
+     * @return
      */
-    String sendRequest(byte[] serializedRequest);
+    TypeOfAnswer sendRequest(byte[] serializedRequest);
 }

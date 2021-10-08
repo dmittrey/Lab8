@@ -7,11 +7,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * The class that serves the command
  */
 public class CommandManager implements CommandManagerInterface {
+
+    private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
 
     private final CommandReaderInterface commandReader;
     private final ValidatorInterface validator;
@@ -20,9 +23,9 @@ public class CommandManager implements CommandManagerInterface {
     private final Set<String> usedScripts;
     private final StudyGroupFactoryInterface studyGroupFactory;
 
-    public CommandManager(CommandReaderInterface aCommandReader) {
+    public CommandManager() {
 
-        commandReader = aCommandReader;
+        commandReader = null;
         validator = Validator.getInstance();
         requestHandler = RequestHandler.getInstance();
         console = Console.getInstance();
@@ -44,6 +47,22 @@ public class CommandManager implements CommandManagerInterface {
         else if (validator.validateScriptArgumentCommand(aCommand)) executeScript(aCommand.getArg());
 
         else console.print(TextFormatting.getRedText("\tCommand entered incorrectly!\n"));
+    }
+
+    @Override
+    public TypeOfAnswer transferCommand(Session aSession) {
+        logger.info("In cmdManager");
+        if (validator.sessionCommands(aSession)) {
+            logger.info("Прошли валидацию");
+            if ((aSession.getTypeOfSession() == TypeOfSession.Register)) {
+                logger.info("register...");
+                return requestHandler.register(aSession);
+            } else {
+                logger.info("logging...");
+                return requestHandler.login(aSession);
+            }
+        }
+        return TypeOfAnswer.NOTVALIDATE;
     }
 
     private void executeScript(String scriptName) {

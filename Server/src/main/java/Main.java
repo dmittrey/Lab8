@@ -55,17 +55,17 @@ public class Main {
 
     private static DBWorker connectToDB() {
 
-        Connection db;
-        try {
-            db = new DBConnector().connect();
-            if (db == null) return null;
-        } catch (SQLException e) {
-            logger.warn("Connection establishing problems");
-            return null;
-        }
+//        Connection db;
+//        try {
+//            db = new DBConnector().connect();
+//            if (db == null) return null;
+//        } catch (SQLException e) {
+//            logger.warn("Connection establishing problems");
+//            return null;
+//        }
 
-//        DBConnector dbConnector = new DBConnector();
-//        Connection db = dbConnector.connect();
+        DBConnector dbConnector = new DBConnector();
+        Connection db = dbConnector.connect();
 
         DBInitializer dbInitializer = new DBInitializer(db);
         try {

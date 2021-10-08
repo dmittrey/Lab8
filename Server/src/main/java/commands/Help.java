@@ -1,9 +1,6 @@
 package commands;
 
-import utility.Receiver;
-import utility.Request;
-import utility.Response;
-import utility.TypeOfAnswer;
+import utility.*;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -13,10 +10,10 @@ import java.util.stream.Collectors;
  */
 public class Help extends CommandAbstract {
 
-    private final Map<String, CommandAbstract> commands;
+    private final Map<TypeOfCommand, CommandAbstract> commands;
     private final Receiver receiver;
 
-    public Help(Map<String, CommandAbstract> aCommands, Receiver aReceiver) {
+    public Help(Map<TypeOfCommand, CommandAbstract> aCommands, Receiver aReceiver) {
         super("display help for available commands", false);
         commands = aCommands;
         receiver = aReceiver;
@@ -28,8 +25,8 @@ public class Help extends CommandAbstract {
 
         Map<String, String> mapOfCommands = commands.keySet()
                 .stream()
-                .filter(str -> !(str.equals("register") || str.equals("login")))
-                .collect(Collectors.toConcurrentMap(command -> command, command -> commands.get(command).getDescription()));
+                .filter(cmd -> !(cmd == TypeOfCommand.Register || cmd == TypeOfCommand.Login))
+                .collect(Collectors.toConcurrentMap(Enum::toString, command -> commands.get(command).getDescription()));
         mapOfCommands.put("execute_script", "Read and execute script from entered file");
         mapOfCommands.put("exit", "end the program");
         receiver.addToHistory(username, "help");

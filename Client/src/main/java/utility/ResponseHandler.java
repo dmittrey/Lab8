@@ -24,22 +24,20 @@ public class ResponseHandler implements ResponseHandlerInterface {
     }
 
     @Override
-    public String receive(ByteBuffer buffer) {
+    public TypeOfAnswer receive(ByteBuffer buffer) {
         try {
             ObjectInputStream inObj = new ObjectInputStream(new ByteArrayInputStream(buffer.array()));
-            Response response = (Response) inObj.readObject();
-            return Animator.getInstance().animate(response);
-        } catch (ClassNotFoundException e) {
-            return TextFormatting.getRedText("\tServer version is unsupported!\n");
-        } catch (InvalidClassException e) {
-            return TextFormatting.getRedText("\tYour version is outdated!\n");
+            return ((Response) inObj.readObject()).getStatus();
+            // FIXME: 08.10.2021 Надо как-то обрабатывать полезную нагрузку
+        } catch (ClassNotFoundException | InvalidClassException e) {
+            return TypeOfAnswer.ANOTHERVERSION;
         } catch (IOException e) {
-            return TextFormatting.getRedText("\tResponse is broken! Try again!\n");
+            return TypeOfAnswer.NETPROBLEM;
         }
     }
 
     @Override
-    public String receive(String errorInformation) {
+    public TypeOfAnswer receive(TypeOfAnswer errorInformation) {
         return errorInformation;
     }
 }

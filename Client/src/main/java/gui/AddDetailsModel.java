@@ -2,40 +2,50 @@ package gui;
 
 import javax.swing.*;
 
-public class AddDetailsModel extends JFrame{
+public class AddDetailsModel extends JFrame {
     private JPanel mainPanel;
-    private JTextField textField1;
     private JPanel namePanel;
+    private JTextField name;
+    private JTextField nameWarn;
     private JPanel coordinatesPanel;
-    private JPanel studCountPanel;
+    private JTextField xCoordinate;
+    private JTextField yCoordinate;
+    private JTextField coordinateWarn;
+    private JPanel studentsCountPanel;
+    private JTextField studentsCount;
+    private JTextField studentsCountWarn;
     private JPanel averageMarkPanel;
+    private JTextField averageMark;
+    private JTextField averageMarkWarn;
     private JPanel formOfEducationPanel;
-    private JPanel Semester;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
+    private JComboBox formOfEducation;
+    private JPanel semesterPanel;
+    private JComboBox semester;
+    private JPanel groupAdminPanel;
     private JPanel groupAdminNamePanel;
+    private JTextField groupAdminName;
+    private JTextField groupAdminNameWarn;
     private JPanel groupAdminWeightPanel;
+    private JTextField groupAdminWeightWarn;
+    private JTextField groupAdminWeight;
     private JPanel groupAdminHairColorPanel;
-    private JTextField textField5;
-    private JTextField textField6;
-    private JTextField textField7;
-    private JTextField textField8;
-    private JTextField textField9;
-    private JComboBox comboBox1;
-    private JComboBox comboBox2;
-    private JTextField textField10;
-    private JTextField textField11;
-    private JTextField textField12;
-    private JTextField textField13;
-    private JTextField textField14;
-    private JTextField textField15;
-    private JButton ADDGROUPButton;
+    private JTextField groupAdminHairColorWarn;
+    private JTextField groupAdminHairColor;
+    private JButton addGroupButton;
 
     public AddDetailsModel() {
-        setTitle("Fields setter");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setContentPane(mainPanel);
-        pack();
+//        setTitle("Fields setter");
+//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        setContentPane(mainPanel);
+//        pack();
+    }
+
+    public JPanel getPanel() {
+        return mainPanel;
+    }
+
+    public static void main(String[] args) {
+        JFrame jFrame = new AddDetailsModel();
+        jFrame.setVisible(true);
     }
 }

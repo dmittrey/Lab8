@@ -1,6 +1,7 @@
 package Interfaces;
 
 import utility.Command;
+import utility.Session;
 
 public interface ValidatorInterface {
 
@@ -18,4 +19,9 @@ public interface ValidatorInterface {
      * Validate Commands with script path argument
      */
     boolean validateScriptArgumentCommand(Command aCommand);
+
+    /**
+     * Validate Login and Register commands
+     */
+    boolean sessionCommands(Session aSession);
 }

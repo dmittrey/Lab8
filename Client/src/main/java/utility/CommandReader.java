@@ -6,9 +6,9 @@ package utility;
 public class CommandReader {
 
     private CommandManager commandManager;
-    private CommandReader instance;
+    private static CommandReader instance;
 
-    public CommandReader getInstance() {
+    public static CommandReader getInstance() {
         if (instance == null) instance = new CommandReader();
         return instance;
     }
@@ -20,8 +20,16 @@ public class CommandReader {
         commandManager = aCommandManager;
     }
 
-    public <T extends TypeOfCommand> void execute(T typeOfCommand, String anArg) {
+    public TypeOfAnswer execute(Session session) {
+        return commandManager.transferCommand(session);
+    }
+
+    public void execute(TypeOfCommand typeOfCommand, String anArg) {
         Command command = new Command(typeOfCommand, anArg);
         commandManager.transferCommand(command);
+    }
+
+    public void execute(TypeOfCommand typeOfCommand) {
+        execute(typeOfCommand, "");
     }
 }

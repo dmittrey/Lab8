@@ -2,7 +2,6 @@ package utility;
 
 import data.StudyGroup;
 import Interfaces.RequestHandlerInterface;
-import Interfaces.SessionWorkerInterface;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -25,7 +24,7 @@ public class RequestHandler implements RequestHandlerInterface {
     }
 
     @Override
-    public String send(Command aCommand) {
+    public TypeOfAnswer send(Command aCommand) {
         try {
             Request request = new Request(aCommand, session);
 
@@ -36,17 +35,17 @@ public class RequestHandler implements RequestHandlerInterface {
             session.setTypeOfSession(TypeOfSession.Login);
             return socketWorker.sendRequest(byteArrayOutputStream.toByteArray());
         } catch (IOException e) {
-            return TextFormatting.getRedText("\tRequest can't be serialized, call programmer!\n");
+            return TypeOfAnswer.NOTSERIALIZED;
         }
     }
 
     @Override
-    public String send(Command aCommand, StudyGroup studyGroup) {
+    public TypeOfAnswer send(Command aCommand, StudyGroup studyGroup) {
 
         if (studyGroup != null) {
             aCommand.addStudyGroup(studyGroup);
             return send(aCommand);
-        } else return TextFormatting.getRedText("\tStudy group isn't exist, try again!\n");
+        } else return TypeOfAnswer.OBJECTNOTEXIST;
     }
 
     @Override
@@ -79,12 +78,14 @@ public class RequestHandler implements RequestHandlerInterface {
         session = aSession;
     }
 
-    public String register(Session aSession) {
+    @Override
+    public TypeOfAnswer register(Session aSession) {
         setSession(aSession);
         return send(new Command(TypeOfCommand.Register, ""));
     }
 
-    public String login(Session aSession) {
+    @Override
+    public TypeOfAnswer login(Session aSession) {
         setSession(aSession);
         return send(new Command(TypeOfCommand.Login, ""));
     }

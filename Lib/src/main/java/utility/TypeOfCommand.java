@@ -16,5 +16,6 @@ public enum TypeOfCommand {
     Execute_script,
     Update,
     Register,
-    Login
+    Login,
+    Exit
 }

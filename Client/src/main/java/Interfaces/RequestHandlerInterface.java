@@ -3,6 +3,7 @@ package Interfaces;
 import data.StudyGroup;
 import utility.Command;
 import utility.Session;
+import utility.TypeOfAnswer;
 
 import java.net.InetSocketAddress;
 
@@ -10,13 +11,15 @@ public interface RequestHandlerInterface {
 
     /**
      * Complete Command and Session into Request
+     * @return
      */
-    String send(Command aCommand);
+    TypeOfAnswer send(Command aCommand);
 
     /**
      * Complete Command with new Object and Session into Request
+     * @return
      */
-    String send(Command aCommand, StudyGroup studyGroup);
+    TypeOfAnswer send(Command aCommand, StudyGroup studyGroup);
 
     /**
      * Set destination of produced requests
@@ -39,4 +42,8 @@ public interface RequestHandlerInterface {
     boolean getSocketStatus();
 
     void setSession(Session aSession);
+
+    TypeOfAnswer register(Session aSession);
+
+    TypeOfAnswer login(Session aSession);
 }

@@ -2,6 +2,8 @@ package utility;
 
 import Interfaces.ValidatorInterface;
 
+import java.util.regex.Pattern;
+
 /**
  * Class to validate commands
  */
@@ -38,6 +40,23 @@ public class Validator implements ValidatorInterface {
     public boolean validateScriptArgumentCommand(Command aCommand) {
         return availableCommands.scriptArgumentCommand.equals(aCommand.getCommand()) &&
                 aCommand.getArg() != null;
+    }
+
+    @Override
+    public boolean sessionCommands(Session aSession) {
+        String username = aSession.getName();
+        String password = aSession.getPassword();
+        return validateLogin(username) && validatePassword(password);
+    }
+
+    private boolean validateLogin(String username) {
+        Pattern usernamePattern = Pattern.compile("^\\s*\\b(\\w+)\\b\\s*");
+        return username != null && usernamePattern.matcher(username).find();
+    }
+
+    private boolean validatePassword(String password) {
+        Pattern passwordPattern = Pattern.compile("^\\s*([\\d\\w]*)\\s*");
+        return password != null && passwordPattern.matcher(password).find();
     }
 
     private boolean validateNoArgumentCommand(Command aCommand) {

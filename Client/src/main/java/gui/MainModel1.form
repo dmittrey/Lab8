@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.MainModel">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.MainModel1">
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="5be9e" class="javax.swing.JTextField" binding="usernameTextField" default-binding="true">
+      <component id="5be9e" class="javax.swing.JTextField" binding="usernameField">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -28,7 +28,7 @@
         <properties/>
         <border type="etched" title="Command"/>
         <children>
-          <component id="b5fb6" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+          <component id="b5fb6" class="javax.swing.JComboBox" binding="commandBox">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -63,7 +63,7 @@
         <properties/>
         <border type="etched" title="Argument"/>
         <children>
-          <component id="b47e0" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+          <component id="b47e0" class="javax.swing.JTextField" binding="argumentField">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -73,7 +73,7 @@
           </component>
         </children>
       </grid>
-      <component id="7e4d9" class="javax.swing.JButton" binding="submitButton" default-binding="true">
+      <component id="7e4d9" class="javax.swing.JButton" binding="submitButton">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -81,7 +81,7 @@
           <text value="Submit"/>
         </properties>
       </component>
-      <component id="130d6" class="javax.swing.JTable" binding="stGroupsTable">
+      <component id="130d6" class="javax.swing.JTable" binding="stGroupTable">
         <constraints>
           <grid row="1" column="1" row-span="5" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
@@ -89,7 +89,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="cf745" class="javax.swing.JButton" binding="visualButton" default-binding="true">
+      <component id="cf745" class="javax.swing.JButton" binding="visualButton">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -97,7 +97,7 @@
           <text value="Visual"/>
         </properties>
       </component>
-      <grid id="72447" binding="clientInfo" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="72447" binding="client" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -105,7 +105,7 @@
         <properties/>
         <border type="etched" title="Client info"/>
         <children>
-          <component id="4ee1d" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+          <component id="4ee1d" class="javax.swing.JTextField" binding="clientInfo">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -117,7 +117,7 @@
           </component>
         </children>
       </grid>
-      <grid id="cf748" binding="serverInfo" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="cf748" binding="server" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -125,7 +125,7 @@
         <properties/>
         <border type="etched" title="Server info"/>
         <children>
-          <component id="e1e39" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+          <component id="e1e39" class="javax.swing.JTextField" binding="serverInfo">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
