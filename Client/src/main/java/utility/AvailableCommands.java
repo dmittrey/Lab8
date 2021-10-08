@@ -9,37 +9,37 @@ import java.util.Set;
  */
 public class AvailableCommands {
 
-    public final Set<String> noArgumentCommands = new HashSet<>();
-    public final Set<String> numArgumentCommands = new HashSet<>();
-    public final Set<String> stringArgumentCommands = new HashSet<>();
-    public final Set<String> objectArgumentCommands = new HashSet<>();
-    public final String scriptArgumentCommand;
-    public final String objAndNumArgumentCommand;
+    public final Set<TypeOfCommand> noArgumentCommands = new HashSet<>();
+    public final Set<TypeOfCommand> numArgumentCommands = new HashSet<>();
+    public final Set<TypeOfCommand> stringArgumentCommands = new HashSet<>();
+    public final Set<TypeOfCommand> objectArgumentCommands = new HashSet<>();
+    public final TypeOfCommand scriptArgumentCommand;
+    public final TypeOfCommand objAndNumArgumentCommand;
 
     public AvailableCommands() {
 
         Collections.addAll(noArgumentCommands,
-                "help",
-                "info",
-                "show",
-                "clear",
-                "history",
-                "min_by_students_count");
+                TypeOfCommand.Help,
+                TypeOfCommand.Info,
+                TypeOfCommand.Show,
+                TypeOfCommand.Clear,
+                TypeOfCommand.History,
+                TypeOfCommand.Min_by_students_count);
 
         Collections.addAll(numArgumentCommands,
-                "remove_by_id",
-                "count_less_than_students_count");
+                TypeOfCommand.Remove_by_id,
+                TypeOfCommand.Count_less_than_students_count);
 
         Collections.addAll(stringArgumentCommands,
-                "filter_starts_with_name");
+                TypeOfCommand.Filter_starts_with_name);
 
         Collections.addAll(objectArgumentCommands,
-                "add",
-                "add_if_max",
-                "add_if_min");
+                TypeOfCommand.Add,
+                TypeOfCommand.Add_if_max,
+                TypeOfCommand.Add_if_min);
 
-        scriptArgumentCommand = "execute_script";
+        scriptArgumentCommand = TypeOfCommand.Execute_script;
 
-        objAndNumArgumentCommand = "update";
+        objAndNumArgumentCommand = TypeOfCommand.Update;
     }
 }

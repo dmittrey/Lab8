@@ -61,7 +61,7 @@ public class Validator implements ValidatorInterface {
     }
 
     private boolean validateObjAndNumArgumentCommand(Command aCommand) {
-        return availableCommands.objAndNumArgumentCommand.contains(aCommand.getCommand()) &&
+        return (availableCommands.objAndNumArgumentCommand == aCommand.getCommand()) &&
                 aCommand.isArgInt() && Integer.parseInt(aCommand.getArg()) > 0;
     }
 }

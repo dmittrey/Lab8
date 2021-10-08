@@ -79,4 +79,6 @@ public class CommandManager implements CommandManagerInterface {
         } else console.print(TextFormatting.getRedText("\nRecursion has been detected! Script " + scriptName +
                 " will not be ran!\n"));
     }
+
+
 }

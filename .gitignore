@@ -11,6 +11,7 @@
 .mtj.tmp/
 
 # Package Files #
+*.jar
 *.war
 *.nar
 *.ear
@@ -23,7 +24,7 @@ hs_err_pid*
 
 # Idea files
 /.idea/
-/Legacy/target/
+/Lib/target/
 /Server/target/
 /Client/target/
 File.xml

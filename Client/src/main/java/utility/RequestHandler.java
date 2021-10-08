@@ -81,11 +81,11 @@ public class RequestHandler implements RequestHandlerInterface {
 
     public String register(Session aSession) {
         setSession(aSession);
-        return send(new Command("register", ""));
+        return send(new Command(TypeOfCommand.Register, ""));
     }
 
     public String login(Session aSession) {
         setSession(aSession);
-        return send(new Command("login", ""));
+        return send(new Command(TypeOfCommand.Login, ""));
     }
 }

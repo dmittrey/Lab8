@@ -9,11 +9,11 @@ import java.io.Serializable;
  */
 public class Command implements Serializable {
 
-    private final String commandName;
+    private final TypeOfCommand commandName;
     private final String argName;
     private StudyGroup studyGroup;
 
-    public Command(String aCommandName, String anArgName) {
+    public Command(TypeOfCommand aCommandName, String anArgName) {
 
         commandName = aCommandName;
         argName = anArgName;
@@ -25,7 +25,7 @@ public class Command implements Serializable {
         return this;
     }
 
-    public String getCommand() {
+    public TypeOfCommand getCommand() {
         return commandName;
     }
 

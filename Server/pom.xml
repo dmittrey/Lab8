@@ -12,7 +12,7 @@
     <dependencies>
         <dependency>
             <groupId>com.dmittrey</groupId>
-            <artifactId>Legacy</artifactId>
+            <artifactId>Lib</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
