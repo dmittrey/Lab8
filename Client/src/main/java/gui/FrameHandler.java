@@ -17,7 +17,7 @@ public class FrameHandler {
     }
 
     public void initial(){
-        addDetailsModel = new AddDetailsModel();
+//        addDetailsModel = new AddDetailsModel();
         loginModel = new LoginModel();
         registerModel = new RegisterModel();
         mainModel = new MainModel();
@@ -30,5 +30,10 @@ public class FrameHandler {
     public void swapAuth(){
         loginModel.setVisible(false);
         registerModel.setVisible(true);
+    }
+
+    public void swapRegister(){
+        registerModel.setVisible(false);
+        loginModel.setVisible(true);
     }
 }

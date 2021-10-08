@@ -1,13 +1,10 @@
-import gui.AddDetailsModel;
-
-import javax.swing.*;
+import gui.FrameHandler;
 
 public class Main {
 
     public static void main(String[] args) {
 
-
-        JFrame frame = new AddDetailsModel();
-        frame.setVisible(true);
+        FrameHandler.getInstance().initial();
+        FrameHandler.getInstance().start();
     }
 }
