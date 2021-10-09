@@ -8,8 +8,10 @@ import javax.swing.*;
 
 public class MainModelAnimator {
     private static MainModelAnimator instance;
+    private final SGTableWorker sgTableWorker;
 
     private MainModelAnimator() {
+        sgTableWorker = SGTableWorker.getInstance();
     }
 
     public static MainModelAnimator getInstance() {
@@ -17,7 +19,7 @@ public class MainModelAnimator {
         return instance;
     }
 
-    public void animate(Response aResponse, JTextField clientInfo, JTextArea serverInfo, JTable stGroupTable) {
+    public void animate(Response aResponse, JTextField clientInfo, JTextArea serverInfo) {
 
         clientInfo.setText("");
         serverInfo.setText("");
@@ -48,7 +50,8 @@ public class MainModelAnimator {
             }
             else if (aResponse.getSetOfStudyGroups() != null) {
                 serverInfo.setText("Command executed successful!");
-                // FIXME: 09.10.2021 Составить таблицу из sg
+//                aResponse.getSetOfStudyGroups()
+//                        .forEach(sgTableWorker::addData);
             }
             else if (aResponse.getStudyGroup() != null) {
                 serverInfo.setText("Command executed successful!");
