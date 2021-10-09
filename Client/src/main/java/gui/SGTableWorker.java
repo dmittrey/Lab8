@@ -1,17 +1,22 @@
 package gui;
 
+import data.StudyGroup;
+import utility.CommandManager;
+
 import javax.swing.table.AbstractTableModel;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class SGTableWorker extends AbstractTableModel {
 
-    private int rowCount;
     private final ArrayList<String[]> data;
     private static SGTableWorker instance;
+    private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
 
     public static SGTableWorker getInstance() {
-        if (instance == null) return new SGTableWorker();
-        else return instance;
+        if (instance == null) instance = new SGTableWorker();
+        return instance;
     }
 
     private SGTableWorker(){
@@ -51,33 +56,33 @@ public class SGTableWorker extends AbstractTableModel {
         return "";
     }
 
-    public void addData(String[] str) {
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//        String[] sg = new String[13];
-//        sg[0] = studyGroup.getId().toString();
-//        sg[1] = studyGroup.getName();
-//        sg[2] = studyGroup.getCoordinates().getX().toString();
-//        sg[3] = studyGroup.getCoordinates().getY().toString();
-//        sg[4] = formatter.format(studyGroup.getCreationDate());
-//        sg[5] = studyGroup.getStudentsCount().toString();
-//        if (studyGroup.getAverageMark() == null) {
-//            sg[6] = "null";
-//        } else sg[6] = studyGroup.getAverageMark().toString();
-//        if (studyGroup.getFormOfEducation() == null) {
-//            sg[7] = "null";
-//        } else sg[7] = studyGroup.getFormOfEducation().toString();
-//        sg[8] = studyGroup.getSemesterEnum().toString();
-//        sg[9] = studyGroup.getGroupAdmin().getName();
-//        sg[10] = studyGroup.getGroupAdmin().getWeight().toString();
-//        sg[11] = studyGroup.getGroupAdmin().getHairColor().toString();
-//        sg[12] = studyGroup.getAuthor();
-        rowCount++;
-        data.add(str);
+    public boolean addData(StudyGroup studyGroup) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String[] sg = new String[13];
+        sg[0] = studyGroup.getId().toString();
+        sg[1] = studyGroup.getName();
+        sg[2] = studyGroup.getCoordinates().getX().toString();
+        sg[3] = studyGroup.getCoordinates().getY().toString();
+        sg[4] = formatter.format(studyGroup.getCreationDate());
+        sg[5] = studyGroup.getStudentsCount().toString();
+        if (studyGroup.getAverageMark() == null) {
+            sg[6] = "null";
+        } else sg[6] = studyGroup.getAverageMark().toString();
+        if (studyGroup.getFormOfEducation() == null) {
+            sg[7] = "null";
+        } else sg[7] = studyGroup.getFormOfEducation().toString();
+        sg[8] = studyGroup.getSemesterEnum().toString();
+        sg[9] = studyGroup.getGroupAdmin().getName();
+        sg[10] = studyGroup.getGroupAdmin().getWeight().toString();
+        sg[11] = studyGroup.getGroupAdmin().getHairColor().toString();
+        sg[12] = studyGroup.getAuthor();
+        logger.info(String.valueOf(getRowCount()));
+        return data.add(sg);
     }
 
     @Override
     public int getRowCount() {
-        return rowCount;
+        return data.size();
     }
 
     @Override

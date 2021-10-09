@@ -1,14 +1,18 @@
 package gui;
 
+import utility.CommandManager;
 import utility.Response;
 import utility.TextFormatting;
 import utility.TypeOfAnswer;
 
 import javax.swing.*;
+import java.util.logging.Logger;
 
 public class MainModelAnimator {
     private static MainModelAnimator instance;
     private final SGTableWorker sgTableWorker;
+
+    private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
 
     private MainModelAnimator() {
         sgTableWorker = SGTableWorker.getInstance();
@@ -20,6 +24,23 @@ public class MainModelAnimator {
     }
 
     public void animate(Response aResponse, JTextField clientInfo, JTextArea serverInfo) {
+
+//        String[] str = new String[13];
+//        str[0] = "Hi";
+//        str[1] = "Hi";
+//        str[2] = "Hi";
+//        str[3] = "Hi";
+//        str[4] = "Hi";
+//        str[5] = "Hi";
+//        str[6] = "Hi";
+//        str[7] = "Hi";
+//        str[8] = "Hi";
+//        str[9] = "Hi";
+//        str[10] = "Hi";
+//        str[11] = "Hi";
+//        str[12] = "Hi";
+//        boolean status = sgTableWorker.addData(str);
+//        logger.info(String.valueOf(status));
 
         clientInfo.setText("");
         serverInfo.setText("");
@@ -50,8 +71,8 @@ public class MainModelAnimator {
             }
             else if (aResponse.getSetOfStudyGroups() != null) {
                 serverInfo.setText("Command executed successful!");
-//                aResponse.getSetOfStudyGroups()
-//                        .forEach(sgTableWorker::addData);
+                aResponse.getSetOfStudyGroups()
+                        .forEach(sgTableWorker::addData);
             }
             else if (aResponse.getStudyGroup() != null) {
                 serverInfo.setText("Command executed successful!");
