@@ -2,12 +2,17 @@ package utility;
 
 import Interfaces.ValidatorInterface;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 /**
  * Class to validate commands
  */
 public class Validator implements ValidatorInterface {
+
+    private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
 
     private static AvailableCommands availableCommands;
     private static Validator instance;
@@ -49,6 +54,34 @@ public class Validator implements ValidatorInterface {
         return validateLogin(username) && validatePassword(password);
     }
 
+    @Override
+    public boolean validateConnection(String remoteHostAddress, String remoteHostPort) {
+        logger.info(String.valueOf(validateHostAddress(remoteHostAddress)));
+        logger.info(String.valueOf(validateHostPort(remoteHostPort)));
+
+        return validateHostAddress(remoteHostAddress) && validateHostPort(remoteHostPort);
+    }
+
+    private boolean validateHostAddress(String remoteHostAddress) {
+        Pattern hostAddress = Pattern.compile("^\\s*([\\w.]+)\\s*");
+
+        if (hostAddress.matcher(remoteHostAddress).find()) {
+            try {
+                InetAddress.getByName(remoteHostAddress);
+                return true;
+            } catch (UnknownHostException e) {
+                return false;
+            }
+        } else return false;
+    }
+
+    private boolean validateHostPort(String port) {
+        Pattern remoteHostPortPattern = Pattern.compile("^\\s*\\b(\\d{1,5})\\b\\s*");
+
+        return remoteHostPortPattern.matcher(port).find() && Integer.parseInt(port.trim()) < 65536
+                || Integer.parseInt(port.trim()) > 0;
+    }
+
     private boolean validateLogin(String username) {
         Pattern usernamePattern = Pattern.compile("^\\s*\\b(\\w+)\\b\\s*");
         return username != null && usernamePattern.matcher(username).find();
@@ -56,7 +89,7 @@ public class Validator implements ValidatorInterface {
 
     private boolean validatePassword(String password) {
         Pattern passwordPattern = Pattern.compile("^\\s*([\\d\\w]*)\\s*");
-        return password != null && passwordPattern.matcher(password).find();
+        return password == null || passwordPattern.matcher(password).find();
     }
 
     private boolean validateNoArgumentCommand(Command aCommand) {

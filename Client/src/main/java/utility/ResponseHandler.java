@@ -24,20 +24,19 @@ public class ResponseHandler implements ResponseHandlerInterface {
     }
 
     @Override
-    public TypeOfAnswer receive(ByteBuffer buffer) {
+    public Response receive(ByteBuffer buffer) {
         try {
             ObjectInputStream inObj = new ObjectInputStream(new ByteArrayInputStream(buffer.array()));
-            return ((Response) inObj.readObject()).getStatus();
-            // FIXME: 08.10.2021 Надо как-то обрабатывать полезную нагрузку
+            return (Response) inObj.readObject();
         } catch (ClassNotFoundException | InvalidClassException e) {
-            return TypeOfAnswer.ANOTHERVERSION;
+            return new Response(TypeOfAnswer.ANOTHERVERSION);
         } catch (IOException e) {
-            return TypeOfAnswer.NETPROBLEM;
+            return new Response(TypeOfAnswer.NETPROBLEM);
         }
     }
 
     @Override
-    public TypeOfAnswer receive(TypeOfAnswer errorInformation) {
-        return errorInformation;
+    public Response receive(TypeOfAnswer errorInformation) {
+        return new Response(errorInformation);
     }
 }

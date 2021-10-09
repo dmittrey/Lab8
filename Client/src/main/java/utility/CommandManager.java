@@ -34,23 +34,15 @@ public class CommandManager implements CommandManagerInterface {
     }
 
     @Override
-    public void transferCommand(Command aCommand) {
+    public Response transferCommand(Command aCommand) {
 
-        if (aCommand == null) console.print(TextFormatting.getRedText("\n\tCommand entered incorrectly!\n"));
-
-        else if (validator.notObjectArgumentCommands(aCommand))
-            console.print(requestHandler.send(aCommand) + "\n");
-
-        else if (validator.objectArgumentCommands(aCommand))
-            console.print(requestHandler.send(aCommand, studyGroupFactory.createStudyGroup()) + "\n");
-
-        else if (validator.validateScriptArgumentCommand(aCommand)) executeScript(aCommand.getArg());
-
-        else console.print(TextFormatting.getRedText("\tCommand entered incorrectly!\n"));
+        return (aCommand == null)
+                ? new Response(TypeOfAnswer.NOTVALIDATE)
+                : requestHandler.send(aCommand);
     }
 
     @Override
-    public TypeOfAnswer transferCommand(Session aSession) {
+    public Response transferCommand(Session aSession) {
         logger.info("In cmdManager");
         if (validator.sessionCommands(aSession)) {
             logger.info("Прошли валидацию");
@@ -62,7 +54,7 @@ public class CommandManager implements CommandManagerInterface {
                 return requestHandler.login(aSession);
             }
         }
-        return TypeOfAnswer.NOTVALIDATE;
+        return new Response(TypeOfAnswer.NOTVALIDATE);
     }
 
     private void executeScript(String scriptName) {
@@ -98,6 +90,4 @@ public class CommandManager implements CommandManagerInterface {
         } else console.print(TextFormatting.getRedText("\nRecursion has been detected! Script " + scriptName +
                 " will not be ran!\n"));
     }
-
-
 }

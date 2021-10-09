@@ -1,6 +1,6 @@
 package Interfaces;
 
-import utility.TypeOfAnswer;
+import utility.Response;
 
 public interface SocketWorkerInterface {
 
@@ -8,5 +8,5 @@ public interface SocketWorkerInterface {
      * Send Request to the server
      * @return
      */
-    TypeOfAnswer sendRequest(byte[] serializedRequest);
+    Response sendRequest(byte[] serializedRequest);
 }

@@ -24,7 +24,7 @@ public class RequestHandler implements RequestHandlerInterface {
     }
 
     @Override
-    public TypeOfAnswer send(Command aCommand) {
+    public Response send(Command aCommand) {
         try {
             Request request = new Request(aCommand, session);
 
@@ -35,17 +35,17 @@ public class RequestHandler implements RequestHandlerInterface {
             session.setTypeOfSession(TypeOfSession.Login);
             return socketWorker.sendRequest(byteArrayOutputStream.toByteArray());
         } catch (IOException e) {
-            return TypeOfAnswer.NOTSERIALIZED;
+            return new Response(TypeOfAnswer.NOTSERIALIZED);
         }
     }
 
     @Override
-    public TypeOfAnswer send(Command aCommand, StudyGroup studyGroup) {
+    public Response send(Command aCommand, StudyGroup studyGroup) {
 
         if (studyGroup != null) {
             aCommand.addStudyGroup(studyGroup);
             return send(aCommand);
-        } else return TypeOfAnswer.OBJECTNOTEXIST;
+        } else return new Response(TypeOfAnswer.OBJECTNOTEXIST);
     }
 
     @Override
@@ -79,13 +79,13 @@ public class RequestHandler implements RequestHandlerInterface {
     }
 
     @Override
-    public TypeOfAnswer register(Session aSession) {
+    public Response register(Session aSession) {
         setSession(aSession);
         return send(new Command(TypeOfCommand.Register, ""));
     }
 
     @Override
-    public TypeOfAnswer login(Session aSession) {
+    public Response login(Session aSession) {
         setSession(aSession);
         return send(new Command(TypeOfCommand.Login, ""));
     }

@@ -18,7 +18,7 @@ public class Main {
 
         CommandManager commandManager = new CommandManager();
         CommandReader.getInstance().setCommandManager(commandManager);
-        InetSocketAddress socketAddress = new InetSocketAddress(InetAddress.getLocalHost(), 2222);
+        InetSocketAddress socketAddress = new InetSocketAddress(InetAddress.getLocalHost(), 2323);
         RequestHandler.getInstance().setRemoteHostSocketAddress(socketAddress);
 
         logger.info("gui");

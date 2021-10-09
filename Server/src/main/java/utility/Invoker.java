@@ -1,6 +1,8 @@
 package utility;
 
 import commands.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -8,6 +10,8 @@ import java.util.*;
  * Invoker class from pattern Command to logging commands from client
  */
 public class Invoker {
+
+    public static final Logger logger = LoggerFactory.getLogger("Invoker");
 
     private final Map<TypeOfCommand, CommandAbstract> commands;
     private final Receiver receiver;
@@ -26,6 +30,8 @@ public class Invoker {
         TypeOfCommand aCommand = aRequest.getCommand().getCommand();
         String username = aRequest.getSession().getName();
         String password = aRequest.getSession().getPassword();
+        logger.info(String.valueOf(commands.get(aCommand).getAuthorizationStatus()));
+        logger.info(String.valueOf(aCommand == TypeOfCommand.Register || receiver.loginUser(username, password)));
         return (!commands.get(aCommand).getAuthorizationStatus())
                 ? commands.get(aCommand).execute(aRequest)
                 : (aCommand == TypeOfCommand.Register || receiver.loginUser(username, password))

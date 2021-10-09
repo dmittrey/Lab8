@@ -24,4 +24,6 @@ public interface ValidatorInterface {
      * Validate Login and Register commands
      */
     boolean sessionCommands(Session aSession);
+
+    boolean validateConnection(String remoteHostAddress, String remoteHostPort);
 }

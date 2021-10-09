@@ -1,15 +1,16 @@
 package Interfaces;
 
 import utility.Command;
+import utility.Response;
 import utility.Session;
-import utility.TypeOfAnswer;
 
 public interface CommandManagerInterface {
 
     /**
      * Validate and complete aCommand
+     * @return
      */
-    void transferCommand(Command aCommand);
+    Response transferCommand(Command aCommand);
 
-    TypeOfAnswer transferCommand(Session aSession);
+    Response transferCommand(Session aSession);
 }

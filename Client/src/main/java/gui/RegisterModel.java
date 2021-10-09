@@ -19,7 +19,7 @@ public class RegisterModel extends JFrame {
         submitButton.addActionListener(e -> {
             if (Arrays.equals(passwordField.getPassword(), passwordField2.getPassword())) {
                 FrameHandler.getInstance().register(usernameField.getText(), passwordField.getPassword());
-            }
+            } else setWarn(TypeOfAnswer.NOTMATCH);
         });
     }
 

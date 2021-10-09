@@ -20,13 +20,13 @@ public class CommandReader {
         commandManager = aCommandManager;
     }
 
-    public TypeOfAnswer execute(Session session) {
+    public Response execute(Session session) {
         return commandManager.transferCommand(session);
     }
 
-    public void execute(TypeOfCommand typeOfCommand, String anArg) {
+    public Response execute(TypeOfCommand typeOfCommand, String anArg) {
         Command command = new Command(typeOfCommand, anArg);
-        commandManager.transferCommand(command);
+        return commandManager.transferCommand(command);
     }
 
     public void execute(TypeOfCommand typeOfCommand) {

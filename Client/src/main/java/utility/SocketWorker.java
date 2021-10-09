@@ -14,10 +14,8 @@ import java.nio.channels.DatagramChannel;
 public class SocketWorker implements SocketWorkerInterface {
 
     private DatagramChannel datagramChannel;
-    private final ResponseHandlerInterface responseHandler;
 
     public SocketWorker(SocketAddress aSocketAddress) {
-        responseHandler = ResponseHandler.getInstance();
         try {
             datagramChannel = DatagramChannel.open();
             datagramChannel.configureBlocking(false);
@@ -28,20 +26,20 @@ public class SocketWorker implements SocketWorkerInterface {
     }
 
     @Override
-    public TypeOfAnswer sendRequest(byte[] serializedRequest) {
+    public Response sendRequest(byte[] serializedRequest) {
         try {
             ByteBuffer buf = ByteBuffer.wrap(serializedRequest);
             do {
                 datagramChannel.write(buf);
             } while (buf.hasRemaining());
-            return responseHandler.receive(receiveAnswer());
+            return receiveAnswer();
         } catch (IOException exception) {
             RequestHandler.getInstance().setSocketStatus(false);
-            return TypeOfAnswer.COMMANDNOTGO;
+            return new Response(TypeOfAnswer.COMMANDNOTGO);
         }
     }
 
-    private TypeOfAnswer receiveAnswer() {
+    private Response receiveAnswer() {
 
         long timeStart = System.currentTimeMillis();
         ByteBuffer buffer = ByteBuffer.allocate(4096);
@@ -56,7 +54,7 @@ public class SocketWorker implements SocketWorkerInterface {
                 }
             } else {
                 RequestHandler.getInstance().setSocketStatus(false);
-                return TypeOfAnswer.SERVERNOTAVAILABLE;
+                return new Response(TypeOfAnswer.SERVERNOTAVAILABLE);
             }
         }
     }
