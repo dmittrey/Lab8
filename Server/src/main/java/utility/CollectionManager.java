@@ -24,7 +24,7 @@ public class CollectionManager {
         typesOfInfo.put("Type of collection items", "Study groups");
         typesOfInfo.put("Priority", "Student's count, Average mark, Creation date");
         typesOfInfo.put("Initialization date", initTime);
-        typesOfInfo.put("Number of items in te collection", String.valueOf(studyGroups.size()));
+        typesOfInfo.put("Number of items in the collection", String.valueOf(studyGroups.size()));
         return typesOfInfo;
     }
 

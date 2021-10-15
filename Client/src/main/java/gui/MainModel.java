@@ -3,6 +3,8 @@ package gui;
 import utility.*;
 
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.logging.Logger;
 
 public class MainModel extends JFrame {
@@ -61,9 +63,18 @@ public class MainModel extends JFrame {
         JTable jTable = new JTable(sgTableWorker);
         jTable.setModel(SGTableWorker.getInstance());
         sgScrollPane = new JScrollPane(jTable);
+        jTable.setAutoCreateRowSorter(true);
 
         ComboBoxToolTipRenderer<String> renderer = new ComboBoxToolTipRenderer<>();
         commandBox = new JComboBox<>();
         commandBox.setRenderer(renderer);
+
+        jTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                SGChangeMenu sgChangeMenu = new SGChangeMenu();
+                jTable.setComponentPopupMenu(sgChangeMenu);
+            }
+        });
     }
 }

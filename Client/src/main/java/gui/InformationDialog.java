@@ -13,7 +13,7 @@ public class InformationDialog extends JDialog {
         setTitle("Information");
         setModal(true);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        setSize(500,300);
+        setSize(500,330);
         setLocation();
 
         buttonOK.addActionListener(e -> dispose());
