@@ -61,5 +61,9 @@ public class MainModel extends JFrame {
         JTable jTable = new JTable(sgTableWorker);
         jTable.setModel(SGTableWorker.getInstance());
         sgScrollPane = new JScrollPane(jTable);
+
+        ComboBoxToolTipRenderer<String> renderer = new ComboBoxToolTipRenderer<>();
+        commandBox = new JComboBox<>();
+        commandBox.setRenderer(renderer);
     }
 }

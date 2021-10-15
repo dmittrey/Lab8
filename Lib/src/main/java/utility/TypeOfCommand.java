@@ -30,8 +30,10 @@ public enum TypeOfCommand {
     }
 
     public static TypeOfCommand getEnum(String value) {
-        for(TypeOfCommand v : values())
-            if(v.getValue().equalsIgnoreCase(value)) return v;
+        if (value != null) {
+            for (TypeOfCommand v : values())
+                if (v.getValue().equalsIgnoreCase(value)) return v;
+        }
         return null;
     }
 }
