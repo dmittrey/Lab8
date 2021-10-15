@@ -1,8 +1,16 @@
 package gui;
 
-import javax.swing.*;
+import data.*;
+import data.Color;
+import utility.Command;
+import utility.CommandReader;
 
-public class AddDetailsModel extends JFrame {
+import javax.swing.*;
+import java.awt.*;
+
+public class AddDetailsModel extends JDialog {
+
+    private Command command;
     private JPanel mainPanel;
     private JPanel namePanel;
     private JTextField name;
@@ -31,21 +39,41 @@ public class AddDetailsModel extends JFrame {
     private JPanel groupAdminHairColorPanel;
     private JTextField groupAdminHairColorWarn;
     private JTextField groupAdminHairColor;
-    private JButton addGroupButton;
+    private JButton submitButton;
 
-    public AddDetailsModel() {
-//        setTitle("Fields setter");
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setContentPane(mainPanel);
-//        pack();
+    public AddDetailsModel(JFrame jFrame) {
+        setContentPane(mainPanel);
+        setTitle("Fields setting");
+        setModal(true);
+        pack();
+        setLocation();
+
+        submitButton.addActionListener(e -> {
+            StudyGroup studyGroup = new StudyGroup(0,
+                    name.getText(),
+                    new Coordinates(Integer.parseInt(xCoordinate.getText()), Double.parseDouble(yCoordinate.getText())),
+                    null,
+                    Integer.parseInt(studentsCount.getText()),
+                    Double.parseDouble(averageMark.getText()),
+                    FormOfEducation.valueOf(formOfEducation.getItemAt(formOfEducation.getSelectedIndex()).toString()),
+                    Semester.valueOf(semester.getItemAt(semester.getSelectedIndex()).toString()),
+                    new Person(groupAdminName.getText(),
+                            Long.parseLong(groupAdminWeight.getText()),
+                            Color.valueOf(groupAdminHairColor.getText())
+                    ));
+//            aCommand.addStudyGroup(studyGroup);
+//            CommandReader.getInstance().execute(aCommand);
+            // FIXME: 16.10.2021 Надо сделать оичстку полей
+            dispose();
+        });
     }
 
-    public JPanel getPanel() {
-        return mainPanel;
-    }
+    public void setLocation(){
+        int width = this.getSize().width;
+        int height = this.getSize().height;
 
-    public static void main(String[] args) {
-        JFrame jFrame = new AddDetailsModel();
-        jFrame.setVisible(true);
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+        this.setLocation((screenSize.width / 2) - (width / 2), (screenSize.height / 2) - (height / 2));
     }
 }

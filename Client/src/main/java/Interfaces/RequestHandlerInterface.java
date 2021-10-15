@@ -43,6 +43,8 @@ public interface RequestHandlerInterface {
 
     void setSession(Session aSession);
 
+    Session getSession();
+
     Response register(Session aSession);
 
     Response login(Session aSession);

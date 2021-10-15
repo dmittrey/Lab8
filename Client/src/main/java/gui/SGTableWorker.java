@@ -23,7 +23,7 @@ public class SGTableWorker extends AbstractTableModel {
         data = new ArrayList<>();
     }
 
-    public void clearTable(){
+    public void clearTable() {
         data.clear();
     }
 

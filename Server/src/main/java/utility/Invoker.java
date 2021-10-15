@@ -40,7 +40,7 @@ public class Invoker {
     }
 
     private void initMap() {
-        commands.put(TypeOfCommand.Help, new Help(commands, receiver));//Map<String, String>
+        commands.put(TypeOfCommand.Help, new Help(commands, receiver));//Map<String, String>///
         commands.put(TypeOfCommand.Info, new Info(receiver));//Map<String, String>
         commands.put(TypeOfCommand.Show, new Show(receiver));//Set<StudyGroup>
         commands.put(TypeOfCommand.Add, new Add(receiver));//TypeOfAnswer

@@ -79,6 +79,11 @@ public class RequestHandler implements RequestHandlerInterface {
     }
 
     @Override
+    public Session getSession(){
+        return session;
+    }
+
+    @Override
     public Response register(Session aSession) {
         setSession(aSession);
         return send(new Command(TypeOfCommand.Register, ""));

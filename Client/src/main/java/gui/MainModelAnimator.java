@@ -28,6 +28,8 @@ public class MainModelAnimator {
 
         clientInfo.setText("");
         serverInfo.setText("");
+        SGTableWorker.getInstance().clearTable();
+
         if (aResponse.getStatus().equals(TypeOfAnswer.SUCCESSFUL)) {
             clientInfo.setText("Command executed successful!");
             StringBuilder sb = new StringBuilder();
@@ -52,26 +54,20 @@ public class MainModelAnimator {
                                     .append(aResponse.getInformation().get(key).toUpperCase())
                                     .append("\n"));
                 }
-                serverInfo.setText(sb.toString());
-            }
-            else if (aResponse.getSetOfStudyGroups() != null) {
+                FrameHandler.getInstance().printInfo(sb.toString());
+            } else if (aResponse.getSetOfStudyGroups() != null) {
                 serverInfo.setText("Command executed successful!");
-                sgTableWorker.clearTable();
                 aResponse.getSetOfStudyGroups().forEach(sgTableWorker::addData);
-            }
-            else if (aResponse.getStudyGroup() != null) {
+            } else if (aResponse.getStudyGroup() != null) {
                 serverInfo.setText("Command executed successful!");
-                sgTableWorker.clearTable();
                 StudyGroup newStudyGroup = aResponse.getStudyGroup();
                 sgTableWorker.addData(newStudyGroup);
-            }
-            else if (aResponse.getCount() != null) {
+            } else if (aResponse.getCount() != null) {
                 sb.append("Amount of elements: ")
                         .append(TextFormatting.getGreenText(String.valueOf(aResponse.getCount())))
                         .append("\n");
                 serverInfo.setText(sb.toString());
-            }
-            else serverInfo.setText("Command executed successful!");
+            } else serverInfo.setText("Command executed successful!");
         } else {
             switch (aResponse.getStatus()) {
                 case OBJECTNOTEXIST:

@@ -26,11 +26,22 @@ public class MainModel extends JFrame {
     public MainModel() {
 
         submitButton.addActionListener(e -> {
-            TypeOfCommand command = TypeOfCommand.getEnum(commandBox.getItemAt(commandBox.getSelectedIndex()));
+            TypeOfCommand typeOfCommand = TypeOfCommand.getEnum(commandBox.getItemAt(commandBox.getSelectedIndex()));
             String arg = argumentField.getText();
+            Command command = new Command(typeOfCommand, arg);
+
             logger.info("Обработка команды " + command);
 
-            Response cmdResult = CommandReader.getInstance().execute(command, arg);
+            if (typeOfCommand == TypeOfCommand.Add
+                    || typeOfCommand == TypeOfCommand.Add_if_max
+                    || typeOfCommand == TypeOfCommand.Add_if_min
+                    || typeOfCommand == TypeOfCommand.Update) {
+                FrameHandler.getInstance().spawnFieldsChanger(command);
+            }
+
+            Response cmdResult = CommandReader.getInstance().execute(command);
+            MainModelAnimator.getInstance().animate(cmdResult, clientInfo, serverInfo);
+            cmdResult = CommandReader.getInstance().execute(new Command(TypeOfCommand.Show, ""));
             MainModelAnimator.getInstance().animate(cmdResult, clientInfo, serverInfo);
             SGTableWorker.getInstance().fireTableDataChanged();
         });
@@ -38,23 +49,12 @@ public class MainModel extends JFrame {
 
     public void setPanel(MainFrame jFrame) {
         jFrame.setTitle("StudyGroups");
+        usernameField.setText(RequestHandler.getInstance().getSession().getName());
         jFrame.setContentPane(mainPanel);
         jFrame.setSize(1080, 560);
         jFrame.setLocation();
         jFrame.repaint();
     }
-//
-//    public void setClientInfo(String info) {
-//        clientInfo.setText(info);
-//    }
-//
-//    public void setServerWarn(String info) {
-//        serverInfo.setText(info);
-//    }
-//
-//    public void setUsername(String anUsername) {
-//        usernameField.setText(anUsername);
-//    }
 
     private void createUIComponents() {
         SGTableWorker sgTableWorker = SGTableWorker.getInstance();

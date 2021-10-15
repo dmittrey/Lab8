@@ -12,13 +12,14 @@ public class FrameHandler {
     private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
 
     private final CommandReader commandReader;
-    private final AddDetailsModel addDetailsModel;
+    private AddDetailsModel addDetailsModel;
     private final ConnectModel connectModel;
     private final LoginModel loginModel;
     private final RegisterModel registerModel;
     private final MainModel mainModel;
     private final MainFrame jFrame;
     private static FrameHandler instance;
+    private final InformationDialog informationDialog;
 
     public static FrameHandler getInstance() {
         if (instance == null) instance = new FrameHandler();
@@ -27,12 +28,13 @@ public class FrameHandler {
 
     private FrameHandler() {
         commandReader = CommandReader.getInstance();
-        addDetailsModel = new AddDetailsModel();
         connectModel = new ConnectModel();
         loginModel = new LoginModel();
         registerModel = new RegisterModel();
         mainModel = new MainModel();
-        jFrame = new MainFrame();
+        jFrame = new MainFrame("Study groups");
+        addDetailsModel = new AddDetailsModel(jFrame);
+        informationDialog = new InformationDialog();
     }
 
     public void start() {
@@ -82,5 +84,14 @@ public class FrameHandler {
         } else {
             setMain();
         }
+    }
+
+    public void spawnFieldsChanger(Command aCommand) {
+        addDetailsModel.setVisible(true);
+    }
+
+    public void printInfo(String info) {
+        informationDialog.setInfo(info);
+        informationDialog.setVisible(true);
     }
 }

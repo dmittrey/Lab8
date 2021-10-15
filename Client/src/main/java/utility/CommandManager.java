@@ -1,6 +1,7 @@
 package utility;
 
 import Interfaces.*;
+import gui.FrameHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;

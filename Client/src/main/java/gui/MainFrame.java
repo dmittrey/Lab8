@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
 
-    public MainFrame() {
-        super("Study groups");
+    public MainFrame(String title) {
+        super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 

@@ -24,12 +24,11 @@ public class CommandReader {
         return commandManager.transferCommand(session);
     }
 
-    public Response execute(TypeOfCommand typeOfCommand, String anArg) {
-        Command command = new Command(typeOfCommand, anArg);
+    public Response execute(Command command) {
         return commandManager.transferCommand(command);
     }
 
     public void execute(TypeOfCommand typeOfCommand) {
-        execute(typeOfCommand, "");
+        execute(new Command(typeOfCommand, ""));
     }
 }
