@@ -1,14 +1,9 @@
 package gui;
 
 import utility.CommandManager;
-import utility.RequestHandler;
 import utility.TypeOfAnswer;
-import utility.Validator;
 
 import javax.swing.*;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.UnknownHostException;
 import java.util.logging.Logger;
 
 public class ConnectModel {
@@ -34,13 +29,16 @@ public class ConnectModel {
         });
     }
 
-    public void setPanel(JFrame jFrame) {
+    public void setPanel(MainFrame jFrame) {
         jFrame.setTitle("Connecting");
+        jFrame.setSize(400,200);
+        jFrame.setLocation();
         jFrame.setContentPane(mainPanel);
-        jFrame.pack();
+        jFrame.revalidate();
     }
 
     public void setWarn(TypeOfAnswer typeOfAnswer) {
         warnField.setText(typeOfAnswer.toString());
     }
 }
+// FIXME: 15.10.2021 Добавить hotkey на Enter на вход

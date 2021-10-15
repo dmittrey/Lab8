@@ -23,10 +23,12 @@ public class RegisterModel extends JFrame {
         });
     }
 
-    public void setPanel(JFrame jFrame) {
+    public void setPanel(MainFrame jFrame) {
         jFrame.setTitle("Register");
+        jFrame.setSize(400,300);
+        jFrame.setLocation();
         jFrame.setContentPane(mainPanel);
-        jFrame.pack();
+        jFrame.revalidate();
     }
 
     public void setWarn(TypeOfAnswer typeOfAnswer) {

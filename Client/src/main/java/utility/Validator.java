@@ -56,9 +56,6 @@ public class Validator implements ValidatorInterface {
 
     @Override
     public boolean validateConnection(String remoteHostAddress, String remoteHostPort) {
-        logger.info(String.valueOf(validateHostAddress(remoteHostAddress)));
-        logger.info(String.valueOf(validateHostPort(remoteHostPort)));
-
         return validateHostAddress(remoteHostAddress) && validateHostPort(remoteHostPort);
     }
 
@@ -78,8 +75,8 @@ public class Validator implements ValidatorInterface {
     private boolean validateHostPort(String port) {
         Pattern remoteHostPortPattern = Pattern.compile("^\\s*\\b(\\d{1,5})\\b\\s*");
 
-        return remoteHostPortPattern.matcher(port).find() && Integer.parseInt(port.trim()) < 65536
-                || Integer.parseInt(port.trim()) > 0;
+        return remoteHostPortPattern.matcher(port).find() && (Integer.parseInt(port.trim()) < 65536
+                || Integer.parseInt(port.trim()) > 0);
     }
 
     private boolean validateLogin(String username) {

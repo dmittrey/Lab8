@@ -2,7 +2,6 @@ package gui;
 
 import utility.*;
 
-import javax.swing.*;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
@@ -17,8 +16,8 @@ public class FrameHandler {
     private final ConnectModel connectModel;
     private final LoginModel loginModel;
     private final RegisterModel registerModel;
-    private final MainModel1 mainModel;
-    private final JFrame jFrame;
+    private final MainModel mainModel;
+    private final MainFrame jFrame;
     private static FrameHandler instance;
 
     public static FrameHandler getInstance() {
@@ -32,16 +31,16 @@ public class FrameHandler {
         connectModel = new ConnectModel();
         loginModel = new LoginModel();
         registerModel = new RegisterModel();
-        mainModel = new MainModel1();
+        mainModel = new MainModel();
         jFrame = new MainFrame();
     }
 
-    public void start(){
+    public void start() {
         connectModel.setPanel(jFrame);
         jFrame.setVisible(true);
     }
 
-    public void connect(String remoteHostAddress, String remoteHostPort){
+    public void connect(String remoteHostAddress, String remoteHostPort) {
         if (Validator.getInstance().validateConnection(remoteHostAddress, remoteHostPort)) {
             try {
                 RequestHandler.getInstance().setRemoteHostSocketAddress(
@@ -53,15 +52,15 @@ public class FrameHandler {
         } else connectModel.setWarn(TypeOfAnswer.NOTVALIDATE);
     }
 
-    public void setAuth(){
+    public void setAuth() {
         loginModel.setPanel(jFrame);
     }
 
-    public void setRegister(){
+    public void setRegister() {
         registerModel.setPanel(jFrame);
     }
 
-    public void setMain(){
+    public void setMain() {
         mainModel.setPanel(jFrame);
     }
 
@@ -75,7 +74,7 @@ public class FrameHandler {
         }
     }
 
-    public void register(String anUsername, char[] aPassword){
+    public void register(String anUsername, char[] aPassword) {
         Session session = new Session(anUsername, new String(aPassword), TypeOfSession.Register);
         TypeOfAnswer status = commandReader.execute(session).getStatus();
         if (status != TypeOfAnswer.SUCCESSFUL) {

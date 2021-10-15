@@ -1,5 +1,6 @@
 package gui;
 
+import data.StudyGroup;
 import utility.CommandManager;
 import utility.Response;
 import utility.TextFormatting;
@@ -23,24 +24,7 @@ public class MainModelAnimator {
         return instance;
     }
 
-    public void animate(Response aResponse, JTextField clientInfo, JTextArea serverInfo) {
-
-//        String[] str = new String[13];
-//        str[0] = "Hi";
-//        str[1] = "Hi";
-//        str[2] = "Hi";
-//        str[3] = "Hi";
-//        str[4] = "Hi";
-//        str[5] = "Hi";
-//        str[6] = "Hi";
-//        str[7] = "Hi";
-//        str[8] = "Hi";
-//        str[9] = "Hi";
-//        str[10] = "Hi";
-//        str[11] = "Hi";
-//        str[12] = "Hi";
-//        boolean status = sgTableWorker.addData(str);
-//        logger.info(String.valueOf(status));
+    public void animate(Response aResponse, JTextField clientInfo, JTextField serverInfo) {
 
         clientInfo.setText("");
         serverInfo.setText("");
@@ -49,6 +33,7 @@ public class MainModelAnimator {
             StringBuilder sb = new StringBuilder();
 
             if (aResponse.getInformation() != null) {
+                // FIXME: 15.10.2021 Информацию буду алертом выводить, help будет при наведении на каждую команду отдельно
                 if (aResponse.getInformation().get("1") == null) {
                     aResponse.getInformation().
                             forEach((key, value) -> sb.append(key.toUpperCase())
@@ -71,12 +56,14 @@ public class MainModelAnimator {
             }
             else if (aResponse.getSetOfStudyGroups() != null) {
                 serverInfo.setText("Command executed successful!");
-                aResponse.getSetOfStudyGroups()
-                        .forEach(sgTableWorker::addData);
+                sgTableWorker.clearTable();
+                aResponse.getSetOfStudyGroups().forEach(sgTableWorker::addData);
             }
             else if (aResponse.getStudyGroup() != null) {
                 serverInfo.setText("Command executed successful!");
-                // FIXME: 09.10.2021 Составить таблицу из одной sg
+                sgTableWorker.clearTable();
+                StudyGroup newStudyGroup = aResponse.getStudyGroup();
+                sgTableWorker.addData(newStudyGroup);
             }
             else if (aResponse.getCount() != null) {
                 sb.append("Amount of elements: ")

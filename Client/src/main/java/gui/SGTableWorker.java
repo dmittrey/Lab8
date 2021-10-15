@@ -19,13 +19,17 @@ public class SGTableWorker extends AbstractTableModel {
         return instance;
     }
 
-    private SGTableWorker(){
+    private SGTableWorker() {
         data = new ArrayList<>();
+    }
+
+    public void clearTable(){
+        data.clear();
     }
 
     @Override
     public String getColumnName(int columnIndex) {
-        switch (columnIndex){
+        switch (columnIndex) {
             case 0:
                 return "id";
             case 1:
@@ -57,6 +61,7 @@ public class SGTableWorker extends AbstractTableModel {
     }
 
     public boolean addData(StudyGroup studyGroup) {
+        logger.info(studyGroup.getName() + " has been added!");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String[] sg = new String[13];
         sg[0] = studyGroup.getId().toString();
@@ -76,7 +81,6 @@ public class SGTableWorker extends AbstractTableModel {
         sg[10] = studyGroup.getGroupAdmin().getWeight().toString();
         sg[11] = studyGroup.getGroupAdmin().getHairColor().toString();
         sg[12] = studyGroup.getAuthor();
-        logger.info(String.valueOf(getRowCount()));
         return data.add(sg);
     }
 
