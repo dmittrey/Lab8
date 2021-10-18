@@ -1,5 +1,8 @@
-package gui;
+package gui.main;
 
+import gui.*;
+import gui.actions.RemoveAction;
+import gui.actions.UpdateAction;
 import utility.*;
 
 import javax.swing.*;
@@ -11,6 +14,8 @@ public class MainModel extends JFrame {
 
     private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
 
+    private final RemoveAction removeAction;
+    private final UpdateAction updateAction;
     private JPanel mainPanel;
     private JTextField usernameField;
     private JPanel commandPanel;
@@ -25,7 +30,10 @@ public class MainModel extends JFrame {
     private JPanel server;
     private JScrollPane sgScrollPane;
 
-    public MainModel() {
+    public MainModel(RemoveAction aRemoveAction, UpdateAction anUpdateAction) {
+
+        removeAction = aRemoveAction;
+        updateAction = anUpdateAction;
 
         submitButton.addActionListener(e -> {
             TypeOfCommand typeOfCommand = TypeOfCommand.getEnum(commandBox.getItemAt(commandBox.getSelectedIndex()));
@@ -72,7 +80,7 @@ public class MainModel extends JFrame {
         jTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                SGChangeMenu sgChangeMenu = new SGChangeMenu();
+                SGChangeMenu sgChangeMenu = new SGChangeMenu(removeAction, updateAction);
                 jTable.setComponentPopupMenu(sgChangeMenu);
             }
         });

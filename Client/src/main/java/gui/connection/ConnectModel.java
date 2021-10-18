@@ -1,5 +1,7 @@
-package gui;
+package gui.connection;
 
+import gui.FrameHandler;
+import gui.MainFrame;
 import utility.CommandManager;
 import utility.TypeOfAnswer;
 

@@ -1,5 +1,7 @@
-package gui;
+package gui.logining;
 
+import gui.FrameHandler;
+import gui.MainFrame;
 import utility.TypeOfAnswer;
 
 import javax.swing.*;

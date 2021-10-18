@@ -1,9 +1,8 @@
-package gui;
+package gui.addDetails;
 
 import data.*;
 import data.Color;
 import utility.Command;
-import utility.CommandReader;
 
 import javax.swing.*;
 import java.awt.*;

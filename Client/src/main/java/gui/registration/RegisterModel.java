@@ -1,5 +1,7 @@
-package gui;
+package gui.registration;
 
+import gui.FrameHandler;
+import gui.MainFrame;
 import utility.TypeOfAnswer;
 
 import javax.swing.*;
