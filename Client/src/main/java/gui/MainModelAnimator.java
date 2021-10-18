@@ -35,7 +35,6 @@ public class MainModelAnimator {
             StringBuilder sb = new StringBuilder();
 
             if (aResponse.getInformation() != null) {
-                // FIXME: 15.10.2021 Информацию буду алертом выводить, help будет при наведении на каждую команду отдельно
                 if (aResponse.getInformation().get("1") == null) {
                     aResponse.getInformation().
                             forEach((key, value) -> sb.append(key.toUpperCase())

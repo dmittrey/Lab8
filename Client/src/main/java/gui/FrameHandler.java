@@ -87,6 +87,10 @@ public class FrameHandler {
         if (status != TypeOfAnswer.SUCCESSFUL) {
             loginModel.setWarn(status);
         } else {
+
+            Thread synchronizer = new Thread(new DataSynchronizer());
+            synchronizer.start();
+
             setMain();
         }
     }
