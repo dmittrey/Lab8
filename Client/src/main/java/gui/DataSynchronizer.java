@@ -14,11 +14,11 @@ public class DataSynchronizer implements Runnable {
         try {
             while (true) {
                 SGTableWorker.getInstance().clearTable();
-                Response newCollection = CommandReader.getInstance().execute(new Command(TypeOfCommand.Show, ""));
+                Response newCollection = CommandReader.getInstance().execute(new Command(TypeOfCommand.Show, null));
                 if (newCollection.getSetOfStudyGroups() != null)
                     newCollection.getSetOfStudyGroups().forEach(SGTableWorker.getInstance()::addData);
                 SGTableWorker.getInstance().fireTableDataChanged();
-                Thread.sleep(3000);
+                Thread.sleep(5000);
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();

@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class MainModel extends JFrame {
+public class MainModel extends MainFrame {
     private JPanel mainPanel;
     private JTextField usernameField;
     private JPanel commandPanel;
@@ -34,11 +34,11 @@ public class MainModel extends JFrame {
         return argumentField.getText();
     }
 
-    public JPanel getMainPanel(){
+    public JPanel getMainPanel() {
         return mainPanel;
     }
 
-    public void setUsername(String username){
+    public void setUsername(String username) {
         usernameField.setText(username);
     }
 

@@ -1,11 +1,6 @@
 package gui.registration;
 
-import gui.FrameHandler;
-import gui.MainFrame;
-import utility.TypeOfAnswer;
-
 import javax.swing.*;
-import java.util.Arrays;
 
 public class RegisterModel extends JFrame {
     private JPanel mainPanel;
@@ -16,24 +11,28 @@ public class RegisterModel extends JFrame {
     private JPasswordField passwordField2;
     private JTextField warnField;
 
-    public RegisterModel() {
-        loginButton.addActionListener(e -> FrameHandler.getInstance().setAuth());
-        submitButton.addActionListener(e -> {
-            if (Arrays.equals(passwordField.getPassword(), passwordField2.getPassword())) {
-                FrameHandler.getInstance().register(usernameField.getText(), passwordField.getPassword());
-            } else setWarn(TypeOfAnswer.NOTMATCH);
-        });
+    public RegisterModel(RegisterController registerController) {
+        loginButton.addActionListener(e -> registerController.switchLogin());
+        submitButton.addActionListener(e -> registerController.register());
     }
 
-    public void setPanel(MainFrame jFrame) {
-        jFrame.setTitle("Register");
-        jFrame.setSize(400,300);
-        jFrame.setLocation();
-        jFrame.setContentPane(mainPanel);
-        jFrame.revalidate();
+    public String getUsername() {
+        return usernameField.getText();
     }
 
-    public void setWarn(TypeOfAnswer typeOfAnswer) {
-        warnField.setText(typeOfAnswer.toString());
+    public char[] getFirstPassword() {
+        return passwordField.getPassword();
+    }
+
+    public char[] getSecondPassword() {
+        return passwordField2.getPassword();
+    }
+
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+
+    public JTextField getWarnField() {
+        return warnField;
     }
 }

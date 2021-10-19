@@ -1,18 +1,15 @@
 package gui;
 
 import data.StudyGroup;
-import utility.CommandManager;
 
 import javax.swing.table.AbstractTableModel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 public class SGTableWorker extends AbstractTableModel {
 
     private final ArrayList<String[]> data;
     private static SGTableWorker instance;
-    private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
 
     public static SGTableWorker getInstance() {
         if (instance == null) instance = new SGTableWorker();
@@ -61,7 +58,6 @@ public class SGTableWorker extends AbstractTableModel {
     }
 
     public boolean addData(StudyGroup studyGroup) {
-        logger.info(studyGroup.getName() + " has been added!");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String[] sg = new String[13];
         sg[0] = studyGroup.getId().toString();

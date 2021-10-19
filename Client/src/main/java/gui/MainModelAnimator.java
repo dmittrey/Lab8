@@ -1,34 +1,25 @@
 package gui;
 
 import data.StudyGroup;
-import utility.CommandManager;
 import utility.Response;
-import utility.TextFormatting;
 import utility.TypeOfAnswer;
 
 import javax.swing.*;
-import java.util.logging.Logger;
 
 public class MainModelAnimator {
-    private static MainModelAnimator instance;
+
     private final SGTableWorker sgTableWorker;
+    private final FrameHandler frameHandler;
 
-    private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
-
-    private MainModelAnimator() {
+    public MainModelAnimator(FrameHandler aFrameHandler) {
         sgTableWorker = SGTableWorker.getInstance();
-    }
-
-    public static MainModelAnimator getInstance() {
-        if (instance == null) instance = new MainModelAnimator();
-        return instance;
+        frameHandler = aFrameHandler;
     }
 
     public void animate(Response aResponse, JTextField clientInfo, JTextField serverInfo) {
 
         clientInfo.setText("");
         serverInfo.setText("");
-        SGTableWorker.getInstance().clearTable();
 
         if (aResponse.getStatus().equals(TypeOfAnswer.SUCCESSFUL)) {
             clientInfo.setText("Command executed successful!");
@@ -53,17 +44,19 @@ public class MainModelAnimator {
                                     .append(aResponse.getInformation().get(key).toUpperCase())
                                     .append("\n"));
                 }
-                FrameHandler.getInstance().printInfo(sb.toString());
+                frameHandler.printInfo(sb.toString());
             } else if (aResponse.getSetOfStudyGroups() != null) {
+                SGTableWorker.getInstance().clearTable();
                 serverInfo.setText("Command executed successful!");
                 aResponse.getSetOfStudyGroups().forEach(sgTableWorker::addData);
             } else if (aResponse.getStudyGroup() != null) {
+                SGTableWorker.getInstance().clearTable();
                 serverInfo.setText("Command executed successful!");
                 StudyGroup newStudyGroup = aResponse.getStudyGroup();
                 sgTableWorker.addData(newStudyGroup);
             } else if (aResponse.getCount() != null) {
                 sb.append("Amount of elements: ")
-                        .append(TextFormatting.getGreenText(String.valueOf(aResponse.getCount())))
+                        .append(aResponse.getCount())
                         .append("\n");
                 serverInfo.setText(sb.toString());
             } else serverInfo.setText("Command executed successful!");

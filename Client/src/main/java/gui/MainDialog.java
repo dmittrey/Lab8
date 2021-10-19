@@ -3,8 +3,7 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainFrame extends JFrame {
-
+public class MainDialog extends JDialog {
     public void setLocation() {
         int width = this.getSize().width;
         int height = this.getSize().height;

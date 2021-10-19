@@ -1,9 +1,5 @@
 package gui.logining;
 
-import gui.FrameHandler;
-import gui.MainFrame;
-import utility.TypeOfAnswer;
-
 import javax.swing.*;
 
 public class LoginModel {
@@ -14,20 +10,24 @@ public class LoginModel {
     private JTextField usernameField;
     private JTextField warnField;
 
-    public LoginModel() {
-        registerButton.addActionListener(e -> FrameHandler.getInstance().setRegister());
-        submitButton.addActionListener(e -> FrameHandler.getInstance().login(usernameField.getText(), passwordField.getPassword()));
+    public LoginModel(LoginController loginController) {
+        registerButton.addActionListener(e -> loginController.switchRegister());
+        submitButton.addActionListener(e -> loginController.login());
     }
 
-    public void setPanel(MainFrame jFrame) {
-        jFrame.setTitle("Login");
-        jFrame.setSize(400, 200);
-        jFrame.setLocation();
-        jFrame.setContentPane(mainPanel);
-        jFrame.revalidate();
+    public JPanel getMainPanel() {
+        return mainPanel;
     }
 
-    public void setWarn(TypeOfAnswer typeOfAnswer) {
-        warnField.setText(typeOfAnswer.toString());
+    public String getUsername() {
+        return usernameField.getText();
+    }
+
+    public char[] getPassword() {
+        return passwordField.getPassword();
+    }
+
+    public JTextField getWarnField() {
+        return warnField;
     }
 }

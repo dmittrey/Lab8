@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class SortMenu extends JMenu {
 
-    public SortMenu(String title){
+    public SortMenu(String title) {
         super(title);
 
         JMenuItem sortId = new JMenuItem("Id");

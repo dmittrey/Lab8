@@ -23,6 +23,7 @@ public class Main {
 
         logger.info("gui");
 
-        FrameHandler.getInstance().start();
+        FrameHandler frameHandler = new FrameHandler();
+        frameHandler.start();
     }
 }

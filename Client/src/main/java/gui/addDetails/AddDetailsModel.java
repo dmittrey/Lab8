@@ -1,10 +1,11 @@
 package gui.addDetails;
 
+import gui.MainDialog;
 import utility.Command;
 
 import javax.swing.*;
 
-public class AddDetailsModel extends JDialog {
+public class AddDetailsModel extends MainDialog {
 
     private Command command;
     private JPanel mainPanel;
@@ -41,7 +42,8 @@ public class AddDetailsModel extends JDialog {
         setContentPane(mainPanel);
         setTitle("Fields setting");
         setModal(true);
-        pack();
+        setSize(850, 500);
+        setLocation();
 
         submitButton.addActionListener(e -> aCommand.addStudyGroup(addDetailsController.addStudyGroup()));
     }

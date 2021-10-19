@@ -32,13 +32,13 @@ public class CommandManager implements CommandManagerInterface {
     @Override
     public Response transferCommand(Command aCommand) {
         if (validator.notObjectArgumentCommands(aCommand)) {
-            logger.info(String.valueOf(aCommand));
             return requestHandler.send(aCommand);
         } else if (validator.objectArgumentCommands(aCommand)) {
             new AddDetailsController(aCommand).spawnModel();
-//            logger.info(String.valueOf(aCommand));
-            return requestHandler.send(aCommand);
-        } else if (validator.objectArgumentCommands(aCommand)){
+            return (aCommand.getStudyGroup() == null)
+                    ? requestHandler.send(aCommand)
+                    : new Response(TypeOfAnswer.SUCCESSFUL);
+        } else if (validator.objectArgumentCommands(aCommand)) {
             executeScript(aCommand.getArg());
             return new Response(TypeOfAnswer.SUCCESSFUL);
         } else return new Response(TypeOfAnswer.NOTVALIDATE);
@@ -46,14 +46,10 @@ public class CommandManager implements CommandManagerInterface {
 
     @Override
     public Response transferCommand(Session aSession) {
-        logger.info("In cmdManager");
         if (validator.sessionCommands(aSession)) {
-            logger.info("Прошли валидацию");
             if ((aSession.getTypeOfSession() == TypeOfSession.Register)) {
-                logger.info("register...");
                 return requestHandler.register(aSession);
             } else {
-                logger.info("logging...");
                 return requestHandler.login(aSession);
             }
         }

@@ -1,29 +1,32 @@
 package gui.main;
 
 import gui.FrameHandler;
+import gui.MainFrame;
 import gui.MainModelAnimator;
 import gui.SGTableWorker;
 import utility.*;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.logging.Logger;
 
 public class MainController {
 
     private final MainModel model;
+    private final MainModelAnimator mainModelAnimator;
+    private final FrameHandler frameHandler;
     private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
 
-    public MainController() {
+    public MainController(FrameHandler aFrameHandler) {
         model = new MainModel(this);
+        frameHandler = aFrameHandler;
+        mainModelAnimator = new MainModelAnimator(aFrameHandler);
     }
 
-    public void setPanel(JFrame jFrame) {
-        jFrame.setTitle("StudyGroups");
+    public void setPanel(MainFrame jFrame) {
+        jFrame.setTitle("Study groups");
         setUsername();
         jFrame.setContentPane(model.getMainPanel());
         jFrame.setSize(1080, 560);
-        setLocation(jFrame);
+        jFrame.setLocation();
         jFrame.repaint();
     }
 
@@ -35,21 +38,12 @@ public class MainController {
         logger.info("Обработка команды " + command);
 
         Response cmdResult = CommandReader.getInstance().execute(command);
-        MainModelAnimator.getInstance().animate(cmdResult, model.getClientInfo(), model.getServerInfo());
+        mainModelAnimator.animate(cmdResult, model.getClientInfo(), model.getServerInfo());
         SGTableWorker.getInstance().fireTableDataChanged();
     }
 
-    private void setUsername(){
+    private void setUsername() {
         String username = RequestHandler.getInstance().getSession().getName();
         model.setUsername(username);
-    }
-
-    private void setLocation(JFrame jFrame) {
-        int width = jFrame.getSize().width;
-        int height = jFrame.getSize().height;
-
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-        jFrame.setLocation((screenSize.width / 2) - (width / 2), (screenSize.height / 2) - (height / 2));
     }
 }

@@ -1,46 +1,34 @@
 package gui.connection;
 
-import gui.FrameHandler;
-import gui.MainFrame;
-import utility.CommandManager;
-import utility.TypeOfAnswer;
-
 import javax.swing.*;
-import java.util.logging.Logger;
 
 public class ConnectModel {
 
-    private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
-
     private JPanel mainPanel;
     private JPanel remoteHostAddress;
-    private JTextField textField1;
+    private JTextField hostAddress;
     private JPanel remoteHostPort;
-    private JTextField textField2;
+    private JTextField hostPort;
     private JButton button1;
     private JTextField warnField;
 
-    public ConnectModel() {
-        button1.addActionListener(e -> {
-            String hostAddress = textField1.getText();
-            String hostPort = textField2.getText();
-            logger.info(hostAddress);
-            logger.info(hostPort);
-
-            FrameHandler.getInstance().connect(hostAddress, hostPort);
-        });
+    public ConnectModel(ConnectController connectController) {
+        button1.addActionListener(e -> connectController.connect());
     }
 
-    public void setPanel(MainFrame jFrame) {
-        jFrame.setTitle("Connecting");
-        jFrame.setSize(400,200);
-        jFrame.setLocation();
-        jFrame.setContentPane(mainPanel);
-        jFrame.revalidate();
+    public String getAddress() {
+        return hostAddress.getText();
     }
 
-    public void setWarn(TypeOfAnswer typeOfAnswer) {
-        warnField.setText(typeOfAnswer.toString());
+    public String getPort() {
+        return hostPort.getText();
+    }
+
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+
+    public void setWarn(String aWarnText) {
+        warnField.setText(aWarnText);
     }
 }
-// FIXME: 15.10.2021 Добавить hotkey на Enter на вход
