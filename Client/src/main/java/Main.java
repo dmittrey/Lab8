@@ -1,4 +1,3 @@
-import gui.DataSynchronizer;
 import gui.FrameHandler;
 import utility.CommandManager;
 import utility.CommandReader;

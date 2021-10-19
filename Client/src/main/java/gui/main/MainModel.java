@@ -1,21 +1,13 @@
 package gui.main;
 
 import gui.*;
-import gui.actions.RemoveAction;
-import gui.actions.UpdateAction;
 import utility.*;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.logging.Logger;
 
 public class MainModel extends JFrame {
-
-    private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
-
-    private final RemoveAction removeAction;
-    private final UpdateAction updateAction;
     private JPanel mainPanel;
     private JTextField usernameField;
     private JPanel commandPanel;
@@ -30,40 +22,32 @@ public class MainModel extends JFrame {
     private JPanel server;
     private JScrollPane sgScrollPane;
 
-    public MainModel(RemoveAction aRemoveAction, UpdateAction anUpdateAction) {
-
-        removeAction = aRemoveAction;
-        updateAction = anUpdateAction;
-
-        submitButton.addActionListener(e -> {
-            TypeOfCommand typeOfCommand = TypeOfCommand.getEnum(commandBox.getItemAt(commandBox.getSelectedIndex()));
-            String arg = argumentField.getText();
-            Command command = new Command(typeOfCommand, arg);
-
-            logger.info("Обработка команды " + command);
-
-            if (typeOfCommand == TypeOfCommand.Add
-                    || typeOfCommand == TypeOfCommand.Add_if_max
-                    || typeOfCommand == TypeOfCommand.Add_if_min
-                    || typeOfCommand == TypeOfCommand.Update) {
-                FrameHandler.getInstance().spawnFieldsChanger(command);
-            }
-
-            Response cmdResult = CommandReader.getInstance().execute(command);
-            MainModelAnimator.getInstance().animate(cmdResult, clientInfo, serverInfo);
-            cmdResult = CommandReader.getInstance().execute(new Command(TypeOfCommand.Show, ""));
-            MainModelAnimator.getInstance().animate(cmdResult, clientInfo, serverInfo);
-            SGTableWorker.getInstance().fireTableDataChanged();
-        });
+    public MainModel(MainController mainController) {
+        submitButton.addActionListener(e -> mainController.executeCommand());
     }
 
-    public void setPanel(MainFrame jFrame) {
-        jFrame.setTitle("StudyGroups");
-        usernameField.setText(RequestHandler.getInstance().getSession().getName());
-        jFrame.setContentPane(mainPanel);
-        jFrame.setSize(1080, 560);
-        jFrame.setLocation();
-        jFrame.repaint();
+    public TypeOfCommand getTypeOfCommand() {
+        return TypeOfCommand.getEnum(commandBox.getItemAt(commandBox.getSelectedIndex()));
+    }
+
+    public String getArgument() {
+        return argumentField.getText();
+    }
+
+    public JPanel getMainPanel(){
+        return mainPanel;
+    }
+
+    public void setUsername(String username){
+        usernameField.setText(username);
+    }
+
+    public JTextField getClientInfo() {
+        return clientInfo;
+    }
+
+    public JTextField getServerInfo() {
+        return serverInfo;
     }
 
     private void createUIComponents() {
@@ -80,7 +64,7 @@ public class MainModel extends JFrame {
         jTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                SGChangeMenu sgChangeMenu = new SGChangeMenu(removeAction, updateAction);
+                SGChangeMenu sgChangeMenu = new SGChangeMenu();
                 jTable.setComponentPopupMenu(sgChangeMenu);
             }
         });

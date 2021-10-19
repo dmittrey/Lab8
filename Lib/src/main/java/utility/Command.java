@@ -21,7 +21,7 @@ public class Command implements Serializable {
     }
 
     public Command addStudyGroup(StudyGroup aStudyGroup) {
-        studyGroup = aStudyGroup;
+        if (aStudyGroup != null) studyGroup = aStudyGroup;
         return this;
     }
 

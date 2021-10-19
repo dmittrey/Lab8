@@ -17,8 +17,7 @@ public class Validator implements ValidatorInterface {
     private static AvailableCommands availableCommands;
     private static Validator instance;
 
-    private Validator() {
-    }
+    private Validator() {}
 
     public static Validator getInstance() {
         if (instance == null) {

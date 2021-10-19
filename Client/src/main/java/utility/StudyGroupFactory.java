@@ -2,11 +2,12 @@ package utility;
 
 import data.*;
 import Interfaces.FieldsReceiver;
+import gui.addDetails.AddDetailsModel;
 
 /**
  * Class for creating Study groups without id and Date
  */
-public class StudyGroupFactory implements Interfaces.StudyGroupFactoryInterface {
+public class StudyGroupFactory {
 
     private final FieldsReceiver fieldsReceiver;
 
@@ -15,8 +16,7 @@ public class StudyGroupFactory implements Interfaces.StudyGroupFactoryInterface 
         fieldsReceiver = new FieldsGetter(Console.getInstance());
     }
 
-    @Override
-    public StudyGroup createStudyGroup() {
+    public StudyGroup createScriptStudyGroup() {
 
         String name = fieldsReceiver.getName();
         Coordinates coordinates = fieldsReceiver.getCoordinates();
@@ -26,15 +26,31 @@ public class StudyGroupFactory implements Interfaces.StudyGroupFactoryInterface 
         Semester semester = fieldsReceiver.getSemester();
         Person groupAdmin = fieldsReceiver.getGroupAdmin();
 
-        if ((name != null) &&
-                (coordinates != null) &&
-                (studentsCount != null) &&
-                (semester != null) &&
-                (groupAdmin != null)) {
+        return new StudyGroup(0, name, coordinates, null, studentsCount,
+                averageMark, formOfEducation, semester, groupAdmin);
+    }
 
-            return new StudyGroup(0, name, coordinates, null, studentsCount,
-                    averageMark, formOfEducation, semester, groupAdmin);
-        }
-        return null;
+    public StudyGroup createGUIStudyGroup(AddDetailsModel model) {
+
+        String name = model.getName();
+        Integer coordinateX = Integer.parseInt(model.getXCoordinate());
+        Double coordinateY = Double.parseDouble(model.getYCoordinate());
+        int studentsCount = Integer.parseInt(model.getStudentsCount());
+        Double averageMark = Double.parseDouble(model.getAverageMark());
+        FormOfEducation formOfEducation = FormOfEducation.valueOf(model.getFormOfEducation());
+        Semester semester = Semester.valueOf(model.getSemester());
+        String adminName = model.getGroupAdminName();
+        Long adminWeight = Long.parseLong(model.getGroupAdminWeight());
+        Color adminColor = Color.valueOf(model.getGroupAdminHairColor());
+
+        return new StudyGroup(0,
+                name,
+                new Coordinates(coordinateX, coordinateY),
+                null,
+                studentsCount,
+                averageMark,
+                formOfEducation,
+                semester,
+                new Person(adminName, adminWeight, adminColor));
     }
 }

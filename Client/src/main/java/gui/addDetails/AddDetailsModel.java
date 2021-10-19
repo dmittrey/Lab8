@@ -1,11 +1,8 @@
 package gui.addDetails;
 
-import data.*;
-import data.Color;
 import utility.Command;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class AddDetailsModel extends JDialog {
 
@@ -17,7 +14,7 @@ public class AddDetailsModel extends JDialog {
     private JPanel coordinatesPanel;
     private JTextField xCoordinate;
     private JTextField yCoordinate;
-    private JTextField coordinateWarn;
+    private JTextField xCoordinateWarn;
     private JPanel studentsCountPanel;
     private JTextField studentsCount;
     private JTextField studentsCountWarn;
@@ -25,9 +22,9 @@ public class AddDetailsModel extends JDialog {
     private JTextField averageMark;
     private JTextField averageMarkWarn;
     private JPanel formOfEducationPanel;
-    private JComboBox formOfEducation;
+    private JComboBox<String> formOfEducation;
     private JPanel semesterPanel;
-    private JComboBox semester;
+    private JComboBox<String> semester;
     private JPanel groupAdminPanel;
     private JPanel groupAdminNamePanel;
     private JTextField groupAdminName;
@@ -36,43 +33,84 @@ public class AddDetailsModel extends JDialog {
     private JTextField groupAdminWeightWarn;
     private JTextField groupAdminWeight;
     private JPanel groupAdminHairColorPanel;
-    private JTextField groupAdminHairColorWarn;
-    private JTextField groupAdminHairColor;
     private JButton submitButton;
+    private JComboBox<String> groupAdminHairColor;
+    private JTextField yCoordinateWarn;
 
-    public AddDetailsModel(JFrame jFrame) {
+    public AddDetailsModel(AddDetailsController addDetailsController, Command aCommand) {
         setContentPane(mainPanel);
         setTitle("Fields setting");
         setModal(true);
         pack();
-        setLocation();
 
-        submitButton.addActionListener(e -> {
-            StudyGroup studyGroup = new StudyGroup(0,
-                    name.getText(),
-                    new Coordinates(Integer.parseInt(xCoordinate.getText()), Double.parseDouble(yCoordinate.getText())),
-                    null,
-                    Integer.parseInt(studentsCount.getText()),
-                    Double.parseDouble(averageMark.getText()),
-                    FormOfEducation.valueOf(formOfEducation.getItemAt(formOfEducation.getSelectedIndex()).toString()),
-                    Semester.valueOf(semester.getItemAt(semester.getSelectedIndex()).toString()),
-                    new Person(groupAdminName.getText(),
-                            Long.parseLong(groupAdminWeight.getText()),
-                            Color.valueOf(groupAdminHairColor.getText())
-                    ));
-//            aCommand.addStudyGroup(studyGroup);
-//            CommandReader.getInstance().execute(aCommand);
-            // FIXME: 16.10.2021 Надо сделать оичстку полей
-            dispose();
-        });
+        submitButton.addActionListener(e -> aCommand.addStudyGroup(addDetailsController.addStudyGroup()));
     }
 
-    public void setLocation(){
-        int width = this.getSize().width;
-        int height = this.getSize().height;
+    public String getName() {
+        return (name.getText().isEmpty()) ? null : name.getText();
+    }
 
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-        this.setLocation((screenSize.width / 2) - (width / 2), (screenSize.height / 2) - (height / 2));
+    public String getXCoordinate() {
+        return (xCoordinate.getText().isEmpty()) ? null : xCoordinate.getText();
+    }
+
+    public String getYCoordinate() {
+        return (yCoordinate.getText().isEmpty()) ? null : yCoordinate.getText();
+    }
+
+    public String getStudentsCount() {
+        return (studentsCount.getText().isEmpty()) ? null : studentsCount.getText();
+    }
+
+    public String getAverageMark() {
+        return (averageMark.getText().isEmpty()) ? null : averageMark.getText();
+    }
+
+    public String getFormOfEducation() {
+        return formOfEducation.getItemAt(formOfEducation.getSelectedIndex());
+    }
+
+    public String getSemester() {
+        return semester.getItemAt(semester.getSelectedIndex());
+    }
+
+    public String getGroupAdminName() {
+        return (groupAdminName.getText().isEmpty()) ? null : groupAdminName.getText();
+    }
+
+    public String getGroupAdminWeight() {
+        return (groupAdminWeight.getText().isEmpty()) ? null : groupAdminWeight.getText();
+    }
+
+    public String getGroupAdminHairColor() {
+        return groupAdminHairColor.getItemAt(groupAdminHairColor.getSelectedIndex());
+    }
+
+    public void setNameWarn(String aNameWarn) {
+        nameWarn.setText(aNameWarn);
+    }
+
+    public void setXCoordinateWarn(String aXCoordinateWarn) {
+        xCoordinateWarn.setText(aXCoordinateWarn);
+    }
+
+    public void setYCoordinateWarn(String aYCoordinateWarn) {
+        yCoordinateWarn.setText(aYCoordinateWarn);
+    }
+
+    public void setStudentsCountWarn(String aStudentsCountWarn) {
+        studentsCountWarn.setText(aStudentsCountWarn);
+    }
+
+    public void setAverageMarkWarn(String anAverageMarkWarn) {
+        averageMarkWarn.setText(anAverageMarkWarn);
+    }
+
+    public void setGroupAdminNameWarn(String aGroupAdminNameWarn) {
+        groupAdminNameWarn.setText(aGroupAdminNameWarn);
+    }
+
+    public void setGroupAdminWeightWarn(String aGroupAdminWeightWarn) {
+        groupAdminWeightWarn.setText(aGroupAdminWeightWarn);
     }
 }

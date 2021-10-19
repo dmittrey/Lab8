@@ -20,15 +20,17 @@ public class CommandReader {
         commandManager = aCommandManager;
     }
 
+    /**
+     * Method to register/auth user
+     */
     public Response execute(Session session) {
         return commandManager.transferCommand(session);
     }
 
+    /**
+     * Method to execute command
+     */
     public Response execute(Command command) {
         return commandManager.transferCommand(command);
-    }
-
-    public void execute(TypeOfCommand typeOfCommand) {
-        execute(new Command(typeOfCommand, ""));
     }
 }

@@ -1,13 +1,10 @@
 package gui;
 
-import gui.actions.RemoveAction;
-import gui.actions.UpdateAction;
-
 import javax.swing.*;
 
 public class SGChangeMenu extends JPopupMenu {
 
-    public SGChangeMenu(RemoveAction aRemoveAction, UpdateAction anUpdateAction) {
+    public SGChangeMenu() {
         JMenuItem updateButton = new JMenuItem("Обновить объект");
         JMenuItem removeButton = new JMenuItem("Удалить объект");
         JMenu sortButton = new SortMenu("Сортировать");
@@ -17,8 +14,5 @@ public class SGChangeMenu extends JPopupMenu {
         add(removeButton);
         add(sortButton);
         add(filterButton);
-
-        updateButton.addActionListener(anUpdateAction);
-        removeButton.addActionListener(aRemoveAction);
     }
 }

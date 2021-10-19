@@ -1,34 +1,22 @@
 package gui;
 
-import gui.actions.AddAction;
-import gui.actions.RemoveAction;
-import gui.actions.UpdateAction;
-import gui.addDetails.AddDetailsModel;
 import gui.connection.ConnectModel;
 import gui.informing.InformationDialog;
 import gui.logining.LoginModel;
-import gui.main.MainModel;
+import gui.main.MainController;
 import gui.registration.RegisterModel;
 import utility.*;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
-import java.util.logging.Logger;
 
 public class FrameHandler {
-
-    private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
-
-    private final RemoveAction removeAction;
-    private final AddAction addAction;
-    private final UpdateAction updateAction;
     private final CommandReader commandReader;
-    private AddDetailsModel addDetailsModel;
     private final ConnectModel connectModel;
     private final LoginModel loginModel;
     private final RegisterModel registerModel;
-    private final MainModel mainModel;
+    private final MainController mainController;
     private final MainFrame jFrame;
     private static FrameHandler instance;
     private final InformationDialog informationDialog;
@@ -39,16 +27,12 @@ public class FrameHandler {
     }
 
     private FrameHandler() {
-        removeAction = new RemoveAction(this);
-        updateAction = new UpdateAction(this);
-        addAction = new AddAction(this);
+        jFrame = new MainFrame("Study groups");
         commandReader = CommandReader.getInstance();
         connectModel = new ConnectModel();
         loginModel = new LoginModel();
         registerModel = new RegisterModel();
-        mainModel = new MainModel(removeAction, updateAction);
-        jFrame = new MainFrame("Study groups");
-        addDetailsModel = new AddDetailsModel(jFrame);
+        mainController = new MainController();
         informationDialog = new InformationDialog();
     }
 
@@ -78,7 +62,7 @@ public class FrameHandler {
     }
 
     public void setMain() {
-        mainModel.setPanel(jFrame);
+        mainController.setPanel(jFrame);
     }
 
     public void login(String anUsername, char[] aPassword) {
@@ -105,24 +89,8 @@ public class FrameHandler {
         }
     }
 
-    public void spawnFieldsChanger(Command aCommand) {
-        addDetailsModel.setVisible(true);
-    }
-
     public void printInfo(String info) {
         informationDialog.setInfo(info);
         informationDialog.setVisible(true);
-    }
-
-    public void addStudyGroup(){
-
-    }
-
-    public void updateStudyGroup(){
-
-    }
-
-    public void removeStudyGroup(){
-
     }
 }
