@@ -11,7 +11,7 @@ public interface CommandReaderInterface {
 
     Response execute(Session session);
 
-    Response execute(Command command);
+    void execute(Command command);
 
     Command readCommand(String anInputString);
 }

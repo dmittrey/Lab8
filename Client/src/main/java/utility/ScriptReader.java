@@ -1,11 +1,9 @@
 package utility;
 
-import Interfaces.CommandManagerInterface;
 import Interfaces.CommandReaderInterface;
 import Interfaces.ScriptReaderInterface;
 import gui.MainModelAnimator;
 
-import javax.swing.*;
 import java.io.*;
 
 /**
@@ -14,16 +12,11 @@ import java.io.*;
 public class ScriptReader implements ScriptReaderInterface {
 
     private final File file;
-    private final CommandManagerInterface commandManager;
     private final CommandReaderInterface commandReader;
-    private final MainModelAnimator mainModelAnimator;
 
-    public ScriptReader(CommandManager aCommandManager, CommandReaderInterface aCommandReader, File aFile, MainModelAnimator aMainModelAnimator)
-            throws FileNotFoundException {
-        mainModelAnimator = aMainModelAnimator;
+    public ScriptReader(File aFile) throws FileNotFoundException {
         file = aFile;
-        commandManager = aCommandManager;
-        commandReader = aCommandReader;
+        commandReader = CommandReader.getInstance();
     }
 
     public void read() throws IOException {
@@ -40,7 +33,6 @@ public class ScriptReader implements ScriptReaderInterface {
 
                 Command newCommand = commandReader.readCommand(nextLine + " ");
                 System.out.println(newCommand);
-                mainModelAnimator.animate(commandManager.transferCommand(newCommand), new JTextField(), new JTextField());
             } while (true);
         }
     }

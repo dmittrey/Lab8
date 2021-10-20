@@ -10,7 +10,7 @@ public interface CommandManagerInterface {
      * Validate and complete aCommand
      * @return
      */
-    Response transferCommand(Command aCommand);
+    void transferCommand(Command aCommand);
 
     Response transferCommand(Session aSession);
 }

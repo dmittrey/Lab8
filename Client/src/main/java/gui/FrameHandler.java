@@ -23,6 +23,7 @@ public class FrameHandler {
     private final MainFrame jFrame;
     private final InformationDialogController informationDialogController;
     private final DataSynchronizer dataSynchronizer;
+    private final MainModelAnimator mainModelAnimator;
     private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
 
     public FrameHandler() {
@@ -36,10 +37,11 @@ public class FrameHandler {
         mainController = new MainController(this);
         informationDialogController = new InformationDialogController();
         dataSynchronizer = new DataSynchronizer();
+        mainModelAnimator = mainController.getMainModelAnimator();
     }
 
     public MainModelAnimator getMainModelAnimator(){
-        return mainController.getMainModelAnimator();
+        return mainModelAnimator;
     }
 
     public void start() {
@@ -102,8 +104,6 @@ public class FrameHandler {
     }
 
     public void resumeSynchronize(){
-        System.out.println("Frame handler продолжили");
-        System.out.println(this);
         dataSynchronizer.resume();
     }
 }

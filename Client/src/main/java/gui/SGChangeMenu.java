@@ -1,11 +1,14 @@
 package gui;
 
+import utility.Command;
+import utility.CommandReader;
+import utility.TypeOfCommand;
+
 import javax.swing.*;
 
 public class SGChangeMenu extends JPopupMenu {
 
     public SGChangeMenu(FrameHandler frameHandler) {
-        System.out.println(frameHandler);
         JMenuItem synchronize = new JMenuItem("Включить синхронизацию");
         JMenuItem updateButton = new JMenuItem("Обновить объект");
         JMenuItem removeButton = new JMenuItem("Удалить объект");
@@ -19,9 +22,18 @@ public class SGChangeMenu extends JPopupMenu {
         add(filterButton);
 
         synchronize.addActionListener(e -> {
-            System.out.println("Нажали");
-            System.out.println(frameHandler);
             frameHandler.resumeSynchronize();
+        });
+
+        updateButton.addActionListener(e -> {
+            Command command = new Command(TypeOfCommand.Update, null);
+
+            CommandReader.getInstance().execute(command);
+            SGTableWorker.getInstance().fireTableDataChanged();
+        });
+
+        removeButton.addActionListener(e -> {
+            Command command = new Command(TypeOfCommand.Remove_by_id, null);
         });
     }
 }

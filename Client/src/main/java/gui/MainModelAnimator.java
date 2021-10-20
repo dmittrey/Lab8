@@ -10,19 +10,32 @@ public class MainModelAnimator {
 
     private final SGTableWorker sgTableWorker;
     private final FrameHandler frameHandler;
+    private final JTextField clientInfo;
+    private final JTextField serverInfo;
 
-    public MainModelAnimator(FrameHandler aFrameHandler) {
+    public MainModelAnimator(FrameHandler aFrameHandler, JTextField aClientInfo, JTextField aServerInfo) {
         sgTableWorker = SGTableWorker.getInstance();
         frameHandler = aFrameHandler;
+        clientInfo = aClientInfo;
+        serverInfo = aServerInfo;
     }
 
-    public void animate(Response aResponse, JTextField clientInfo, JTextField serverInfo) {
+    public void animateShow(Response aResponse) {
+        if (aResponse.getSetOfStudyGroups() != null) {
+            SGTableWorker.getInstance().clearTable();
+            aResponse.getSetOfStudyGroups().forEach(sgTableWorker::addData);
+            sgTableWorker.fireTableDataChanged();
+        }
+    }
+
+    public void animate(Response aResponse) {
 
         clientInfo.setText("");
         serverInfo.setText("");
 
         if (aResponse.getStatus().equals(TypeOfAnswer.SUCCESSFUL)) {
             clientInfo.setText("Command executed successful!");
+            serverInfo.setText("Command executed successful!");
             StringBuilder sb = new StringBuilder();
 
             if (aResponse.getInformation() != null) {
@@ -47,28 +60,26 @@ public class MainModelAnimator {
                 frameHandler.printInfo(sb.toString());
             } else if (aResponse.getSetOfStudyGroups() != null) {
                 SGTableWorker.getInstance().clearTable();
-                serverInfo.setText("Command executed successful!");
                 aResponse.getSetOfStudyGroups().forEach(sgTableWorker::addData);
                 frameHandler.stopSynchronize();
-                System.out.println(frameHandler);
+                sgTableWorker.fireTableDataChanged();
             } else if (aResponse.getStudyGroup() != null) {
                 SGTableWorker.getInstance().clearTable();
-                serverInfo.setText("Command executed successful!");
                 StudyGroup newStudyGroup = aResponse.getStudyGroup();
                 sgTableWorker.addData(newStudyGroup);
                 frameHandler.stopSynchronize();
-                System.out.println(frameHandler);
+                sgTableWorker.fireTableDataChanged();
             } else if (aResponse.getCount() != null) {
                 sb.append("Amount of elements: ")
                         .append(aResponse.getCount())
                         .append("\n");
                 serverInfo.setText(sb.toString());
-            } else serverInfo.setText("Command executed successful!");
+            }
         } else {
             switch (aResponse.getStatus()) {
                 case OBJECTNOTEXIST:
                     clientInfo.setText("Command executed successful!");
-                    serverInfo.setText("No object with such parameters was found!");
+                    serverInfo.setText("No object was found!");
                     break;
                 case DUPLICATESDETECTED:
                     clientInfo.setText("Command executed successful!");

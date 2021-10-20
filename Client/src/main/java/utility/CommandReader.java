@@ -38,8 +38,8 @@ public class CommandReader implements CommandReaderInterface {
      * Method to execute command
      */
     @Override
-    public Response execute(Command command) {
-        return commandManager.transferCommand(command);
+    public void execute(Command command) {
+        commandManager.transferCommand(command);
     }
 
     @Override

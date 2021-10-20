@@ -1,6 +1,7 @@
 package utility;
 
 import Interfaces.*;
+import gui.FrameHandler;
 import gui.MainModelAnimator;
 import gui.addDetails.AddDetailsController;
 
@@ -19,16 +20,16 @@ public class CommandManager implements CommandManagerInterface {
 
     private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
 
-    private final CommandReaderInterface commandReader;
     private final ValidatorInterface validator;
     private final RequestHandlerInterface requestHandler;
     private final ConsoleInterface console;
     private final Set<String> usedScripts;
+    private final FrameHandler frameHandler;
     private final MainModelAnimator mainModelAnimator;
 
-    public CommandManager(MainModelAnimator aMainModelAnimator) {
-        mainModelAnimator = aMainModelAnimator;
-        commandReader = CommandReader.getInstance();
+    public CommandManager(FrameHandler aFrameHandler) {
+        frameHandler = aFrameHandler;
+        mainModelAnimator = frameHandler.getMainModelAnimator();
         validator = Validator.getInstance();
         requestHandler = RequestHandler.getInstance();
         console = Console.getInstance();
@@ -36,15 +37,21 @@ public class CommandManager implements CommandManagerInterface {
     }
 
     @Override
-    public Response transferCommand(Command aCommand) {
-        logger.info("Обрабатываем команду:" + aCommand);
+    public void transferCommand(Command aCommand) {
         if (validator.notObjectArgumentCommands(aCommand)) {
-            return requestHandler.send(aCommand);
-        } else if (validator.objectArgumentCommands(aCommand)) {
+            if ((aCommand.getCommand() == TypeOfCommand.Show)) {
+                mainModelAnimator.animateShow(requestHandler.send(aCommand));
+            } else {
+                logger.info("Обрабатываем команду:" + aCommand);
+                mainModelAnimator.animate(requestHandler.send(aCommand));
+            }
+        }
+        else if (validator.objectArgumentCommands(aCommand)) {
             new AddDetailsController(aCommand).spawnModel();
-            return (aCommand.getStudyGroup() != null)
-                    ? requestHandler.send(aCommand)
-                    : new Response(TypeOfAnswer.SUCCESSFUL);
+            if (aCommand.getStudyGroup() != null) {
+                mainModelAnimator.animate(requestHandler.send(aCommand));
+            } else mainModelAnimator.animate(new Response(TypeOfAnswer.NOTVALIDATE));
+
         } else if (validator.scriptArgumentCommand(aCommand)) {
             JFileChooser fileopen = new JFileChooser();
             int ret = fileopen.showDialog(null, "Открыть файл");
@@ -52,8 +59,8 @@ public class CommandManager implements CommandManagerInterface {
                 File file = fileopen.getSelectedFile();
                 executeScript(file);
             }
-            return new Response(TypeOfAnswer.SUCCESSFUL);
-        } else return new Response(TypeOfAnswer.NOTVALIDATE);
+            mainModelAnimator.animate(new Response(TypeOfAnswer.SUCCESSFUL));
+        } else mainModelAnimator.animate(new Response(TypeOfAnswer.NOTVALIDATE));
     }
 
     @Override
@@ -75,7 +82,7 @@ public class CommandManager implements CommandManagerInterface {
             try {
                 if (usedScripts.size() == 1) console.setExeStatus(true);
 
-                ScriptReader scriptReader = new ScriptReader(this, commandReader, script, mainModelAnimator);
+                ScriptReader scriptReader = new ScriptReader(script);
                 try {
                     scriptReader.read();
 

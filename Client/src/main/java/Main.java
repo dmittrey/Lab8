@@ -1,4 +1,5 @@
 import gui.FrameHandler;
+import gui.MainModelAnimator;
 import utility.CommandManager;
 import utility.CommandReader;
 import utility.RequestHandler;
@@ -17,7 +18,7 @@ public class Main {
         logger.info("start");
 
         FrameHandler frameHandler = new FrameHandler();
-        CommandManager commandManager = new CommandManager(frameHandler.getMainModelAnimator());
+        CommandManager commandManager = new CommandManager(frameHandler);
         CommandReader.getInstance().setCommandManager(commandManager);
         InetSocketAddress socketAddress = new InetSocketAddress(InetAddress.getLocalHost(), 2323);
         RequestHandler.getInstance().setRemoteHostSocketAddress(socketAddress);

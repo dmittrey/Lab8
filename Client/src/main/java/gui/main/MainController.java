@@ -13,7 +13,11 @@ public class MainController {
 
     public MainController(FrameHandler aFrameHandler) {
         model = new MainModel(this, new SGChangeMenu(aFrameHandler));
-        mainModelAnimator = new MainModelAnimator(aFrameHandler);
+        mainModelAnimator = new MainModelAnimator(aFrameHandler, model.getClientInfo(), model.getServerInfo());
+    }
+
+    public MainModelAnimator getMainModelAnimator(){
+        return mainModelAnimator;
     }
 
     public void setPanel(MainFrame jFrame) {
@@ -32,13 +36,9 @@ public class MainController {
 
         logger.info("Обработка команды " + command);
 
-        Response cmdResult = CommandReader.getInstance().execute(command);
-        mainModelAnimator.animate(cmdResult, model.getClientInfo(), model.getServerInfo());
-        SGTableWorker.getInstance().fireTableDataChanged();
-    }
-
-    public MainModelAnimator getMainModelAnimator(){
-        return mainModelAnimator;
+        CommandReader.getInstance().execute(command);
+//        Response cmdResult = CommandReader.getInstance().execute(command);
+//        SGTableWorker.getInstance().fireTableDataChanged();
     }
 
     private void setUsername() {

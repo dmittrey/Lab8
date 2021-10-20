@@ -2,7 +2,6 @@ package gui;
 
 import utility.Command;
 import utility.CommandReader;
-import utility.Response;
 import utility.TypeOfCommand;
 
 /**
@@ -18,11 +17,8 @@ public class DataSynchronizer implements Runnable {
             while (true) {
                 if (isSynchronizeWorks) {
                     SGTableWorker.getInstance().clearTable();
-                    Response newCollection = CommandReader.getInstance().execute(new Command(TypeOfCommand.Show, null));
-                    if (newCollection.getSetOfStudyGroups() != null)
-                        newCollection.getSetOfStudyGroups().forEach(SGTableWorker.getInstance()::addData);
-                    SGTableWorker.getInstance().fireTableDataChanged();
-                    Thread.sleep(5000);
+                    CommandReader.getInstance().execute(new Command(TypeOfCommand.Show, null));
+                    Thread.sleep(1000);
                 }
             }
         } catch (InterruptedException e) {
@@ -36,6 +32,5 @@ public class DataSynchronizer implements Runnable {
 
     public void resume() {
         isSynchronizeWorks = true;
-        System.out.println("Включили");
     }
 }
