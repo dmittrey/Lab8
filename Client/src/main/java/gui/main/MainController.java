@@ -1,9 +1,6 @@
 package gui.main;
 
-import gui.FrameHandler;
-import gui.MainFrame;
-import gui.MainModelAnimator;
-import gui.SGTableWorker;
+import gui.*;
 import utility.*;
 
 import java.util.logging.Logger;
@@ -12,12 +9,10 @@ public class MainController {
 
     private final MainModel model;
     private final MainModelAnimator mainModelAnimator;
-    private final FrameHandler frameHandler;
     private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
 
     public MainController(FrameHandler aFrameHandler) {
-        model = new MainModel(this);
-        frameHandler = aFrameHandler;
+        model = new MainModel(this, new SGChangeMenu(aFrameHandler));
         mainModelAnimator = new MainModelAnimator(aFrameHandler);
     }
 
@@ -40,6 +35,10 @@ public class MainController {
         Response cmdResult = CommandReader.getInstance().execute(command);
         mainModelAnimator.animate(cmdResult, model.getClientInfo(), model.getServerInfo());
         SGTableWorker.getInstance().fireTableDataChanged();
+    }
+
+    public MainModelAnimator getMainModelAnimator(){
+        return mainModelAnimator;
     }
 
     private void setUsername() {

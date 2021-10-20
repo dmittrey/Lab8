@@ -1,16 +1,17 @@
 package Interfaces;
 
 import utility.Command;
+import utility.CommandManager;
+import utility.Response;
+import utility.Session;
 
 public interface CommandReaderInterface {
 
-    /**
-     * Turn on commands receiving from console
-     */
-    boolean enable();
+    void setCommandManager(CommandManager aCommandManager);
 
-    /**
-     * Read one command from console
-     */
+    Response execute(Session session);
+
+    Response execute(Command command);
+
     Command readCommand(String anInputString);
 }

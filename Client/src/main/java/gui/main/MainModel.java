@@ -21,9 +21,11 @@ public class MainModel extends MainFrame {
     private JTextField serverInfo;
     private JPanel server;
     private JScrollPane sgScrollPane;
+    private final SGChangeMenu sgChangeMenu;
 
-    public MainModel(MainController mainController) {
+    public MainModel(MainController mainController, SGChangeMenu aSGChangeMenu) {
         submitButton.addActionListener(e -> mainController.executeCommand());
+        sgChangeMenu = aSGChangeMenu;
     }
 
     public TypeOfCommand getTypeOfCommand() {
@@ -64,7 +66,6 @@ public class MainModel extends MainFrame {
         jTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                SGChangeMenu sgChangeMenu = new SGChangeMenu();
                 jTable.setComponentPopupMenu(sgChangeMenu);
             }
         });

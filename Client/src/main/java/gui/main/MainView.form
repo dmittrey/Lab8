@@ -38,15 +38,15 @@
             <properties>
               <model>
                 <item value="Add"/>
-                <item value="Add if max"/>
-                <item value="Add if min"/>
+                <item value="Add_if_max"/>
+                <item value="Add_if_min"/>
                 <item value="Clear"/>
-                <item value="Count less than students count"/>
-                <item value="Execute script"/>
-                <item value="Filter starts with name"/>
+                <item value="Count_less_than_students_count"/>
+                <item value="Execute_script"/>
+                <item value="Filter_starts_with_name"/>
                 <item value="History"/>
                 <item value="Info"/>
-                <item value="Min by students"/>
+                <item value="Min_by_students"/>
               </model>
               <toolTipText value=""/>
             </properties>

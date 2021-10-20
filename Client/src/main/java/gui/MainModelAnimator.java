@@ -49,11 +49,15 @@ public class MainModelAnimator {
                 SGTableWorker.getInstance().clearTable();
                 serverInfo.setText("Command executed successful!");
                 aResponse.getSetOfStudyGroups().forEach(sgTableWorker::addData);
+                frameHandler.stopSynchronize();
+                System.out.println(frameHandler);
             } else if (aResponse.getStudyGroup() != null) {
                 SGTableWorker.getInstance().clearTable();
                 serverInfo.setText("Command executed successful!");
                 StudyGroup newStudyGroup = aResponse.getStudyGroup();
                 sgTableWorker.addData(newStudyGroup);
+                frameHandler.stopSynchronize();
+                System.out.println(frameHandler);
             } else if (aResponse.getCount() != null) {
                 sb.append("Amount of elements: ")
                         .append(aResponse.getCount())

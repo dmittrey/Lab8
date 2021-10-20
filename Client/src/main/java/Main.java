@@ -16,14 +16,14 @@ public class Main {
 
         logger.info("start");
 
-        CommandManager commandManager = new CommandManager();
+        FrameHandler frameHandler = new FrameHandler();
+        CommandManager commandManager = new CommandManager(frameHandler.getMainModelAnimator());
         CommandReader.getInstance().setCommandManager(commandManager);
         InetSocketAddress socketAddress = new InetSocketAddress(InetAddress.getLocalHost(), 2323);
         RequestHandler.getInstance().setRemoteHostSocketAddress(socketAddress);
 
         logger.info("gui");
 
-        FrameHandler frameHandler = new FrameHandler();
         frameHandler.start();
     }
 }

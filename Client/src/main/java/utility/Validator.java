@@ -41,9 +41,9 @@ public class Validator implements ValidatorInterface {
     }
 
     @Override
-    public boolean validateScriptArgumentCommand(Command aCommand) {
+    public boolean scriptArgumentCommand(Command aCommand) {
         return availableCommands.scriptArgumentCommand.equals(aCommand.getCommand()) &&
-                aCommand.getArg() != null;
+                aCommand.getArg() == null;
     }
 
     @Override

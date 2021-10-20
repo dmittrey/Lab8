@@ -1,5 +1,6 @@
 package gui;
 
+import Interfaces.CommandReaderInterface;
 import gui.connection.ConnectController;
 import gui.informing.InformationDialogController;
 import gui.logining.LoginController;
@@ -14,13 +15,14 @@ import java.net.UnknownHostException;
 import java.util.logging.Logger;
 
 public class FrameHandler {
-    private final CommandReader commandReader;
+    private final CommandReaderInterface commandReader;
     private final ConnectController connectController;
     private final LoginController loginController;
     private final RegisterController registerController;
     private final MainController mainController;
     private final MainFrame jFrame;
     private final InformationDialogController informationDialogController;
+    private final DataSynchronizer dataSynchronizer;
     private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
 
     public FrameHandler() {
@@ -33,6 +35,11 @@ public class FrameHandler {
         registerController = new RegisterController(this);
         mainController = new MainController(this);
         informationDialogController = new InformationDialogController();
+        dataSynchronizer = new DataSynchronizer();
+    }
+
+    public MainModelAnimator getMainModelAnimator(){
+        return mainController.getMainModelAnimator();
     }
 
     public void start() {
@@ -61,6 +68,8 @@ public class FrameHandler {
     }
 
     public void setMain() {
+        Thread synchronizer = new Thread(dataSynchronizer);
+        synchronizer.start();
         mainController.setPanel(jFrame);
     }
 
@@ -70,8 +79,6 @@ public class FrameHandler {
         if (status != TypeOfAnswer.SUCCESSFUL) {
             loginController.setWarn(status);
         } else {
-            Thread synchronizer = new Thread(new DataSynchronizer());
-            synchronizer.start();
             setMain();
         }
     }
@@ -88,5 +95,15 @@ public class FrameHandler {
 
     public void printInfo(String info) {
         informationDialogController.showInfo(info);
+    }
+
+    public void stopSynchronize(){
+        dataSynchronizer.stop();
+    }
+
+    public void resumeSynchronize(){
+        System.out.println("Frame handler продолжили");
+        System.out.println(this);
+        dataSynchronizer.resume();
     }
 }

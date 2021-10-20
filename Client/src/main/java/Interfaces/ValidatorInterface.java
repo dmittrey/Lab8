@@ -18,7 +18,7 @@ public interface ValidatorInterface {
     /**
      * Validate Commands with script path argument
      */
-    boolean validateScriptArgumentCommand(Command aCommand);
+    boolean scriptArgumentCommand(Command aCommand);
 
     /**
      * Validate Login and Register commands
