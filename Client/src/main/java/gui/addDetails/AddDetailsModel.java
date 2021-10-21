@@ -49,23 +49,23 @@ public class AddDetailsModel extends JDialog implements Relocatable {
     }
 
     public String getName() {
-        return (name.getText().isEmpty()) ? null : name.getText();
+        return (name.getText().trim().isEmpty()) ? null : name.getText().trim();
     }
 
     public String getXCoordinate() {
-        return (xCoordinate.getText().isEmpty()) ? null : xCoordinate.getText();
+        return (xCoordinate.getText().trim().isEmpty()) ? null : xCoordinate.getText().trim();
     }
 
     public String getYCoordinate() {
-        return (yCoordinate.getText().isEmpty()) ? null : yCoordinate.getText();
+        return (yCoordinate.getText().trim().isEmpty()) ? null : yCoordinate.getText().trim();
     }
 
     public String getStudentsCount() {
-        return (studentsCount.getText().isEmpty()) ? null : studentsCount.getText();
+        return (studentsCount.getText().trim().isEmpty()) ? null : studentsCount.getText().trim();
     }
 
     public String getAverageMark() {
-        return (averageMark.getText().isEmpty()) ? null : averageMark.getText();
+        return (averageMark.getText().trim().isEmpty()) ? null : averageMark.getText().trim();
     }
 
     public String getFormOfEducation() {
@@ -77,11 +77,11 @@ public class AddDetailsModel extends JDialog implements Relocatable {
     }
 
     public String getGroupAdminName() {
-        return (groupAdminName.getText().isEmpty()) ? null : groupAdminName.getText();
+        return (groupAdminName.getText().trim().isEmpty()) ? null : groupAdminName.getText().trim();
     }
 
     public String getGroupAdminWeight() {
-        return (groupAdminWeight.getText().isEmpty()) ? null : groupAdminWeight.getText();
+        return (groupAdminWeight.getText().trim().isEmpty()) ? null : groupAdminWeight.getText().trim();
     }
 
     public String getGroupAdminHairColor() {
