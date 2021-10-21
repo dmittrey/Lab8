@@ -148,6 +148,7 @@
             <constraints/>
             <properties>
               <autoCreateRowSorter value="false"/>
+              <toolTipText value="Click right button on mouse!"/>
             </properties>
             <clientProperties>
               <JTable.autoStartsEdit class="java.lang.Boolean" value="false"/>

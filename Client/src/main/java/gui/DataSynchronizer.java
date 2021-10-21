@@ -16,7 +16,7 @@ public class DataSynchronizer implements Runnable {
         try {
             while (true) {
                 if (isSynchronizeWorks) {
-                    SGTableWorker.getInstance().clearTable();
+                    SGTableModel.getInstance().clearTable();
                     CommandReader.getInstance().execute(new Command(TypeOfCommand.Show, null));
                     Thread.sleep(1000);
                 }

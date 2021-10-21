@@ -6,8 +6,9 @@ import utility.*;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.logging.Logger;
 
-public class MainModel extends MainFrame {
+public class MainModel {
     private JPanel mainPanel;
     private JTextField usernameField;
     private JPanel commandPanel;
@@ -22,18 +23,24 @@ public class MainModel extends MainFrame {
     private JPanel server;
     private JScrollPane sgScrollPane;
     private JTable jTable;
+    private static final Logger logger = Logger.getLogger(MainModel.class.getName());
 
     public MainModel(MainController mainController, FrameHandler aFrameHandler) {
         submitButton.addActionListener(e -> mainController.executeCommand());
-        jTable.setModel(SGTableWorker.getInstance());
-
+        jTable.setModel(SGTableModel.getInstance());
         jTable.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                int rowAtPoint = jTable.rowAtPoint(e.getPoint());
-                String sgId = (String) jTable.getValueAt(rowAtPoint, 0);
-                System.out.println(sgId);
-                new SGChangeMenu(aFrameHandler, sgId).show(e.getComponent(), e.getX(), e.getY());
+            public void mouseReleased(MouseEvent e) {
+                if (e.getButton() == 3) {
+                    int rowAtPoint = jTable.rowAtPoint(e.getPoint());
+                    int columnAtPoint = jTable.columnAtPoint(e.getPoint());
+                    if (rowAtPoint != -1 && columnAtPoint != -1) {
+                        String sgId = (String) jTable.getValueAt(rowAtPoint, 0);
+                        logger.info("Mouse selected study group №" + sgId);
+                        new SGChangeMenu(aFrameHandler, sgId, rowAtPoint, columnAtPoint)
+                                .show(e.getComponent(), e.getX(), e.getY());
+                    }
+                }
             }
         });
     }

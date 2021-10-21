@@ -1,10 +1,12 @@
 package gui.logining;
 
+import Interfaces.Relocatable;
 import gui.FrameHandler;
-import gui.MainFrame;
 import utility.TypeOfAnswer;
 
-public class LoginController {
+import javax.swing.*;
+
+public class LoginController implements Relocatable {
 
     private final LoginModel model;
     private final FrameHandler frameHandler;
@@ -14,10 +16,10 @@ public class LoginController {
         frameHandler = aFrameHandler;
     }
 
-    public void setPanel(MainFrame jFrame) {
+    public void setPanel(JFrame jFrame) {
         jFrame.setTitle("Login");
         jFrame.setSize(400, 200);
-        jFrame.setLocation();
+        setLocation(jFrame);
         jFrame.setContentPane(model.getMainPanel());
         jFrame.revalidate();
     }

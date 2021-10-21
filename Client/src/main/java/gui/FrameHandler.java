@@ -20,14 +20,13 @@ public class FrameHandler {
     private final LoginController loginController;
     private final RegisterController registerController;
     private final MainController mainController;
-    private final MainFrame jFrame;
+    private final JFrame jFrame;
     private final InformationDialogController informationDialogController;
     private final DataSynchronizer dataSynchronizer;
     private final MainModelAnimator mainModelAnimator;
-    private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
 
     public FrameHandler() {
-        jFrame = new MainFrame();
+        jFrame = new JFrame();
         jFrame.setTitle("Study groups");
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         commandReader = CommandReader.getInstance();
@@ -40,7 +39,7 @@ public class FrameHandler {
         mainModelAnimator = mainController.getMainModelAnimator();
     }
 
-    public MainModelAnimator getMainModelAnimator(){
+    public MainModelAnimator getMainModelAnimator() {
         return mainModelAnimator;
     }
 
@@ -99,11 +98,11 @@ public class FrameHandler {
         informationDialogController.showInfo(info);
     }
 
-    public void stopSynchronize(){
+    public void stopSynchronize() {
         dataSynchronizer.stop();
     }
 
-    public void resumeSynchronize(){
+    public void resumeSynchronize() {
         dataSynchronizer.resume();
     }
 }

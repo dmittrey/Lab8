@@ -8,13 +8,13 @@ import javax.swing.*;
 
 public class MainModelAnimator {
 
-    private final SGTableWorker sgTableWorker;
+    private final SGTableModel sgTableModel;
     private final FrameHandler frameHandler;
     private final JTextField clientInfo;
     private final JTextField serverInfo;
 
     public MainModelAnimator(FrameHandler aFrameHandler, JTextField aClientInfo, JTextField aServerInfo) {
-        sgTableWorker = SGTableWorker.getInstance();
+        sgTableModel = SGTableModel.getInstance();
         frameHandler = aFrameHandler;
         clientInfo = aClientInfo;
         serverInfo = aServerInfo;
@@ -22,9 +22,9 @@ public class MainModelAnimator {
 
     public void animateShow(Response aResponse) {
         if (aResponse.getSetOfStudyGroups() != null) {
-            SGTableWorker.getInstance().clearTable();
-            aResponse.getSetOfStudyGroups().forEach(sgTableWorker::addData);
-            sgTableWorker.fireTableDataChanged();
+            sgTableModel.clearTable();
+            aResponse.getSetOfStudyGroups().forEach(sgTableModel::addData);
+            sgTableModel.fireTableDataChanged();
         }
     }
 
@@ -59,16 +59,16 @@ public class MainModelAnimator {
                 }
                 frameHandler.printInfo(sb.toString());
             } else if (aResponse.getSetOfStudyGroups() != null) {
-                SGTableWorker.getInstance().clearTable();
-                aResponse.getSetOfStudyGroups().forEach(sgTableWorker::addData);
+                sgTableModel.clearTable();
+                aResponse.getSetOfStudyGroups().forEach(sgTableModel::addData);
                 frameHandler.stopSynchronize();
-                sgTableWorker.fireTableDataChanged();
+                sgTableModel.fireTableDataChanged();
             } else if (aResponse.getStudyGroup() != null) {
-                SGTableWorker.getInstance().clearTable();
+                sgTableModel.clearTable();
                 StudyGroup newStudyGroup = aResponse.getStudyGroup();
-                sgTableWorker.addData(newStudyGroup);
+                sgTableModel.addData(newStudyGroup);
                 frameHandler.stopSynchronize();
-                sgTableWorker.fireTableDataChanged();
+                sgTableModel.fireTableDataChanged();
             } else if (aResponse.getCount() != null) {
                 sb.append("Amount of elements: ")
                         .append(aResponse.getCount())

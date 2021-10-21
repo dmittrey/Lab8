@@ -1,10 +1,12 @@
 package gui.connection;
 
+import Interfaces.Relocatable;
 import gui.FrameHandler;
-import gui.MainFrame;
 import utility.TypeOfAnswer;
 
-public class ConnectController {
+import javax.swing.*;
+
+public class ConnectController implements Relocatable {
 
     private final ConnectModel model;
     private final FrameHandler frameHandler;
@@ -20,10 +22,10 @@ public class ConnectController {
         frameHandler.connect(hostAddress, hostPort);
     }
 
-    public void setPanel(MainFrame jFrame) {
+    public void setPanel(JFrame jFrame) {
         jFrame.setTitle("Connecting");
         jFrame.setSize(400, 200);
-        jFrame.setLocation();
+        setLocation(jFrame);
         jFrame.setContentPane(model.getMainPanel());
         jFrame.revalidate();
     }

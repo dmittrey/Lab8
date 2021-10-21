@@ -1,11 +1,13 @@
 package gui.main;
 
+import Interfaces.Relocatable;
 import gui.*;
 import utility.*;
 
+import javax.swing.*;
 import java.util.logging.Logger;
 
-public class MainController {
+public class MainController implements Relocatable {
 
     private final MainModel model;
     private final MainModelAnimator mainModelAnimator;
@@ -16,16 +18,16 @@ public class MainController {
         mainModelAnimator = new MainModelAnimator(aFrameHandler, model.getClientInfo(), model.getServerInfo());
     }
 
-    public MainModelAnimator getMainModelAnimator(){
+    public MainModelAnimator getMainModelAnimator() {
         return mainModelAnimator;
     }
 
-    public void setPanel(MainFrame jFrame) {
+    public void setPanel(JFrame jFrame) {
         jFrame.setTitle("Study groups");
         setUsername();
         jFrame.setContentPane(model.getMainPanel());
         jFrame.setSize(1080, 560);
-        jFrame.setLocation();
+        setLocation(jFrame);
         jFrame.repaint();
     }
 

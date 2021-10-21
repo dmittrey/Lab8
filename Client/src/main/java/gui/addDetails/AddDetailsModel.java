@@ -1,11 +1,11 @@
 package gui.addDetails;
 
-import gui.MainDialog;
+import Interfaces.Relocatable;
 import utility.Command;
 
 import javax.swing.*;
 
-public class AddDetailsModel extends MainDialog {
+public class AddDetailsModel extends JDialog implements Relocatable {
 
     private Command command;
     private JPanel mainPanel;
@@ -43,7 +43,7 @@ public class AddDetailsModel extends MainDialog {
         setTitle("Fields setting");
         setModal(true);
         setSize(850, 500);
-        setLocation();
+        setLocation(this);
 
         submitButton.addActionListener(e -> aCommand.addStudyGroup(addDetailsController.addStudyGroup()));
     }

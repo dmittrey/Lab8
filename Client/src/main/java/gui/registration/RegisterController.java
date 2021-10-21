@@ -1,12 +1,13 @@
 package gui.registration;
 
+import Interfaces.Relocatable;
 import gui.FrameHandler;
-import gui.MainFrame;
 import utility.TypeOfAnswer;
 
+import javax.swing.*;
 import java.util.Arrays;
 
-public class RegisterController {
+public class RegisterController implements Relocatable {
 
     private final RegisterModel model;
     private final FrameHandler frameHandler;
@@ -30,10 +31,10 @@ public class RegisterController {
         } else setWarn(TypeOfAnswer.NOTMATCH);
     }
 
-    public void setPanel(MainFrame jFrame) {
+    public void setPanel(JFrame jFrame) {
         jFrame.setTitle("Register");
         jFrame.setSize(400, 300);
-        jFrame.setLocation();
+        setLocation(jFrame);
         jFrame.setContentPane(model.getMainPanel());
         jFrame.revalidate();
     }
