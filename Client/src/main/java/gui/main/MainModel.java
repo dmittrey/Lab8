@@ -23,6 +23,7 @@ public class MainModel {
     private JPanel server;
     private JScrollPane sgScrollPane;
     private JTable jTable;
+    private JButton button1;
     private static final Logger logger = Logger.getLogger(MainModel.class.getName());
 
     public MainModel(MainController mainController, FrameHandler aFrameHandler) {

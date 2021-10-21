@@ -11,6 +11,7 @@ public class ConnectModel {
     private JTextField hostPort;
     private JButton button1;
     private JTextField warnField;
+    private JButton changeLanguageButton;
 
     public ConnectModel(ConnectController connectController) {
         button1.addActionListener(e -> connectController.connect());
