@@ -2,13 +2,12 @@ package gui.bundles;
 
 import java.util.ListResourceBundle;
 
-public class RegisterLabels_lv extends ListResourceBundle {
+public class LoginLabels_lv_LV extends ListResourceBundle {
 
     private final Object[][] contents = {
-            {"login", "Denník"},
-            {"username", "Používateľské"},
+            {"register", "Reģistrēts"},
+            {"username", "Lietotājs"},
             {"password", "Parole"},
-            {"passwordAgain", "Parole vēlreiz"},
             {"submit", "Iesniegt"}
     };
 

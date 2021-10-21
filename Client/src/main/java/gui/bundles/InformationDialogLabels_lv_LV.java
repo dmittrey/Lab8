@@ -2,10 +2,10 @@ package gui.bundles;
 
 import java.util.ListResourceBundle;
 
-public class InformationDialogLabels_sk extends ListResourceBundle {
+public class InformationDialogLabels_lv_LV extends ListResourceBundle {
 
     private final Object[][] contents = {
-            {"ok", "DOBRE"}
+            {"ok", "LABI"}
     };
 
     @Override

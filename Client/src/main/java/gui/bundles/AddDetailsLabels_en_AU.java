@@ -2,7 +2,7 @@ package gui.bundles;
 
 import java.util.ListResourceBundle;
 
-public class AddDetailsLabels_en extends ListResourceBundle {
+public class AddDetailsLabels_en_AU extends ListResourceBundle {
 
     private final Object[][] contents = {
             {"name", "Name"},

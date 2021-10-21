@@ -2,14 +2,13 @@ package gui.bundles;
 
 import java.util.ListResourceBundle;
 
-public class RegisterLabels_ru extends ListResourceBundle {
+public class LoginLabels_ru_RU extends ListResourceBundle {
 
     private final Object[][] contents = {
-            {"login", "Авторизоваться"},
+            {"register", "Зарегистрировать"},
             {"username", "Имя пользователя"},
             {"password", "Пароль"},
-            {"passwordAgain", "Повторите пароль"},
-            {"submit", "Подтвердите"}
+            {"submit", "Подтвердить"}
     };
 
     @Override

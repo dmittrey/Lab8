@@ -2,7 +2,7 @@ package gui.bundles;
 
 import java.util.ListResourceBundle;
 
-public class MainLabels_sk extends ListResourceBundle {
+public class MainLabels_sk_SK extends ListResourceBundle {
 
     private final Object[][] contents = {
             {"language", "Jazyk"},

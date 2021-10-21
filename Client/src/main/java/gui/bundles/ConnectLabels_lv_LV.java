@@ -2,7 +2,7 @@ package gui.bundles;
 
 import java.util.ListResourceBundle;
 
-public class ConnectLabels_lv extends ListResourceBundle {
+public class ConnectLabels_lv_LV extends ListResourceBundle {
 
     private final Object[][] contents = {
             {"remoteHostAddress", "Attālā resursdatora adrese"},
