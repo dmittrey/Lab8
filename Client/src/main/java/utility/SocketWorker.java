@@ -1,6 +1,5 @@
 package utility;
 
-import Interfaces.ResponseHandlerInterface;
 import Interfaces.SocketWorkerInterface;
 
 import java.io.IOException;

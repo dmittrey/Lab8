@@ -12,7 +12,6 @@ import javax.swing.*;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
-import java.util.logging.Logger;
 
 public class FrameHandler {
     private final CommandReaderInterface commandReader;

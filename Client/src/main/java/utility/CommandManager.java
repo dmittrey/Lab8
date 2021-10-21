@@ -24,12 +24,10 @@ public class CommandManager implements CommandManagerInterface {
     private final RequestHandlerInterface requestHandler;
     private final ConsoleInterface console;
     private final Set<String> usedScripts;
-    private final FrameHandler frameHandler;
     private final MainModelAnimator mainModelAnimator;
 
     public CommandManager(FrameHandler aFrameHandler) {
-        frameHandler = aFrameHandler;
-        mainModelAnimator = frameHandler.getMainModelAnimator();
+        mainModelAnimator = aFrameHandler.getMainModelAnimator();
         validator = Validator.getInstance();
         requestHandler = RequestHandler.getInstance();
         console = Console.getInstance();
@@ -45,21 +43,22 @@ public class CommandManager implements CommandManagerInterface {
                 logger.info("Обрабатываем команду:" + aCommand);
                 mainModelAnimator.animate(requestHandler.send(aCommand));
             }
-        }
-        else if (validator.objectArgumentCommands(aCommand)) {
-            new AddDetailsController(aCommand).spawnModel();
+        } else if (validator.objectArgumentCommands(aCommand)) {
+            if (console.getExeStatus()) aCommand.addStudyGroup(new StudyGroupFactory().createScriptStudyGroup());
+            else new AddDetailsController(aCommand).spawnModel();
+
             if (aCommand.getStudyGroup() != null) {
                 mainModelAnimator.animate(requestHandler.send(aCommand));
             } else mainModelAnimator.animate(new Response(TypeOfAnswer.NOTVALIDATE));
-
-        } else if (validator.scriptArgumentCommand(aCommand)) {
-            JFileChooser fileopen = new JFileChooser();
-            int ret = fileopen.showDialog(null, "Открыть файл");
+        } else if (validator.scriptGUIArgumentCommand(aCommand)) {
+            JFileChooser fileOpen = new JFileChooser();
+            int ret = fileOpen.showDialog(null, "Открыть файл");
             if (ret == JFileChooser.APPROVE_OPTION) {
-                File file = fileopen.getSelectedFile();
+                File file = fileOpen.getSelectedFile();
                 executeScript(file);
             }
-            mainModelAnimator.animate(new Response(TypeOfAnswer.SUCCESSFUL));
+        } else if (validator.scriptArgumentCommand(aCommand)) {
+            executeScript(new File(aCommand.getArg()));
         } else mainModelAnimator.animate(new Response(TypeOfAnswer.NOTVALIDATE));
     }
 
@@ -78,7 +77,6 @@ public class CommandManager implements CommandManagerInterface {
     private void executeScript(File script) {
 
         if (usedScripts.add(script.getAbsolutePath())) {
-
             try {
                 if (usedScripts.size() == 1) console.setExeStatus(true);
 
@@ -86,26 +84,21 @@ public class CommandManager implements CommandManagerInterface {
                 try {
                     scriptReader.read();
 
-                    System.out.println(TextFormatting.getGreenText("\nThe script " + script.getName()
-                            + " was processed successfully!\n"));
+                    mainModelAnimator.animate(new Response(TypeOfAnswer.SUCCESSFUL));
                 } catch (IOException exception) {
-
                     usedScripts.remove(script.getAbsolutePath());
-
                     if (usedScripts.size() == 0) console.setExeStatus(false);
 
-                    if (!script.exists()) console.print(
-                            TextFormatting.getRedText("\n\tThe script does not exist!\n\n"));
-                    else if (!script.canRead()) console.print(
-                            TextFormatting.getRedText("\n\tThe system does not have permission to read the file!\n\n"));
-                    else console.print("\n\tWe have some problem's with script!\n\n");
+                    if (script.exists())
+                        mainModelAnimator.animate(new Response(TypeOfAnswer.PERMISSIONDENIED));
+                    else
+                        mainModelAnimator.animate(new Response(TypeOfAnswer.OBJECTNOTEXIST));
                 }
                 usedScripts.remove(script.getAbsolutePath());
                 if (usedScripts.size() == 0) console.setExeStatus(false);
             } catch (FileNotFoundException e) {
-                console.print("\n\tScript not found!\n");
+                mainModelAnimator.animate(new Response(TypeOfAnswer.OBJECTNOTEXIST));
             }
-        } else console.print(TextFormatting.getRedText("\nRecursion has been detected! Script " + script.getName() +
-                " will not be ran!\n"));
+        } else mainModelAnimator.animate(new Response(TypeOfAnswer.RECURSIONDETECTED));
     }
 }

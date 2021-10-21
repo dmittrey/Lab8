@@ -4,15 +4,12 @@ import Interfaces.ValidatorInterface;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 /**
  * Class to validate commands
  */
 public class Validator implements ValidatorInterface {
-
-    private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
 
     private static AvailableCommands availableCommands;
     private static Validator instance;
@@ -42,6 +39,12 @@ public class Validator implements ValidatorInterface {
 
     @Override
     public boolean scriptArgumentCommand(Command aCommand) {
+        return availableCommands.scriptArgumentCommand.equals(aCommand.getCommand()) &&
+                aCommand.getArg() != null;
+    }
+
+    @Override
+    public boolean scriptGUIArgumentCommand(Command aCommand){
         return availableCommands.scriptArgumentCommand.equals(aCommand.getCommand()) &&
                 aCommand.getArg() == null;
     }

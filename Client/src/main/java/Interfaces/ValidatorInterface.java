@@ -20,6 +20,8 @@ public interface ValidatorInterface {
      */
     boolean scriptArgumentCommand(Command aCommand);
 
+    boolean scriptGUIArgumentCommand(Command aCommand);
+
     /**
      * Validate Login and Register commands
      */

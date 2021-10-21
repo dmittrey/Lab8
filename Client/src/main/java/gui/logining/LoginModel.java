@@ -20,7 +20,7 @@ public class LoginModel {
     }
 
     public String getUsername() {
-        return usernameField.getText();
+        return usernameField.getText().trim();
     }
 
     public char[] getPassword() {

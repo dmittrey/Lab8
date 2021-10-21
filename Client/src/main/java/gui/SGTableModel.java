@@ -58,7 +58,7 @@ public class SGTableModel extends AbstractTableModel {
         return "";
     }
 
-    public boolean addData(StudyGroup studyGroup) {
+    public void addData(StudyGroup studyGroup) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String[] sg = new String[13];
         sg[0] = studyGroup.getId().toString();
@@ -78,7 +78,7 @@ public class SGTableModel extends AbstractTableModel {
         sg[10] = studyGroup.getGroupAdmin().getWeight().toString();
         sg[11] = studyGroup.getGroupAdmin().getHairColor().toString();
         sg[12] = studyGroup.getAuthor();
-        return data.add(sg);
+        data.add(sg);
     }
 
     @Override

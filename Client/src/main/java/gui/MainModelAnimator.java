@@ -127,8 +127,12 @@ public class MainModelAnimator {
                     break;
                 case NOTSERIALIZED:
                     clientInfo.setText("Command cannot be serialized!");
+                    break;
                 case NOTVALIDATE:
                     clientInfo.setText("Data in fields is incorrect!");
+                    break;
+                case RECURSIONDETECTED:
+                    clientInfo.setText("Recursion detected!");
             }
         }
     }

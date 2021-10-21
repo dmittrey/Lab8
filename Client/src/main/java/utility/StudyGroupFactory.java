@@ -4,8 +4,6 @@ import data.*;
 import Interfaces.FieldsReceiver;
 import gui.addDetails.AddDetailsModel;
 
-import java.util.Date;
-
 /**
  * Class for creating Study groups without id and Date
  */

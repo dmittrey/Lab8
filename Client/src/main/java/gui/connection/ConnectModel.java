@@ -17,11 +17,11 @@ public class ConnectModel {
     }
 
     public String getAddress() {
-        return hostAddress.getText();
+        return hostAddress.getText().trim();
     }
 
     public String getPort() {
-        return hostPort.getText();
+        return hostPort.getText().trim();
     }
 
     public JPanel getMainPanel() {

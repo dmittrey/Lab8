@@ -18,5 +18,6 @@ public enum TypeOfAnswer implements Serializable {
     NETPROBLEM,
     SERVERNOTAVAILABLE,
     NOTSERIALIZED,
-    NOTVALIDATE
+    NOTVALIDATE,
+    RECURSIONDETECTED
 }

@@ -2,7 +2,6 @@ package utility;
 
 import Interfaces.CommandReaderInterface;
 import Interfaces.ScriptReaderInterface;
-import gui.MainModelAnimator;
 
 import java.io.*;
 
@@ -20,19 +19,16 @@ public class ScriptReader implements ScriptReaderInterface {
     }
 
     public void read() throws IOException {
-
         String nextLine;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-
             do {
                 nextLine = bufferedReader.readLine();
-                System.out.println(nextLine);
                 if (nextLine == null) return;
 
                 Console.getInstance().setBufferedReader(bufferedReader);
 
                 Command newCommand = commandReader.readCommand(nextLine + " ");
-                System.out.println(newCommand);
+                CommandReader.getInstance().execute(newCommand);
             } while (true);
         }
     }
