@@ -5,10 +5,15 @@ import utility.CommandReader;
 import utility.TypeOfCommand;
 
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class SGChangeMenu extends JPopupMenu {
 
-    public SGChangeMenu(FrameHandler frameHandler) {
+    private String sgId;
+
+    public SGChangeMenu(FrameHandler frameHandler, String sgId) {
+
         JMenuItem synchronize = new JMenuItem("Включить синхронизацию");
         JMenuItem updateButton = new JMenuItem("Обновить объект");
         JMenuItem removeButton = new JMenuItem("Удалить объект");
@@ -25,15 +30,10 @@ public class SGChangeMenu extends JPopupMenu {
             frameHandler.resumeSynchronize();
         });
 
-        updateButton.addActionListener(e -> {
-            Command command = new Command(TypeOfCommand.Update, null);
-
-            CommandReader.getInstance().execute(command);
-            SGTableWorker.getInstance().fireTableDataChanged();
-        });
-
         removeButton.addActionListener(e -> {
-            Command command = new Command(TypeOfCommand.Remove_by_id, null);
+            Command command = new Command(TypeOfCommand.Remove_by_id, sgId);
+            System.out.println(command);
+            CommandReader.getInstance().execute(command);
         });
     }
 }

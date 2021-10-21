@@ -12,7 +12,7 @@ public class MainController {
     private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
 
     public MainController(FrameHandler aFrameHandler) {
-        model = new MainModel(this, new SGChangeMenu(aFrameHandler));
+        model = new MainModel(this, aFrameHandler);
         mainModelAnimator = new MainModelAnimator(aFrameHandler, model.getClientInfo(), model.getServerInfo());
     }
 
@@ -37,8 +37,6 @@ public class MainController {
         logger.info("Обработка команды " + command);
 
         CommandReader.getInstance().execute(command);
-//        Response cmdResult = CommandReader.getInstance().execute(command);
-//        SGTableWorker.getInstance().fireTableDataChanged();
     }
 
     private void setUsername() {

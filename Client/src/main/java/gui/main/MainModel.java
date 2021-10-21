@@ -21,11 +21,21 @@ public class MainModel extends MainFrame {
     private JTextField serverInfo;
     private JPanel server;
     private JScrollPane sgScrollPane;
-    private final SGChangeMenu sgChangeMenu;
+    private JTable jTable;
 
-    public MainModel(MainController mainController, SGChangeMenu aSGChangeMenu) {
+    public MainModel(MainController mainController, FrameHandler aFrameHandler) {
         submitButton.addActionListener(e -> mainController.executeCommand());
-        sgChangeMenu = aSGChangeMenu;
+        jTable.setModel(SGTableWorker.getInstance());
+
+        jTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int rowAtPoint = jTable.rowAtPoint(e.getPoint());
+                String sgId = (String) jTable.getValueAt(rowAtPoint, 0);
+                System.out.println(sgId);
+                new SGChangeMenu(aFrameHandler, sgId).show(e.getComponent(), e.getX(), e.getY());
+            }
+        });
     }
 
     public TypeOfCommand getTypeOfCommand() {
@@ -53,21 +63,8 @@ public class MainModel extends MainFrame {
     }
 
     private void createUIComponents() {
-        SGTableWorker sgTableWorker = SGTableWorker.getInstance();
-        JTable jTable = new JTable(sgTableWorker);
-        jTable.setModel(SGTableWorker.getInstance());
-        sgScrollPane = new JScrollPane(jTable);
-        jTable.setAutoCreateRowSorter(true);
-
         ComboBoxToolTipRenderer<String> renderer = new ComboBoxToolTipRenderer<>();
         commandBox = new JComboBox<>();
         commandBox.setRenderer(renderer);
-
-        jTable.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                jTable.setComponentPopupMenu(sgChangeMenu);
-            }
-        });
     }
 }
