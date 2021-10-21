@@ -5,14 +5,14 @@ import java.util.ListResourceBundle;
 public class MainLabels_ru extends ListResourceBundle {
 
     private final Object[][] contents = {
-            {"language", "Language"},
-            {"command", "Register"},
-            {"argument", "Username"},
-            {"submit", "Password"},
-            {"clientInfo", "Submit"},
-            {"serverInfo", "Submit"},
-            {"visualMode", "Submit"},
-            {"studyGroupTable", "Submit"}
+            {"language", "Язык"},
+            {"command", "Команда"},
+            {"argument", "Аргумент"},
+            {"submit", "Подтвердить"},
+            {"clientInfo", "Информация от клиента"},
+            {"serverInfo", "Информация от сервера"},
+            {"visualMode", "Визуальный режим"},
+            {"studyGroupTable", "Таблица учебных групп"}
     };
 
     @Override

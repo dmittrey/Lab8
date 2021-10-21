@@ -5,11 +5,11 @@ import java.util.ListResourceBundle;
 public class RegisterLabels_sk extends ListResourceBundle {
 
     private final Object[][] contents = {
-            {"login", "Login"},
-            {"username", "Username"},
-            {"password", "Password"},
-            {"passwordAgain", "Password again"},
-            {"submit", "Submit"}
+            {"login", "Prihlásenie"},
+            {"username", "Používateľské"},
+            {"password", "Heslo"},
+            {"passwordAgain", "Heslo znova"},
+            {"submit", "Predložiť"}
     };
 
     @Override

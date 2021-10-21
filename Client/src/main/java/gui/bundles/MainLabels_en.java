@@ -6,13 +6,13 @@ public class MainLabels_en extends ListResourceBundle {
 
     private final Object[][] contents = {
             {"language", "Language"},
-            {"command", "Register"},
-            {"argument", "Username"},
-            {"submit", "Password"},
-            {"clientInfo", "Submit"},
-            {"serverInfo", "Submit"},
-            {"visualMode", "Submit"},
-            {"studyGroupTable", "Submit"}
+            {"command", "Command"},
+            {"argument", "Argument"},
+            {"submit", "Submit"},
+            {"clientInfo", "Client info"},
+            {"serverInfo", "Server info"},
+            {"visualMode", "Visual mode"},
+            {"studyGroupTable", "Study group table"}
     };
 
     @Override
