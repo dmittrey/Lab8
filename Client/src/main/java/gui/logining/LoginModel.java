@@ -28,7 +28,7 @@ public class LoginModel {
         langButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == 1){
+                if (e.getButton() == 1) {
                     new LangChangeMenu(loginController).show(e.getComponent(), e.getX(), e.getY());
                 }
             }
@@ -52,7 +52,7 @@ public class LoginModel {
         return warnField;
     }
 
-    public void switchLanguage(Locale locale){
+    public void switchLanguage(Locale locale) {
         loginBundle = ResourceBundle.getBundle("gui.bundles.LoginLabels", locale);
         fillLabels();
     }

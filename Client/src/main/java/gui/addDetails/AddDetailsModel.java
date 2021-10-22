@@ -1,7 +1,6 @@
 package gui.addDetails;
 
 import Interfaces.Relocatable;
-import utility.Command;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -122,6 +121,16 @@ public class AddDetailsModel extends JDialog implements Relocatable {
 
     public void setGroupAdminWeightWarn(String aGroupAdminWeightWarn) {
         groupAdminWeightWarn.setText(aGroupAdminWeightWarn);
+    }
+
+    public void clearFields() {
+        name.setText("");
+        xCoordinate.setText("");
+        yCoordinate.setText("");
+        studentsCount.setText("");
+        averageMark.setText("");
+        groupAdminName.setText("");
+        groupAdminWeight.setText("");
     }
 
     public void switchLanguage(Locale locale) {

@@ -46,7 +46,9 @@ public class CommandManager implements CommandManagerInterface {
             }
         } else if (validator.objectArgumentCommands(aCommand)) {
             if (console.getExeStatus()) aCommand.addStudyGroup(new StudyGroupFactory().createScriptStudyGroup());
-            else frameHandler.spawnAddDetailsModel(aCommand);
+            else {
+                frameHandler.spawnAddDetailsModel(aCommand);
+            }
 
             if (aCommand.getStudyGroup() != null) {
                 mainModelAnimator.animate(requestHandler.send(aCommand));

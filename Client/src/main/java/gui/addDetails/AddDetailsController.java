@@ -22,15 +22,16 @@ public class AddDetailsController implements Localizable {
         frameHandler = aFrameHandler;
     }
 
-    public void spawnModel(Command aCommand) { ;
+    public void spawnModel(Command aCommand) {
+        command = aCommand;
         fieldsValidator = new FieldsValidator(model);
         model.setVisible(true);
-        command = aCommand;
     }
 
     public void addStudyGroup() {
         if (fieldsValidator.validate()) {
             command.addStudyGroup(studyGroupFactory.createGUIStudyGroup(model));
+            clearFields();
             model.dispose();
         }
     }
@@ -42,5 +43,9 @@ public class AddDetailsController implements Localizable {
     @Override
     public void notifySwitchLanguage(Locale locale) {
         frameHandler.switchLanguage(locale);
+    }
+
+    private void clearFields() {
+        model.clearFields();
     }
 }
