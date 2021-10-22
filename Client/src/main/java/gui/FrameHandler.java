@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+import java.util.Locale;
 
 public class FrameHandler {
     private final CommandReaderInterface commandReader;
@@ -103,5 +104,13 @@ public class FrameHandler {
 
     public void resumeSynchronize() {
         dataSynchronizer.resume();
+    }
+
+    public void switchLanguage(Locale locale) {
+        connectController.switchLanguage(locale);
+        informationDialogController.switchLanguage(locale);
+        loginController.switchLanguage(locale);
+        mainController.switchLanguage(locale);
+        registerController.switchLanguage(locale);
     }
 }

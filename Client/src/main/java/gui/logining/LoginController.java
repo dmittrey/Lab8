@@ -5,6 +5,7 @@ import gui.FrameHandler;
 import utility.TypeOfAnswer;
 
 import javax.swing.*;
+import java.util.Locale;
 
 public class LoginController implements Relocatable {
 
@@ -36,5 +37,13 @@ public class LoginController implements Relocatable {
 
     public void setWarn(TypeOfAnswer typeOfAnswer) {
         model.getWarnField().setText(typeOfAnswer.toString());
+    }
+
+    public void switchLanguage(Locale locale){
+        model.switchLanguage(locale);
+    }
+
+    public void notifySwitchLanguage(Locale locale){
+        frameHandler.switchLanguage(locale);
     }
 }

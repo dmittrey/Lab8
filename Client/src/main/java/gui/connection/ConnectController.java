@@ -5,6 +5,7 @@ import gui.FrameHandler;
 import utility.TypeOfAnswer;
 
 import javax.swing.*;
+import java.util.Locale;
 
 public class ConnectController implements Relocatable {
 
@@ -32,5 +33,9 @@ public class ConnectController implements Relocatable {
 
     public void setWarn(TypeOfAnswer typeOfAnswer) {
         model.setWarn(typeOfAnswer.toString());
+    }
+
+    public void switchLanguage(Locale locale){
+
     }
 }

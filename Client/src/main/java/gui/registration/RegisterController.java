@@ -6,6 +6,7 @@ import utility.TypeOfAnswer;
 
 import javax.swing.*;
 import java.util.Arrays;
+import java.util.Locale;
 
 public class RegisterController implements Relocatable {
 
@@ -41,5 +42,9 @@ public class RegisterController implements Relocatable {
 
     public void setWarn(TypeOfAnswer typeOfAnswer) {
         model.getWarnField().setText(typeOfAnswer.toString());
+    }
+
+    public void switchLanguage(Locale locale){
+
     }
 }

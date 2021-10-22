@@ -5,6 +5,7 @@ import java.util.ListResourceBundle;
 public class LoginLabels_ru_RU extends ListResourceBundle {
 
     private final Object[][] contents = {
+            {"language", "Язык"},
             {"register", "Зарегистрировать"},
             {"username", "Имя пользователя"},
             {"password", "Пароль"},

@@ -5,6 +5,7 @@ import gui.*;
 import utility.*;
 
 import javax.swing.*;
+import java.util.Locale;
 import java.util.logging.Logger;
 
 public class MainController implements Relocatable {
@@ -39,6 +40,10 @@ public class MainController implements Relocatable {
         logger.info("Обработка команды " + command);
 
         CommandReader.getInstance().execute(command);
+    }
+
+    public void switchLanguage(Locale locale){
+
     }
 
     private void setUsername() {
