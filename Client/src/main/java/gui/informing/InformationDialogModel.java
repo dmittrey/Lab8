@@ -20,7 +20,7 @@ public class InformationDialogModel extends JDialog implements Relocatable {
         setTitle("Information");
         setModal(true);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        setSize(500, 330);
+        setSize(550, 330);
         setLocation(this);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 

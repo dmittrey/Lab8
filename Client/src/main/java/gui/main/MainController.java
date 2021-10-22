@@ -27,12 +27,12 @@ public class MainController implements Relocatable, Localizable {
     }
 
     public void setPanel(JFrame jFrame) {
-        jFrame.setTitle("Study groups");
+        jFrame.setTitle("Study groups table");
         setUsername();
         jFrame.setContentPane(model.getMainPanel());
         jFrame.setSize(1080, 560);
         setLocation(jFrame);
-        jFrame.repaint();
+        jFrame.revalidate();
     }
 
     public void executeCommand() {

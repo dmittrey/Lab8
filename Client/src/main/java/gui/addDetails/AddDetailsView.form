@@ -38,7 +38,7 @@
             <properties>
               <editable value="false"/>
               <enabled value="true"/>
-              <font name="Showcard Gothic" size="12"/>
+              <font name="Showcard Gothic" size="10"/>
             </properties>
           </component>
         </children>
@@ -94,7 +94,8 @@
             </constraints>
             <properties>
               <editable value="false"/>
-              <font name="Showcard Gothic" size="12"/>
+              <enabled value="true"/>
+              <font name="Showcard Gothic" size="10"/>
             </properties>
           </component>
           <component id="fc9d6" class="javax.swing.JTextField" binding="yCoordinateWarn">
@@ -105,7 +106,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
-              <font name="Showcard Gothic" size="12"/>
+              <font name="Showcard Gothic" size="10"/>
             </properties>
           </component>
         </children>
@@ -136,7 +137,7 @@
             </constraints>
             <properties>
               <editable value="false"/>
-              <font name="Showcard Gothic" size="12"/>
+              <font name="Showcard Gothic" size="10"/>
             </properties>
           </component>
         </children>
@@ -258,7 +259,7 @@
                 </constraints>
                 <properties>
                   <editable value="false"/>
-                  <font name="Showcard Gothic" size="12"/>
+                  <font name="Showcard Gothic" size="10"/>
                 </properties>
               </component>
             </children>
@@ -281,7 +282,7 @@
                 </constraints>
                 <properties>
                   <editable value="false"/>
-                  <font name="Showcard Gothic" size="12"/>
+                  <font name="Showcard Gothic" size="10"/>
                 </properties>
               </component>
               <component id="66ab6" class="javax.swing.JTextField" binding="groupAdminWeight">

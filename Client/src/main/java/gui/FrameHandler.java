@@ -7,6 +7,7 @@ import gui.informing.InformationDialogController;
 import gui.logining.LoginController;
 import gui.main.MainController;
 import gui.registration.RegisterController;
+import gui.visual.VisualController;
 import utility.*;
 
 import javax.swing.*;
@@ -31,6 +32,7 @@ public class FrameHandler {
     private final JFrame jFrame;
     private final InformationDialogController informationDialogController;
     private final AddDetailsController addDetailsController;
+    private final VisualController visualController;
     private final DataSynchronizer dataSynchronizer;
     private final MainModelAnimator mainModelAnimator;
 
@@ -45,6 +47,7 @@ public class FrameHandler {
         mainController = new MainController(this);
         informationDialogController = new InformationDialogController();
         addDetailsController = new AddDetailsController(this);
+        visualController = new VisualController(this);
         dataSynchronizer = new DataSynchronizer();
         mainModelAnimator = mainController.getMainModelAnimator();
     }
@@ -81,7 +84,7 @@ public class FrameHandler {
     public void setMain() {
         Thread synchronizer = new Thread(dataSynchronizer);
         synchronizer.start();
-        mainController.setPanel(jFrame);
+        switchTable();
     }
 
     public void login(String anUsername, char[] aPassword) {
@@ -123,11 +126,18 @@ public class FrameHandler {
         mainController.switchLanguage(locale);
         registerController.switchLanguage(locale);
         addDetailsController.switchLanguage(locale);
-        System.out.println(addDetailsController);
+        visualController.switchLanguage(locale);
     }
 
     public void spawnAddDetailsModel(Command command) {
-        System.out.println(addDetailsController);
         addDetailsController.spawnModel(command);
+    }
+
+    public void switchVisual(){
+        visualController.setPanel(jFrame);
+    }
+
+    public void switchTable(){
+        mainController.setPanel(jFrame);
     }
 }

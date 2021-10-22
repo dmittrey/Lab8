@@ -58,6 +58,7 @@ public class MainModel {
                 }
             }
         });
+        visualButton.addActionListener(e -> aFrameHandler.switchVisual());
         switchLanguage(new Locale("en", "AU"));
     }
 
