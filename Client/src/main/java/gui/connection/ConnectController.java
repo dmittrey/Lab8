@@ -1,5 +1,6 @@
 package gui.connection;
 
+import Interfaces.Localizable;
 import Interfaces.Relocatable;
 import gui.FrameHandler;
 import utility.TypeOfAnswer;
@@ -7,7 +8,7 @@ import utility.TypeOfAnswer;
 import javax.swing.*;
 import java.util.Locale;
 
-public class ConnectController implements Relocatable {
+public class ConnectController implements Relocatable, Localizable {
 
     private final ConnectModel model;
     private final FrameHandler frameHandler;
@@ -35,7 +36,12 @@ public class ConnectController implements Relocatable {
         model.setWarn(typeOfAnswer.toString());
     }
 
-    public void switchLanguage(Locale locale){
+    public void switchLanguage(Locale locale) {
+        model.switchLanguage(locale);
+    }
 
+    @Override
+    public void notifySwitchLanguage(Locale locale) {
+        frameHandler.switchLanguage(locale);
     }
 }

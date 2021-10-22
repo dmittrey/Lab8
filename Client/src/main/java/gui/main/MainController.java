@@ -1,5 +1,6 @@
 package gui.main;
 
+import Interfaces.Localizable;
 import Interfaces.Relocatable;
 import gui.*;
 import utility.*;
@@ -8,15 +9,17 @@ import javax.swing.*;
 import java.util.Locale;
 import java.util.logging.Logger;
 
-public class MainController implements Relocatable {
+public class MainController implements Relocatable, Localizable {
 
     private final MainModel model;
     private final MainModelAnimator mainModelAnimator;
+    private final FrameHandler frameHandler;
     private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
 
     public MainController(FrameHandler aFrameHandler) {
-        model = new MainModel(this, aFrameHandler);
-        mainModelAnimator = new MainModelAnimator(aFrameHandler, model.getClientInfo(), model.getServerInfo());
+        frameHandler = aFrameHandler;
+        model = new MainModel(this, frameHandler);
+        mainModelAnimator = new MainModelAnimator(frameHandler, model.getClientInfo(), model.getServerInfo());
     }
 
     public MainModelAnimator getMainModelAnimator() {
@@ -42,8 +45,12 @@ public class MainController implements Relocatable {
         CommandReader.getInstance().execute(command);
     }
 
-    public void switchLanguage(Locale locale){
+    public void switchLanguage(Locale locale) {
+        model.switchLanguage(locale);
+    }
 
+    public void notifySwitchLanguage(Locale locale) {
+        frameHandler.switchLanguage(locale);
     }
 
     private void setUsername() {

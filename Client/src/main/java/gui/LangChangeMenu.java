@@ -1,13 +1,13 @@
 package gui;
 
-import gui.logining.LoginController;
+import Interfaces.Localizable;
 
 import javax.swing.*;
 import java.util.Locale;
 
 public class LangChangeMenu extends JPopupMenu {
 
-    public LangChangeMenu(LoginController loginController) {
+    public LangChangeMenu(Localizable controller) {
 
         JMenuItem enLang = new JMenuItem("English(AU)");
         JMenuItem lvLang = new JMenuItem("Latvian(LV)");
@@ -19,9 +19,9 @@ public class LangChangeMenu extends JPopupMenu {
         add(ruLang);
         add(skLang);
 
-        enLang.addActionListener(e -> loginController.notifySwitchLanguage(new Locale("en", "AU")));
-        lvLang.addActionListener(e -> loginController.notifySwitchLanguage(new Locale("lv", "LV")));
-        ruLang.addActionListener(e -> loginController.notifySwitchLanguage(new Locale("ru", "RU")));
-        skLang.addActionListener(e -> loginController.notifySwitchLanguage(new Locale("sk", "SK")));
+        enLang.addActionListener(e -> controller.notifySwitchLanguage(new Locale("en", "AU")));
+        lvLang.addActionListener(e -> controller.notifySwitchLanguage(new Locale("lv", "LV")));
+        ruLang.addActionListener(e -> controller.notifySwitchLanguage(new Locale("ru", "RU")));
+        skLang.addActionListener(e -> controller.notifySwitchLanguage(new Locale("sk", "SK")));
     }
 }

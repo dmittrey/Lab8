@@ -1,5 +1,6 @@
 package gui.registration;
 
+import Interfaces.Localizable;
 import Interfaces.Relocatable;
 import gui.FrameHandler;
 import utility.TypeOfAnswer;
@@ -8,7 +9,7 @@ import javax.swing.*;
 import java.util.Arrays;
 import java.util.Locale;
 
-public class RegisterController implements Relocatable {
+public class RegisterController implements Relocatable, Localizable {
 
     private final RegisterModel model;
     private final FrameHandler frameHandler;
@@ -45,6 +46,11 @@ public class RegisterController implements Relocatable {
     }
 
     public void switchLanguage(Locale locale){
+        model.switchLanguage(locale);
+    }
 
+    @Override
+    public void notifySwitchLanguage(Locale locale){
+        frameHandler.switchLanguage(locale);
     }
 }

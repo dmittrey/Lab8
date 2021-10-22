@@ -1,5 +1,6 @@
 package gui.logining;
 
+import Interfaces.Localizable;
 import Interfaces.Relocatable;
 import gui.FrameHandler;
 import utility.TypeOfAnswer;
@@ -7,7 +8,7 @@ import utility.TypeOfAnswer;
 import javax.swing.*;
 import java.util.Locale;
 
-public class LoginController implements Relocatable {
+public class LoginController implements Relocatable, Localizable {
 
     private final LoginModel model;
     private final FrameHandler frameHandler;
@@ -30,7 +31,7 @@ public class LoginController implements Relocatable {
     }
 
     public void login() {
-        String username = model.getUsername();
+        String username = model.getUsername().trim();
         char[] password = model.getPassword();
         frameHandler.login(username, password);
     }
@@ -39,11 +40,12 @@ public class LoginController implements Relocatable {
         model.getWarnField().setText(typeOfAnswer.toString());
     }
 
-    public void switchLanguage(Locale locale){
+    public void switchLanguage(Locale locale) {
         model.switchLanguage(locale);
     }
 
-    public void notifySwitchLanguage(Locale locale){
+    @Override
+    public void notifySwitchLanguage(Locale locale) {
         frameHandler.switchLanguage(locale);
     }
 }

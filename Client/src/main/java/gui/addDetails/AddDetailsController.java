@@ -5,6 +5,8 @@ import utility.Command;
 import utility.FieldsValidator;
 import utility.StudyGroupFactory;
 
+import java.util.Locale;
+
 public class AddDetailsController {
 
     private final AddDetailsModel model;
@@ -27,4 +29,12 @@ public class AddDetailsController {
             return studyGroupFactory.createGUIStudyGroup(model);
         } else return null;
     }
+
+//    public void switchLanguage(Locale locale){
+//        model.switchLanguage(locale);
+//    }
+//
+//    public void notifySwitchLanguage(Locale locale){
+//        frameHandler.switchLanguage(locale);
+//    }
 }

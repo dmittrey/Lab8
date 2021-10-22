@@ -33,16 +33,7 @@ public class LoginModel {
                 }
             }
         });
-        loginBundle = ResourceBundle.getBundle("gui.bundles.LoginLabels", new Locale("en", "AU"));
-        fillLabels();
-    }
-
-    public void fillLabels() {
-        langButton.setText(loginBundle.getString("language"));
-        registerButton.setText(loginBundle.getString("register"));
-        usernameText.setText(loginBundle.getString("username"));
-        passwordText.setText(loginBundle.getString("password"));
-        submitButton.setText(loginBundle.getString("submit"));
+        switchLanguage(new Locale("en", "AU"));
     }
 
     public JPanel getMainPanel() {
@@ -64,5 +55,13 @@ public class LoginModel {
     public void switchLanguage(Locale locale){
         loginBundle = ResourceBundle.getBundle("gui.bundles.LoginLabels", locale);
         fillLabels();
+    }
+
+    private void fillLabels() {
+        langButton.setText(loginBundle.getString("language"));
+        registerButton.setText(loginBundle.getString("register"));
+        usernameText.setText(loginBundle.getString("username"));
+        passwordText.setText(loginBundle.getString("password"));
+        submitButton.setText(loginBundle.getString("submit"));
     }
 }

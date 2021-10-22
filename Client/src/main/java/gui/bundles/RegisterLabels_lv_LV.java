@@ -5,6 +5,7 @@ import java.util.ListResourceBundle;
 public class RegisterLabels_lv_LV extends ListResourceBundle {
 
     private final Object[][] contents = {
+            {"language", "Valoda"},
             {"login", "Denník"},
             {"username", "Používateľské"},
             {"password", "Parole"},

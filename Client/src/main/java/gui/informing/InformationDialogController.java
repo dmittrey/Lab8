@@ -16,6 +16,6 @@ public class InformationDialogController {
     }
 
     public void switchLanguage(Locale locale){
-
+        model.switchLanguage(locale);
     }
 }

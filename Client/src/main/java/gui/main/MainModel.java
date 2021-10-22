@@ -4,8 +4,13 @@ import gui.*;
 import utility.*;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class MainModel {
@@ -23,7 +28,8 @@ public class MainModel {
     private JPanel server;
     private JScrollPane sgScrollPane;
     private JTable jTable;
-    private JButton button1;
+    private JButton langButton;
+    private ResourceBundle mainBundle;
     private static final Logger logger = Logger.getLogger(MainModel.class.getName());
 
     public MainModel(MainController mainController, FrameHandler aFrameHandler) {
@@ -44,6 +50,15 @@ public class MainModel {
                 }
             }
         });
+        langButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getButton() == 1) {
+                    new LangChangeMenu(mainController).show(e.getComponent(), e.getX(), e.getY());
+                }
+            }
+        });
+        switchLanguage(new Locale("en", "AU"));
     }
 
     public TypeOfCommand getTypeOfCommand() {
@@ -68,6 +83,35 @@ public class MainModel {
 
     public JTextField getServerInfo() {
         return serverInfo;
+    }
+
+    public void switchLanguage(Locale locale) {
+        mainBundle = ResourceBundle.getBundle("gui.bundles.MainLabels", locale);
+        fillLabels();
+    }
+
+    private void fillLabels() {
+        langButton.setText(mainBundle.getString("language"));
+        visualButton.setText(mainBundle.getString("visualMode"));
+        String commandTitle = mainBundle.getString("command");
+        String argumentTitle = mainBundle.getString("argument");
+        submitButton.setText(mainBundle.getString("submit"));
+        String clientTitle = mainBundle.getString("clientInfo");
+        String serverTitle = mainBundle.getString("serverInfo");
+        String sgTableTitle = mainBundle.getString("studyGroupTable");
+
+        LineBorder roundedLineBorder = new LineBorder(Color.black, 1, true);
+        TitledBorder commandTitledBorder = new TitledBorder(roundedLineBorder, commandTitle);
+        TitledBorder argumentTitledBorder = new TitledBorder(roundedLineBorder, argumentTitle);
+        TitledBorder clientTitledBorder = new TitledBorder(roundedLineBorder, clientTitle);
+        TitledBorder serverTitledBorder = new TitledBorder(roundedLineBorder, serverTitle);
+        TitledBorder sgTableTitledBorder = new TitledBorder(roundedLineBorder, sgTableTitle);
+
+        commandPanel.setBorder(commandTitledBorder);
+        argumentPanel.setBorder(argumentTitledBorder);
+        client.setBorder(clientTitledBorder);
+        server.setBorder(serverTitledBorder);
+        sgScrollPane.setBorder(sgTableTitledBorder);
     }
 
     private void createUIComponents() {
