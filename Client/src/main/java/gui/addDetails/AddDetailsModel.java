@@ -133,6 +133,16 @@ public class AddDetailsModel extends JDialog implements Relocatable {
         groupAdminWeight.setText("");
     }
 
+    public void clearAlerts(){
+        nameWarn.setText("");
+        xCoordinateWarn.setText("");
+        yCoordinateWarn.setText("");
+        studentsCountWarn.setText("");
+        averageMarkWarn.setText("");
+        groupAdminNameWarn.setText("");
+        groupAdminWeightWarn.setText("");
+    }
+
     public void switchLanguage(Locale locale) {
         addDetailsBundle = ResourceBundle.getBundle("gui.bundles.AddDetailsLabels", locale);
         fillLabels();

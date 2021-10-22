@@ -29,9 +29,10 @@ public class AddDetailsController implements Localizable {
     }
 
     public void addStudyGroup() {
+        model.clearAlerts();
         if (fieldsValidator.validate()) {
             command.addStudyGroup(studyGroupFactory.createGUIStudyGroup(model));
-            clearFields();
+            model.clearFields();
             model.dispose();
         }
     }
@@ -43,9 +44,5 @@ public class AddDetailsController implements Localizable {
     @Override
     public void notifySwitchLanguage(Locale locale) {
         frameHandler.switchLanguage(locale);
-    }
-
-    private void clearFields() {
-        model.clearFields();
     }
 }

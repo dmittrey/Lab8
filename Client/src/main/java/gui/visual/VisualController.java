@@ -21,6 +21,8 @@ public class VisualController implements Relocatable, Localizable {
         frameHandler = aFrameHandler;
         model = new VisualModel(this, frameHandler);
         visualModelAnimator = new VisualModelAnimator(frameHandler);
+        System.out.println(model.getMainPanel().getGraphics());
+//        visualModelAnimator.paintCoordinateAxes(model.getMainPanel());
     }
 
     public void setPanel(JFrame jFrame) {
