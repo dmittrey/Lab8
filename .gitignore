@@ -28,5 +28,7 @@ hs_err_pid*
 /Server/target/
 /Client/target/
 File.xml
+/script.txt
 /script1.txt
 /script2.txt
+/Tasks
