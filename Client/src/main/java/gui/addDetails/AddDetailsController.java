@@ -1,40 +1,46 @@
 package gui.addDetails;
 
-import data.StudyGroup;
+import Interfaces.Localizable;
+import gui.FrameHandler;
 import utility.Command;
 import utility.FieldsValidator;
 import utility.StudyGroupFactory;
 
 import java.util.Locale;
 
-public class AddDetailsController {
+public class AddDetailsController implements Localizable {
 
     private final AddDetailsModel model;
-    private final FieldsValidator fieldsValidator;
+    private FieldsValidator fieldsValidator;
     private final StudyGroupFactory studyGroupFactory;
+    private final FrameHandler frameHandler;
+    private Command command;
 
-    public AddDetailsController(Command aCommand) {
-        model = new AddDetailsModel(this, aCommand);
-        fieldsValidator = new FieldsValidator(model);
+    public AddDetailsController(FrameHandler aFrameHandler) {
         studyGroupFactory = new StudyGroupFactory();
+        model = new AddDetailsModel(this);
+        frameHandler = aFrameHandler;
     }
 
-    public void spawnModel() {
+    public void spawnModel(Command aCommand) { ;
+        fieldsValidator = new FieldsValidator(model);
         model.setVisible(true);
+        command = aCommand;
     }
 
-    public StudyGroup addStudyGroup() {
+    public void addStudyGroup() {
         if (fieldsValidator.validate()) {
+            command.addStudyGroup(studyGroupFactory.createGUIStudyGroup(model));
             model.dispose();
-            return studyGroupFactory.createGUIStudyGroup(model);
-        } else return null;
+        }
     }
 
-//    public void switchLanguage(Locale locale){
-//        model.switchLanguage(locale);
-//    }
-//
-//    public void notifySwitchLanguage(Locale locale){
-//        frameHandler.switchLanguage(locale);
-//    }
+    public void switchLanguage(Locale locale) {
+        model.switchLanguage(locale);
+    }
+
+    @Override
+    public void notifySwitchLanguage(Locale locale) {
+        frameHandler.switchLanguage(locale);
+    }
 }

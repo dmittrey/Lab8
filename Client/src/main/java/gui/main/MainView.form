@@ -5,7 +5,9 @@
     <constraints>
       <xy x="20" y="20" width="716" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-4934476"/>
+    </properties>
     <border type="none"/>
     <children>
       <component id="5be9e" class="javax.swing.JTextField" binding="usernameField">
@@ -15,9 +17,11 @@
           </grid>
         </constraints>
         <properties>
+          <background color="-4934476"/>
           <editable value="false"/>
           <enabled value="true"/>
-          <font name="JetBrains Mono" size="16"/>
+          <font name="JetBrains Mono" size="20"/>
+          <horizontalAlignment value="0"/>
           <text value=""/>
         </properties>
       </component>
@@ -28,7 +32,9 @@
             <preferred-size width="196" height="58"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-4934476"/>
+        </properties>
         <border type="etched"/>
         <children>
           <component id="b5fb6" class="javax.swing.JComboBox" binding="commandBox" custom-create="true">
@@ -60,7 +66,9 @@
             <preferred-size width="196" height="58"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-4934476"/>
+        </properties>
         <border type="etched"/>
         <children>
           <component id="b47e0" class="javax.swing.JTextField" binding="argumentField">
@@ -100,7 +108,9 @@
             <preferred-size width="196" height="58"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-4934476"/>
+        </properties>
         <border type="etched"/>
         <children>
           <component id="4ee1d" class="javax.swing.JTextField" binding="clientInfo">
@@ -111,6 +121,9 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <font name="Showcard Gothic" size="14"/>
+              <foreground color="-7920896"/>
+              <horizontalAlignment value="0"/>
             </properties>
           </component>
         </children>
@@ -122,7 +135,9 @@
             <preferred-size width="196" height="78"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-4934476"/>
+        </properties>
         <border type="etched"/>
         <children>
           <component id="4a75d" class="javax.swing.JTextField" binding="serverInfo">
@@ -133,6 +148,10 @@
             </constraints>
             <properties>
               <editable value="false"/>
+              <font name="Showcard Gothic" size="14"/>
+              <foreground color="-7920896"/>
+              <horizontalAlignment value="0"/>
+              <text value=""/>
             </properties>
           </component>
         </children>
@@ -141,13 +160,18 @@
         <constraints>
           <grid row="1" column="2" row-span="5" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-4934476"/>
+          <enabled value="true"/>
+        </properties>
         <border type="etched"/>
         <children>
           <component id="ddbc9" class="javax.swing.JTable" binding="jTable">
             <constraints/>
             <properties>
               <autoCreateRowSorter value="false"/>
+              <background color="-4934476"/>
+              <fillsViewportHeight value="true"/>
               <toolTipText value="Click right button on mouse!"/>
             </properties>
             <clientProperties>

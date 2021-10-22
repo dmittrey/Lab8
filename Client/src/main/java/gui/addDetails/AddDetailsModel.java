@@ -4,10 +4,14 @@ import Interfaces.Relocatable;
 import utility.Command;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class AddDetailsModel extends JDialog implements Relocatable {
 
-    private Command command;
     private JPanel mainPanel;
     private JPanel namePanel;
     private JTextField name;
@@ -37,15 +41,19 @@ public class AddDetailsModel extends JDialog implements Relocatable {
     private JButton submitButton;
     private JComboBox<String> groupAdminHairColor;
     private JTextField yCoordinateWarn;
+    private JLabel coordinateXText;
+    private JLabel coordinateYText;
+    private ResourceBundle addDetailsBundle;
 
-    public AddDetailsModel(AddDetailsController addDetailsController, Command aCommand) {
+    public AddDetailsModel(AddDetailsController addDetailsController) {
         setContentPane(mainPanel);
         setTitle("Fields setting");
         setModal(true);
         setSize(850, 500);
         setLocation(this);
 
-        submitButton.addActionListener(e -> aCommand.addStudyGroup(addDetailsController.addStudyGroup()));
+        submitButton.addActionListener(e -> addDetailsController.addStudyGroup());
+        switchLanguage(new Locale("en", "AU"));
     }
 
     public String getName() {
@@ -114,5 +122,49 @@ public class AddDetailsModel extends JDialog implements Relocatable {
 
     public void setGroupAdminWeightWarn(String aGroupAdminWeightWarn) {
         groupAdminWeightWarn.setText(aGroupAdminWeightWarn);
+    }
+
+    public void switchLanguage(Locale locale) {
+        addDetailsBundle = ResourceBundle.getBundle("gui.bundles.AddDetailsLabels", locale);
+        fillLabels();
+    }
+
+    private void fillLabels() {
+        String name = addDetailsBundle.getString("name");
+        String coordinates = addDetailsBundle.getString("coordinates");
+        coordinateXText.setText(addDetailsBundle.getString("coordinateX"));
+        coordinateYText.setText(addDetailsBundle.getString("coordinateY"));
+        String studentsCount = addDetailsBundle.getString("studentsCount");
+        String averageMark = addDetailsBundle.getString("averageMark");
+        String formOfEducation = addDetailsBundle.getString("formOfEducation");
+        String semester = addDetailsBundle.getString("semester");
+        String groupAdmin = addDetailsBundle.getString("groupAdmin");
+        String groupAdminName = addDetailsBundle.getString("groupAdminName");
+        String groupAdminWeight = addDetailsBundle.getString("groupAdminWeight");
+        String groupAdminHairColor = addDetailsBundle.getString("groupAdminHairColor");
+        submitButton.setText(addDetailsBundle.getString("submit"));
+
+        LineBorder roundedLineBorder = new LineBorder(Color.black, 1, true);
+        TitledBorder nameTitledBorder = new TitledBorder(roundedLineBorder, name);
+        TitledBorder coordinatesTitledBorder = new TitledBorder(roundedLineBorder, coordinates);
+        TitledBorder studentsCountTitledBorder = new TitledBorder(roundedLineBorder, studentsCount);
+        TitledBorder averageMarkTitledBorder = new TitledBorder(roundedLineBorder, averageMark);
+        TitledBorder formOfEducationTitledBorder = new TitledBorder(roundedLineBorder, formOfEducation);
+        TitledBorder semesterTitledBorder = new TitledBorder(roundedLineBorder, semester);
+        TitledBorder groupAdminTitledBorder = new TitledBorder(roundedLineBorder, groupAdmin);
+        TitledBorder groupAdminNameTitledBorder = new TitledBorder(roundedLineBorder, groupAdminName);
+        TitledBorder groupAdminWeightTitledBorder = new TitledBorder(roundedLineBorder, groupAdminWeight);
+        TitledBorder groupAdminHairColorTitledBorder = new TitledBorder(roundedLineBorder, groupAdminHairColor);
+
+        namePanel.setBorder(nameTitledBorder);
+        coordinatesPanel.setBorder(coordinatesTitledBorder);
+        studentsCountPanel.setBorder(studentsCountTitledBorder);
+        averageMarkPanel.setBorder(averageMarkTitledBorder);
+        formOfEducationPanel.setBorder(formOfEducationTitledBorder);
+        semesterPanel.setBorder(semesterTitledBorder);
+        groupAdminPanel.setBorder(groupAdminTitledBorder);
+        groupAdminNamePanel.setBorder(groupAdminNameTitledBorder);
+        groupAdminWeightPanel.setBorder(groupAdminWeightTitledBorder);
+        groupAdminHairColorPanel.setBorder(groupAdminHairColorTitledBorder);
     }
 }

@@ -5,7 +5,9 @@
     <constraints>
       <xy x="20" y="17" width="500" height="403"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-4934476"/>
+    </properties>
     <border type="none"/>
     <children>
       <grid id="568c4" layout-manager="GridLayoutManager" row-count="4" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -13,7 +15,9 @@
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-4934476"/>
+        </properties>
         <border type="none"/>
         <children>
           <hspacer id="ea258">
@@ -72,7 +76,9 @@
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-4934476"/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="36086" class="javax.swing.JLabel" binding="passwordText">
@@ -123,7 +129,9 @@
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-4934476"/>
+        </properties>
         <clientProperties>
           <html.disable class="java.lang.Boolean" value="false"/>
         </clientProperties>
@@ -161,7 +169,9 @@
           </grid>
         </constraints>
         <properties>
+          <background color="-4934476"/>
           <editable value="false"/>
+          <font name="Showcard Gothic" size="12"/>
           <foreground color="-4517888"/>
           <horizontalAlignment value="0"/>
           <text value=""/>

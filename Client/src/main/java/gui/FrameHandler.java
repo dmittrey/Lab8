@@ -1,6 +1,7 @@
 package gui;
 
 import Interfaces.CommandReaderInterface;
+import gui.addDetails.AddDetailsController;
 import gui.connection.ConnectController;
 import gui.informing.InformationDialogController;
 import gui.logining.LoginController;
@@ -9,12 +10,19 @@ import gui.registration.RegisterController;
 import utility.*;
 
 import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.util.Locale;
+import java.util.logging.Logger;
 
 public class FrameHandler {
+
+    private static final Logger logger = Logger.getLogger(FrameHandler.class.getName());
+
     private final CommandReaderInterface commandReader;
     private final ConnectController connectController;
     private final LoginController loginController;
@@ -22,6 +30,7 @@ public class FrameHandler {
     private final MainController mainController;
     private final JFrame jFrame;
     private final InformationDialogController informationDialogController;
+    private final AddDetailsController addDetailsController;
     private final DataSynchronizer dataSynchronizer;
     private final MainModelAnimator mainModelAnimator;
 
@@ -35,6 +44,7 @@ public class FrameHandler {
         registerController = new RegisterController(this);
         mainController = new MainController(this);
         informationDialogController = new InformationDialogController();
+        addDetailsController = new AddDetailsController(this);
         dataSynchronizer = new DataSynchronizer();
         mainModelAnimator = mainController.getMainModelAnimator();
     }
@@ -112,5 +122,12 @@ public class FrameHandler {
         loginController.switchLanguage(locale);
         mainController.switchLanguage(locale);
         registerController.switchLanguage(locale);
+        addDetailsController.switchLanguage(locale);
+        System.out.println(addDetailsController);
+    }
+
+    public void spawnAddDetailsModel(Command command) {
+        System.out.println(addDetailsController);
+        addDetailsController.spawnModel(command);
     }
 }

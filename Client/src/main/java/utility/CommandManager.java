@@ -3,7 +3,6 @@ package utility;
 import Interfaces.*;
 import gui.FrameHandler;
 import gui.MainModelAnimator;
-import gui.addDetails.AddDetailsController;
 
 import javax.swing.*;
 import java.io.File;
@@ -25,9 +24,11 @@ public class CommandManager implements CommandManagerInterface {
     private final ConsoleInterface console;
     private final Set<String> usedScripts;
     private final MainModelAnimator mainModelAnimator;
+    private final FrameHandler frameHandler;
 
     public CommandManager(FrameHandler aFrameHandler) {
-        mainModelAnimator = aFrameHandler.getMainModelAnimator();
+        frameHandler = aFrameHandler;
+        mainModelAnimator = frameHandler.getMainModelAnimator();
         validator = Validator.getInstance();
         requestHandler = RequestHandler.getInstance();
         console = Console.getInstance();
@@ -45,7 +46,7 @@ public class CommandManager implements CommandManagerInterface {
             }
         } else if (validator.objectArgumentCommands(aCommand)) {
             if (console.getExeStatus()) aCommand.addStudyGroup(new StudyGroupFactory().createScriptStudyGroup());
-            else new AddDetailsController(aCommand).spawnModel();
+            else frameHandler.spawnAddDetailsModel(aCommand);
 
             if (aCommand.getStudyGroup() != null) {
                 mainModelAnimator.animate(requestHandler.send(aCommand));
