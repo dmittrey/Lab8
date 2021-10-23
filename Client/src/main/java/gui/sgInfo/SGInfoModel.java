@@ -47,7 +47,7 @@ public class SGInfoModel extends JDialog {
         switchLanguage(new Locale("en", "AU"));
     }
 
-    public void setFields(StudyGroup studyGroup){
+    public void setFields(StudyGroup studyGroup) {
         name.setText(studyGroup.getName());
         xCoordinate.setText(studyGroup.getCoordinates().getX().toString());
         yCoordinate.setText(studyGroup.getCoordinates().getY().toString());

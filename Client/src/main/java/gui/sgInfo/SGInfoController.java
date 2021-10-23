@@ -17,7 +17,7 @@ public class SGInfoController {
         model.setVisible(true);
     }
 
-    public void switchLanguage(Locale locale){
+    public void switchLanguage(Locale locale) {
         model.switchLanguage(locale);
     }
 }

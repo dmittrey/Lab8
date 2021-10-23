@@ -69,19 +69,19 @@ public class VisualModel extends JFrame {
         visualPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                    int width = visualPanel.getWidth();
-                    int height = visualPanel.getHeight();
-                    int x1 = e.getX() - width / 2;
-                    int y1 = e.getY() - height / 2;
-                    graphicPanel.getPaintedGroups().stream()
-                            .filter(sgIcon -> sgIcon.include(x1, y1))
-                            .findFirst()
-                            .ifPresent(sgIconInFocus -> {
-                                if (e.getButton() == 1) sgInfoController.showInfo(sgIconInFocus.getStudyGroup());
-                                if (e.getButton() == 3)
-                                    new SGVisualChangeMenu(sgIconInFocus.getStudyGroup().getId().toString())
+                int width = visualPanel.getWidth();
+                int height = visualPanel.getHeight();
+                int x1 = e.getX() - width / 2;
+                int y1 = e.getY() - height / 2;
+                graphicPanel.getPaintedGroups().stream()
+                        .filter(sgIcon -> sgIcon.include(x1, y1))
+                        .findFirst()
+                        .ifPresent(sgIconInFocus -> {
+                            if (e.getButton() == 1) sgInfoController.showInfo(sgIconInFocus.getStudyGroup());
+                            if (e.getButton() == 3)
+                                new SGVisualChangeMenu(sgIconInFocus.getStudyGroup().getId().toString())
                                         .show(e.getComponent(), e.getX(), e.getY());
-                            });
+                        });
             }
         });
     }
