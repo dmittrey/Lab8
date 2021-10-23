@@ -7,6 +7,7 @@ import gui.VisualModelAnimator;
 import utility.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Locale;
 import java.util.logging.Logger;
 
@@ -20,9 +21,7 @@ public class VisualController implements Relocatable, Localizable {
     public VisualController(FrameHandler aFrameHandler) {
         frameHandler = aFrameHandler;
         model = new VisualModel(this, frameHandler);
-        visualModelAnimator = new VisualModelAnimator(frameHandler);
-        System.out.println(model.getMainPanel().getGraphics());
-//        visualModelAnimator.paintCoordinateAxes(model.getMainPanel());
+        visualModelAnimator = new VisualModelAnimator(frameHandler, model.getVisualPanel());
     }
 
     public void setPanel(JFrame jFrame) {
@@ -32,6 +31,10 @@ public class VisualController implements Relocatable, Localizable {
         jFrame.setSize(1080, 560);
         setLocation(jFrame);
         jFrame.revalidate();
+    }
+
+    public VisualModelAnimator getVisualModelAnimator() {
+        return visualModelAnimator;
     }
 
     public void switchLanguage(Locale locale) {

@@ -11,9 +11,6 @@ import gui.visual.VisualController;
 import utility.*;
 
 import javax.swing.*;
-import java.awt.*;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
@@ -35,6 +32,7 @@ public class FrameHandler {
     private final VisualController visualController;
     private final DataSynchronizer dataSynchronizer;
     private final MainModelAnimator mainModelAnimator;
+    private final VisualModelAnimator visualModelAnimator;
 
     public FrameHandler() {
         jFrame = new JFrame();
@@ -50,10 +48,15 @@ public class FrameHandler {
         visualController = new VisualController(this);
         dataSynchronizer = new DataSynchronizer();
         mainModelAnimator = mainController.getMainModelAnimator();
+        visualModelAnimator = visualController.getVisualModelAnimator();
     }
 
     public MainModelAnimator getMainModelAnimator() {
         return mainModelAnimator;
+    }
+
+    public VisualModelAnimator getVisualModelAnimator() {
+        return visualModelAnimator;
     }
 
     public void start() {
@@ -133,11 +136,11 @@ public class FrameHandler {
         addDetailsController.spawnModel(command);
     }
 
-    public void switchVisual(){
+    public void switchVisual() {
         visualController.setPanel(jFrame);
     }
 
-    public void switchTable(){
+    public void switchTable() {
         mainController.setPanel(jFrame);
     }
 }

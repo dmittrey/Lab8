@@ -16,7 +16,7 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
     private String name;
     private final Coordinates coordinates;
     private Date creationDate;
-    private final Integer studentsCount;
+    private Integer studentsCount;
     private final Double averageMark;
     private final data.FormOfEducation formOfEducation;
     private final data.Semester semesterEnum;
@@ -82,6 +82,10 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
 
     public void setAuthor(String anAuthor) {
         author = anAuthor;
+    }
+
+    public void setStudentsCount(int aStudentsCount){
+        studentsCount = aStudentsCount;
     }
 
     public Integer getId() {
@@ -191,7 +195,6 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
 
         if (((this.getFormOfEducation() == null) && (other.getFormOfEducation() != null))
                 || ((this.getFormOfEducation() != null) && (other.getFormOfEducation() == null))) return false;
-
 
         return (this.getName().equals(other.getName())
                 && this.getCoordinates().getX().equals(other.getCoordinates().getX())

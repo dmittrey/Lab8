@@ -1,7 +1,6 @@
 package gui.visual;
 
 import gui.*;
-import utility.TypeOfCommand;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -13,12 +12,12 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-public class VisualModel {
+public class VisualModel extends JFrame {
     private JPanel mainPanel;
     private JTextField usernameField;
     private JButton tableButton;
-    private JScrollPane sgScrollPane;
     private JButton langButton;
+    private JPanel visualPanel;
     private ResourceBundle visualBundle;
     private static final Logger logger = Logger.getLogger(VisualModel.class.getName());
 
@@ -39,6 +38,10 @@ public class VisualModel {
         return mainPanel;
     }
 
+    public GraphicPanel getVisualPanel() {
+        return (GraphicPanel) visualPanel;
+    }
+
     public void setUsername(String username) {
         usernameField.setText(username);
     }
@@ -56,6 +59,10 @@ public class VisualModel {
         LineBorder roundedLineBorder = new LineBorder(Color.black, 1, true);
         TitledBorder sgVisualTitledBorder = new TitledBorder(roundedLineBorder, sgVisualTitle);
 
-        sgScrollPane.setBorder(sgVisualTitledBorder);
+        visualPanel.setBorder(sgVisualTitledBorder);
+    }
+
+    private void createUIComponents() {
+        visualPanel = new GraphicPanel(this);
     }
 }

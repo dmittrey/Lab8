@@ -1,22 +1,27 @@
 package gui;
 
-import javax.swing.*;
+import utility.Response;
+
 import java.awt.*;
 
 public class VisualModelAnimator {
 
     private final FrameHandler frameHandler;
+    private final GraphicPanel visualPanel;
 
-    public VisualModelAnimator(FrameHandler aFrameHandler){
+    public VisualModelAnimator(FrameHandler aFrameHandler, GraphicPanel aVisualPanel) {
         frameHandler = aFrameHandler;
+        visualPanel = aVisualPanel;
     }
 
-    public void paintCoordinateAxes(JPanel jPanel) {
-        Graphics g = jPanel.getGraphics();
-        g.setColor(Color.BLACK);
-        int width = jPanel.getSize().width;
-        int height = jPanel.getSize().height;
-        g.drawLine(0, height/2, width, height/2);
-        g.drawLine(width/2, 0, width/2, height);
+    public void draw(Canvas canvas) {
+        Graphics gc = canvas.getGraphics();
+        gc.drawLine(150, 150, 300, 300);
+    }
+
+    public void animateShow(Response aResponse) {
+        if (aResponse.getSetOfStudyGroups() != null) {
+            visualPanel.downloadCollection(aResponse.getSetOfStudyGroups());
+        }
     }
 }

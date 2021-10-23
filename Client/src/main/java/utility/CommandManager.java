@@ -3,6 +3,7 @@ package utility;
 import Interfaces.*;
 import gui.FrameHandler;
 import gui.MainModelAnimator;
+import gui.VisualModelAnimator;
 
 import javax.swing.*;
 import java.io.File;
@@ -24,11 +25,13 @@ public class CommandManager implements CommandManagerInterface {
     private final ConsoleInterface console;
     private final Set<String> usedScripts;
     private final MainModelAnimator mainModelAnimator;
+    private final VisualModelAnimator visualModelAnimator;
     private final FrameHandler frameHandler;
 
     public CommandManager(FrameHandler aFrameHandler) {
         frameHandler = aFrameHandler;
         mainModelAnimator = frameHandler.getMainModelAnimator();
+        visualModelAnimator = frameHandler.getVisualModelAnimator();
         validator = Validator.getInstance();
         requestHandler = RequestHandler.getInstance();
         console = Console.getInstance();
@@ -40,6 +43,7 @@ public class CommandManager implements CommandManagerInterface {
         if (validator.notObjectArgumentCommands(aCommand)) {
             if ((aCommand.getCommand() == TypeOfCommand.Show)) {
                 mainModelAnimator.animateShow(requestHandler.send(aCommand));
+                visualModelAnimator.animateShow(requestHandler.send(aCommand));
             } else {
                 logger.info("Обрабатываем команду:" + aCommand);
                 mainModelAnimator.animate(requestHandler.send(aCommand));
