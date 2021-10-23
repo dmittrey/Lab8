@@ -133,7 +133,7 @@ public class AddDetailsModel extends JDialog implements Relocatable {
         groupAdminWeight.setText("");
     }
 
-    public void clearAlerts(){
+    public void clearAlerts() {
         nameWarn.setText("");
         xCoordinateWarn.setText("");
         yCoordinateWarn.setText("");

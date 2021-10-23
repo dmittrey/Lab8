@@ -14,7 +14,8 @@ public class Validator implements ValidatorInterface {
     private static AvailableCommands availableCommands;
     private static Validator instance;
 
-    private Validator() {}
+    private Validator() {
+    }
 
     public static Validator getInstance() {
         if (instance == null) {
@@ -44,7 +45,7 @@ public class Validator implements ValidatorInterface {
     }
 
     @Override
-    public boolean scriptGUIArgumentCommand(Command aCommand){
+    public boolean scriptGUIArgumentCommand(Command aCommand) {
         return availableCommands.scriptArgumentCommand.equals(aCommand.getCommand()) &&
                 aCommand.getArg() == null;
     }

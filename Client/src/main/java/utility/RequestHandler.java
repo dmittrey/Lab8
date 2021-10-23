@@ -79,7 +79,7 @@ public class RequestHandler implements RequestHandlerInterface {
     }
 
     @Override
-    public Session getSession(){
+    public Session getSession() {
         return session;
     }
 

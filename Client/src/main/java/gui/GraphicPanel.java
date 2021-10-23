@@ -13,13 +13,17 @@ import java.util.stream.Collectors;
 public class GraphicPanel extends JPanel {
 
     private final Set<StudyGroup> buffer;
-    private final Set<SGIcon> paintedGroups;
     private final VisualModel visualModel;
+    private final SGIconStorage sgIconStorage;
 
     public GraphicPanel(VisualModel aVisualModel) {
         buffer = new HashSet<>();
-        paintedGroups = new HashSet<>();
         visualModel = aVisualModel;
+        sgIconStorage = new SGIconStorage();
+    }
+
+    public Set<SGIcon> getPaintedGroups() {
+        return sgIconStorage.getStorage();
     }
 
     public void downloadCollection(Set<StudyGroup> newCollection) {
@@ -27,7 +31,7 @@ public class GraphicPanel extends JPanel {
         buffer.removeAll(buffer.stream()
                 .filter(sg -> !(newCollection.contains(sg)))
                 .collect(Collectors.toSet()));
-        paintedGroups.removeAll(paintedGroups.stream()
+        sgIconStorage.getStorage().removeAll(sgIconStorage.getStorage().stream()
                 .filter(pg -> !(buffer.contains(pg.getStudyGroup())))
                 .collect(Collectors.toSet()));
         visualModel.getMainPanel().repaint();
@@ -68,7 +72,7 @@ public class GraphicPanel extends JPanel {
         g2.draw(new ArrowRight(width, height / 2));
         g.drawLine(width / 2, 0, width / 2, height);
         g2.draw(new ArrowTop(width / 2, 0));
-        paintedGroups.forEach(sgIcon -> {
+        sgIconStorage.getStorage().forEach(sgIcon -> {
             int size = sgIcon.getSize();
             int startX = width / 2 + sgIcon.getStudyGroup().getCoordinates().getX() - size;
             int startY = height / 2 + (int) Math.round(sgIcon.getStudyGroup().getCoordinates().getY()) - size;
@@ -104,9 +108,8 @@ public class GraphicPanel extends JPanel {
     }
 
     public void run(StudyGroup studyGroup) {
-        int maxValue = studyGroup.getStudentsCount()*5;
-        SGIcon sgIcon = new SGIcon(studyGroup, maxValue);
-        paintedGroups.add(sgIcon);
+        int maxValue = studyGroup.getStudentsCount() * 5;
+        SGIcon sgIcon = sgIconStorage.createSGIcon(studyGroup, maxValue);
         for (int i = 0; i < maxValue; i++) {
             sgIcon.setSize(i);
             this.repaint();

@@ -7,7 +7,6 @@ import gui.VisualModelAnimator;
 import utility.*;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.Locale;
 import java.util.logging.Logger;
 
@@ -16,7 +15,6 @@ public class VisualController implements Relocatable, Localizable {
     private final VisualModel model;
     private final VisualModelAnimator visualModelAnimator;
     private final FrameHandler frameHandler;
-    private static final Logger logger = Logger.getLogger(CommandManager.class.getName());
 
     public VisualController(FrameHandler aFrameHandler) {
         frameHandler = aFrameHandler;

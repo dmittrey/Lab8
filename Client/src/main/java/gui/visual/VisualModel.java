@@ -10,7 +10,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 
 public class VisualModel extends JFrame {
     private JPanel mainPanel;
@@ -19,7 +18,6 @@ public class VisualModel extends JFrame {
     private JButton langButton;
     private JPanel visualPanel;
     private ResourceBundle visualBundle;
-    private static final Logger logger = Logger.getLogger(VisualModel.class.getName());
 
     public VisualModel(VisualController visualController, FrameHandler aFrameHandler) {
         langButton.addMouseListener(new MouseAdapter() {
@@ -63,6 +61,21 @@ public class VisualModel extends JFrame {
     }
 
     private void createUIComponents() {
-        visualPanel = new GraphicPanel(this);
+        GraphicPanel graphicPanel = new GraphicPanel(this);
+        visualPanel = graphicPanel;
+        visualPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int width = visualPanel.getWidth();
+                int height = visualPanel.getHeight();
+                int x1 = e.getX() - width / 2;
+                int y1 = e.getY() - height / 2;
+                SGIcon sgIconInFocus = graphicPanel.getPaintedGroups().stream()
+                        .filter(sgIcon -> sgIcon.include(x1, y1))
+                        .findFirst()
+                        .orElse(null);
+                if (sgIconInFocus != null) System.out.println(sgIconInFocus.getStudyGroup().getName());
+            }
+        });
     }
 }

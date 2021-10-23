@@ -45,12 +45,12 @@ public class RegisterController implements Relocatable, Localizable {
         model.getWarnField().setText(typeOfAnswer.toString());
     }
 
-    public void switchLanguage(Locale locale){
+    public void switchLanguage(Locale locale) {
         model.switchLanguage(locale);
     }
 
     @Override
-    public void notifySwitchLanguage(Locale locale){
+    public void notifySwitchLanguage(Locale locale) {
         frameHandler.switchLanguage(locale);
     }
 }
