@@ -76,7 +76,7 @@ public class GraphicPanel extends JPanel {
             int size = sgIcon.getSize();
             int startX = width / 2 + sgIcon.getStudyGroup().getCoordinates().getX() - size;
             int startY = height / 2 + (int) Math.round(sgIcon.getStudyGroup().getCoordinates().getY()) - size;
-            Color color = Color.red;
+            Color color = sgIcon.getColor();
 
             g2.setColor(Color.BLACK);
             g2.drawOval(startX, startY, size * 2, size * 2);

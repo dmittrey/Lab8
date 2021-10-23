@@ -7,6 +7,7 @@ import gui.informing.InformationDialogController;
 import gui.logining.LoginController;
 import gui.main.MainController;
 import gui.registration.RegisterController;
+import gui.sgInfo.SGInfoController;
 import gui.visual.VisualController;
 import utility.*;
 

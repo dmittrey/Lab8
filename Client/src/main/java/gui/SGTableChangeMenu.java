@@ -6,9 +6,9 @@ import utility.TypeOfCommand;
 
 import javax.swing.*;
 
-public class SGChangeMenu extends JPopupMenu {
+public class SGTableChangeMenu extends JPopupMenu {
 
-    public SGChangeMenu(FrameHandler frameHandler, String sgId, int rowAtPoint, int columnAtPoint) {
+    public SGTableChangeMenu(FrameHandler frameHandler, String sgId, int rowAtPoint, int columnAtPoint) {
 
         JMenuItem synchronize = new JMenuItem("Включить синхронизацию");
         JMenuItem updateButton = new JMenuItem("Обновить объект");

@@ -44,7 +44,7 @@ public class MainModel {
                     if (rowAtPoint != -1 && columnAtPoint != -1) {
                         String sgId = (String) jTable.getValueAt(rowAtPoint, 0);
                         logger.info("Mouse selected study group №" + sgId);
-                        new SGChangeMenu(aFrameHandler, sgId, rowAtPoint, columnAtPoint)
+                        new SGTableChangeMenu(aFrameHandler, sgId, rowAtPoint, columnAtPoint)
                                 .show(e.getComponent(), e.getX(), e.getY());
                     }
                 }

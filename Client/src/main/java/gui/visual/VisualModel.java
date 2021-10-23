@@ -1,6 +1,7 @@
 package gui.visual;
 
 import gui.*;
+import gui.sgInfo.SGInfoController;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -18,8 +19,10 @@ public class VisualModel extends JFrame {
     private JButton langButton;
     private JPanel visualPanel;
     private ResourceBundle visualBundle;
+    private final SGInfoController sgInfoController;
 
     public VisualModel(VisualController visualController, FrameHandler aFrameHandler) {
+        sgInfoController = new SGInfoController();
         langButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -66,15 +69,19 @@ public class VisualModel extends JFrame {
         visualPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int width = visualPanel.getWidth();
-                int height = visualPanel.getHeight();
-                int x1 = e.getX() - width / 2;
-                int y1 = e.getY() - height / 2;
-                SGIcon sgIconInFocus = graphicPanel.getPaintedGroups().stream()
-                        .filter(sgIcon -> sgIcon.include(x1, y1))
-                        .findFirst()
-                        .orElse(null);
-                if (sgIconInFocus != null) System.out.println(sgIconInFocus.getStudyGroup().getName());
+                    int width = visualPanel.getWidth();
+                    int height = visualPanel.getHeight();
+                    int x1 = e.getX() - width / 2;
+                    int y1 = e.getY() - height / 2;
+                    graphicPanel.getPaintedGroups().stream()
+                            .filter(sgIcon -> sgIcon.include(x1, y1))
+                            .findFirst()
+                            .ifPresent(sgIconInFocus -> {
+                                if (e.getButton() == 1) sgInfoController.showInfo(sgIconInFocus.getStudyGroup());
+                                if (e.getButton() == 3)
+                                    new SGVisualChangeMenu(sgIconInFocus.getStudyGroup().getId().toString())
+                                        .show(e.getComponent(), e.getX(), e.getY());
+                            });
             }
         });
     }
